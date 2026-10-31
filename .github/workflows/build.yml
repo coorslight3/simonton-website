@@ -1,7 +1,7 @@
-# Validates that the site still builds after every change.
-# A missing quote or comma in team-data.js / about_page.py / areas_content.py will
-# fail here with the file and line, instead of silently breaking the deploy.
-name: Build site
+# Builds the site and publishes it to GitHub Pages.
+# A missing quote or comma in a data file fails here with the file and line,
+# and the previously published version stays live.
+name: Build and deploy
 
 on:
   push:
@@ -9,16 +9,23 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       # build_team.py shells out to node twice to read site/team-data.js
       - uses: actions/setup-node@v4
         with:
@@ -43,9 +50,17 @@ jobs:
           find site -name '*.html' -print0 | sort -z | xargs -0 sha256sum > /tmp/b
           diff /tmp/a /tmp/b && echo "build is idempotent"
 
-      - name: Upload the built site
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: site
-          path: site/
-          retention-days: 14
+          path: site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
