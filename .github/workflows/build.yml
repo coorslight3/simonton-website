@@ -1,0 +1,51 @@
+# Validates that the site still builds after every change.
+# A missing quote or comma in team-data.js / about_page.py / areas_content.py will
+# fail here with the file and line, instead of silently breaking the deploy.
+name: Build site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # build_team.py shells out to node twice to read site/team-data.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build
+        run: python3 build_team.py
+
+      - name: Check the expected pages were produced
+        run: |
+          n=$(ls site/*.html | wc -l)
+          echo "generated $n pages in site/"
+          test "$n" -ge 40
+          test -f site/about.html
+          test -f site/team.html
+          test -d site/apartment-broker
+
+      - name: Confirm the build is reproducible
+        run: |
+          find site -name '*.html' -print0 | sort -z | xargs -0 sha256sum > /tmp/a
+          python3 build_team.py
+          find site -name '*.html' -print0 | sort -z | xargs -0 sha256sum > /tmp/b
+          diff /tmp/a /tmp/b && echo "build is idempotent"
+
+      - name: Upload the built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site/
+          retention-days: 14

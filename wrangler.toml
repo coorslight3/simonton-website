@@ -1,0 +1,12 @@
+# Cloudflare Pages build settings for this project.
+# These can also be set in the Pages dashboard; keeping them here documents them.
+#
+#   Build command      : python3 build_team.py
+#   Build output dir   : site
+#   Root directory     : /
+#
+# The build needs BOTH Python 3 and Node. Node is used only to read
+# site/team-data.js (build_team.py shells out to it twice). Cloudflare's build
+# image ships both, so no extra install step is needed.
+name = "simonton-commercial"
+pages_build_output_dir = "site"

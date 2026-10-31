@@ -1,0 +1,11 @@
+#!/bin/sh
+# Stand-in for the one `node -e` call in build_team.py, for Macs without Node.js:
+# loads ./team-data.js with macOS's built-in JavaScriptCore and prints window.TEAM as JSON.
+# Use it by putting this folder first on PATH under the name `node` (see HANDOFF.md, "Building without Node").
+exec osascript -l JavaScript -e '
+ObjC.import("Foundation");
+var path = $.NSFileManager.defaultManager.currentDirectoryPath.js + "/team-data.js";
+var src = $.NSString.stringWithContentsOfFileEncodingError(path, $.NSUTF8StringEncoding, null).js;
+var window = {};
+eval(src);
+JSON.stringify(window.TEAM)'
