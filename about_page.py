@@ -62,10 +62,7 @@ TEAM = [
     'relationships and transaction experience across the whole team, which means a listing in one '
     'territory is exposed to every buyer any of us knows.',
     'The result is the combination that is normally unavailable: an individual broker who genuinely knows '
-    'your neighborhood, backed by the buyer pool and transaction volume of an entire team. Senior Partners '
-    'John Sarna and Andrew Wong have each closed more than $100 million in commercial real estate. Zvon '
-    'Jedvaj brings more than four decades in the Los Angeles apartment market. Josh Merrin contributes '
-    'nearly a decade and an extensive knowledge of the San Fernando Valley.',
+    'your neighborhood, backed by the buyer pool and transaction volume of an entire team.',
     'Our work goes beyond listing and selling. We handle acquisitions and dispositions, broker opinions of '
     'value, 1031 exchange timing, financial underwriting, value-add and development analysis, and portfolio '
     'strategy, whether that is an owner selling a building held for three generations or an investor placing '
