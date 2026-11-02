@@ -18,23 +18,23 @@ SUB = 'Three submarkets. Six ZIP codes. 4,141 apartment buildings, tracked one b
 
 STATS = [('135', 'Units sold'), ('$29.1M', 'Sales volume'), ('$215,592', 'Average price per unit')]
 
-# Property, submarket, units, built, sale price, $/unit
+# Property, submarket, ZIP, units, built, sale price, $/unit
 CLOSINGS = [
-    ('3320 Woodbine St', 'Mar Vista', 12, 1954, '$4,700,000', '$391,700'),
-    ('3763 S Bentley Ave', 'Palms', 12, 1985, '$3,700,000', '$308,300'),
-    ('4646 Coliseum St', 'Mid City', 18, 1954, '$3,150,000', '$175,000'),
-    ('3741-3745 Jasmine Ave', 'Palms', 14, 1953, '$3,000,000', '$214,300'),
-    ('1909 Buckingham Rd', 'Mid City', 16, 1964, '$2,950,000', '$184,400'),
-    ('2610 S Bundy Dr', 'Mar Vista', 9, 1970, '$2,385,000', '$265,000'),
-    ('3421 & 3427 S Norton Ave', 'Mid City', 16, 1930, '$2,275,000', '$142,200'),
-    ('1514 S Bronson Ave', 'Mid City', 5, 1920, '$1,580,000', '$316,000'),
-    ('8960 Hargis St', 'Palms', 6, 1956, '$1,475,000', '$245,800'),
-    ('3018 9th Ave', 'Mid City', 8, 1947, '$1,350,000', '$168,800'),
-    ('1542 2nd Ave', 'Mid City', 8, 1962, '$1,250,000', '$156,200'),
-    ('1506 W 36th St', 'Mid City', 5, 1929, '$880,000', '$176,000'),
-    ('1714 3rd Ave', 'Mid City', 6, 1907, '$410,000', '$68,300'),
+    ('3320 Woodbine St', 'Mar Vista', '90064', 12, 1954, '$4,700,000', '$391,700'),
+    ('3763 S Bentley Ave', 'Palms', '90034', 12, 1985, '$3,700,000', '$308,300'),
+    ('4646 Coliseum St', 'Mid City', '90016', 18, 1954, '$3,150,000', '$175,000'),
+    ('3741-3745 Jasmine Ave', 'Palms', '90034', 14, 1953, '$3,000,000', '$214,300'),
+    ('1909 Buckingham Rd', 'Mid City', '90016', 16, 1964, '$2,950,000', '$184,400'),
+    ('2610 S Bundy Dr', 'Mar Vista', '90064', 9, 1970, '$2,385,000', '$265,000'),
+    ('3421 & 3427 S Norton Ave', 'Mid City', '90018', 16, 1930, '$2,275,000', '$142,200'),
+    ('1514 S Bronson Ave', 'Mid City', '90019', 5, 1920, '$1,580,000', '$316,000'),
+    ('8960 Hargis St', 'Palms', '90034', 6, 1956, '$1,475,000', '$245,800'),
+    ('3018 9th Ave', 'Mid City', '90018', 8, 1947, '$1,350,000', '$168,800'),
+    ('1542 2nd Ave', 'Mid City', '90019', 8, 1962, '$1,250,000', '$156,200'),
+    ('1506 W 36th St', 'Mid City', '90018', 5, 1929, '$880,000', '$176,000'),
+    ('1714 3rd Ave', 'Mid City', '90019', 6, 1907, '$410,000', '$68,300'),
 ]
-TOTAL = ('Total', '', 135, '', '$29,105,000', '$215,592 avg')
+TOTAL = ('Total', '', '', 135, '', '$29,105,000', '$215,592 avg')
 
 BIO = [
     'Robert Carlile is a multifamily investment broker with RE/MAX One Commercial in Santa Monica. He sells apartment buildings in Palms, Mar Vista and Mid City.',
@@ -144,16 +144,16 @@ def closings_table(closings=None, total=None,
                    caption='Closed apartment building sales in Palms, Mar Vista and Mid City'):
     """Heading and table of closed sales. Robert's by default; Mike's page passes its own rows."""
     rows = ''.join(
-        f'<tr><th scope="row">{e(p)}</th><td>{e(s)}</td><td class="num">{u}</td><td class="num">{b}</td>'
-        f'<td class="num">{e(sp)}</td><td class="num">{e(pu)}</td></tr>' for p, s, u, b, sp, pu in (closings or CLOSINGS))
+        f'<tr><th scope="row">{e(p)}</th><td>{e(s)}</td><td>{e(z)}</td><td class="num">{u}</td><td class="num">{b}</td>'
+        f'<td class="num">{e(sp)}</td><td class="num">{e(pu)}</td></tr>' for p, s, z, u, b, sp, pu in (closings or CLOSINGS))
     t = total or TOTAL
-    foot = (f'<tr><th scope="row">{t[0]}</th><td></td><td class="num">{t[2]}</td><td></td>'
-            f'<td class="num">{t[4]}</td><td class="num">{t[5]}</td></tr>')
+    foot = (f'<tr><th scope="row">{t[0]}</th><td></td><td></td><td class="num">{t[3]}</td><td></td>'
+            f'<td class="num">{t[5]}</td><td class="num">{t[6]}</td></tr>')
     return f'''<div class="head"><h2>Recently Closed Transactions</h2></div>
     <div class="table-wrap" role="region" aria-label="Closed transactions table" tabindex="0">
       <table class="closed">
         <caption class="sr-only">{e(caption)}</caption>
-        <thead><tr><th scope="col">Property</th><th scope="col">Submarket</th><th scope="col" class="num">Units</th><th scope="col" class="num">Built</th><th scope="col" class="num">Sale Price</th><th scope="col" class="num">$/Unit</th></tr></thead>
+        <thead><tr><th scope="col">Property</th><th scope="col">Submarket</th><th scope="col">ZIP</th><th scope="col" class="num">Units</th><th scope="col" class="num">Built</th><th scope="col" class="num">Sale Price</th><th scope="col" class="num">$/Unit</th></tr></thead>
         <tbody>{rows}</tbody>
         <tfoot>{foot}</tfoot>
       </table>
@@ -247,7 +247,7 @@ def render(top, bottom):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=64">
+<link rel="stylesheet" href="{ROOT}styles.css?v=65">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -265,7 +265,7 @@ def render(top, bottom):
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=64"></script>
+{bottom}<script src="{ROOT}script.js?v=65"></script>
 </body>
 </html>
 '''

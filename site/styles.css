@@ -266,7 +266,8 @@ button.member{cursor:pointer}
 .person-bio h2{font-size:clamp(24px,2.4vw,30px)}
 .person-bio p{font-size:16px}
 .person-split .closed{font-size:14px}
-.person-split .closed th,.person-split .closed td{padding:10px 10px}
+.person-split .closed th,.person-split .closed td{padding:10px 8px}
+.person-split .closed tbody th{white-space:normal;min-width:130px}
 @media (max-width:980px){.person-split{grid-template-columns:minmax(0,1fr);grid-template-areas:"table" "bio"}}
 @media (max-width:760px){.person-compact .person-grid{grid-template-columns:96px 1fr;gap:16px}.person-compact .person-text h1{font-size:28px}}
 .subpage .header{position:sticky}
