@@ -274,3 +274,17 @@ document.querySelectorAll('form[data-form]').forEach(f => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
   dd.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) set(false); });
 })();
+
+// Home team + services section: the team column and service cards rise in, one after another, on scroll.
+(() => {
+  const sec = $('.intro');
+  if (!sec || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const items = [...sec.querySelectorAll('.who, .svc-card, .svc-cta')];
+  items.forEach((el, i) => el.style.setProperty('--i', el.matches('.who') ? 0 : i));
+  sec.classList.add('anim');
+  // also reveal anything already scrolled past (e.g. after jumping to a link further down the page)
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting || en.boundingClientRect.top < 0) { en.target.classList.add('in'); io.unobserve(en.target); }
+  }), { threshold: 0.15 });
+  items.forEach(el => io.observe(el));
+})();

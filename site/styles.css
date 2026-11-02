@@ -483,3 +483,42 @@ blockquote footer strong{font-weight:700}
 .map-frame{display:block;width:100%;height:min(78vh,760px);border:1px solid var(--line);
   background:#fff;margin:var(--s3) 0}
 @media (max-width:700px){.map-frame{height:min(70vh,560px)}}
+
+/* Home "Simonton Commercial Team" + "Our Services": the first section after the hero, so it makes a statement.
+   Services are rounded cards that fill the column to match the team side and turn black on hover. */
+.intro .split{align-items:stretch}
+.intro .services h2{font-size:clamp(22px,2.5vw,30px)}
+.intro .who-photo img{border-radius:20px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.approach{background:var(--ink);color:#fff;border-radius:20px;padding:22px 26px;margin:var(--s3) 0}
+.who p.approach{text-align:center}
+.approach strong{display:block;margin-top:6px;font:800 clamp(20px,2vw,25px)/1.25 var(--font-head);letter-spacing:-.01em}
+.services{display:flex;flex-direction:column}
+.svc{flex:1;display:flex;flex-direction:column;gap:14px;margin-top:var(--s3);counter-reset:svc}
+.svc-card{flex:1 1 auto;display:grid;grid-template-columns:42px 1fr;column-gap:16px;align-content:center;padding:18px 20px;
+  border:1.5px solid var(--ink);border-radius:20px;background:#fff;counter-increment:svc;
+  transition:transform .25s,box-shadow .25s,background-color .3s,color .3s}
+.svc-card::before{content:counter(svc,decimal-leading-zero);grid-row:1 / span 2;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
+  border:1.5px solid currentColor;font:700 13px var(--font-body);letter-spacing:.04em}
+.svc-card h3{margin:0;font:700 19px/1.3 var(--font-head);align-self:center;min-height:42px;display:flex;align-items:center}
+.svc-card p{margin:4px 0 0;color:var(--muted);font-size:15.5px;line-height:1.55;transition:color .3s}
+.svc-card:hover{transform:translateY(-3px);background:var(--ink);color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.svc-card:hover p{color:rgba(255,255,255,.8)}
+.svc-cta{align-self:center;margin-top:var(--s3);min-height:52px;padding:0 32px}
+/* scroll-in: added by script.js only when motion is allowed */
+.intro.anim .who,.intro.anim .svc-card,.intro.anim .svc-cta{opacity:0;transform:translateY(22px);
+  transition:opacity .6s ease,transform .6s ease,box-shadow .25s,background-color .3s,color .3s;transition-delay:calc(var(--i,0) * 90ms)}
+.intro.anim .who.in,.intro.anim .svc-card.in,.intro.anim .svc-cta.in{opacity:1;transform:none}
+.intro.anim .svc-card.in:hover{transform:translateY(-3px);transition-delay:0s}
+@media (max-width:980px){.svc-card{flex:none}}
+@media (prefers-reduced-motion:reduce){.svc-card:hover{transform:none}}
+
+/* Team page preview (team-preview.html): Contact Our Team cards made wide, details left and bio right */
+.ft-list{display:grid;gap:var(--s4);margin-top:var(--s4)}
+.ft-wide{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:var(--s5);padding:24px 28px 26px}
+.ft-wide .ft-name{font-size:clamp(24px,2.2vw,30px)}
+.ft-side{align-self:start;position:sticky;top:110px}
+.ft-bio{color:#cfcfcf;font-size:16.5px;line-height:1.75;max-width:68ch}
+.ft-bio p{margin:0 0 1em}
+.ft-bio p:last-child{margin-bottom:0}
+.ft-label{font:500 12px var(--mono);letter-spacing:.2em;color:#8f8f8f}
+@media (max-width:860px){.ft-wide{grid-template-columns:1fr;gap:var(--s3);padding:20px}.ft-side{position:static}}

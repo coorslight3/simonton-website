@@ -246,7 +246,7 @@ def render(top, bottom):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=50">
+<link rel="stylesheet" href="{ROOT}styles.css?v=55">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -264,7 +264,7 @@ def render(top, bottom):
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=50"></script>
+{bottom}<script src="{ROOT}script.js?v=55"></script>
 </body>
 </html>
 '''

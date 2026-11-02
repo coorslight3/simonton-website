@@ -3,7 +3,7 @@
 Run after editing site/team-data.js or the header/footer in site/index.html:
     PATH=$HOME/.local/node/bin:$PATH python3 build_team.py
 """
-import html, json, re, shutil, subprocess, sys
+import html, json, os, re, shutil, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -73,14 +73,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=50">
+<link rel="stylesheet" href="styles.css?v=55">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=50"></script>
+{bottom}{scripts}<script src="script.js?v=55"></script>
 </body>
 </html>
 '''
@@ -304,6 +304,46 @@ def contact_team_html():
     <div class="ft-grid">{cards}</div>
   </div>
 </section>'''
+
+
+# PREVIEW (not linked from anywhere, local builds only): the team page in the Contact Our Team card style, one wide card per broker,
+# photo and contact details on the left and the bio on the right. If the client approves it, it replaces team.html.
+def team_wide_html():
+    cards = ''
+    for i, p in enumerate(team, 1):
+        rows = ''
+        if p.get('email'):
+            rows += f'<div><dt>Email</dt><dd><a href="mailto:{e(p["email"])}">{e(p["email"])}</a></dd></div>'
+        if p.get('phone'):
+            digits = re.sub(r'\D', '', p['phone'])
+            rows += f'<div><dt>Direct</dt><dd><a href="tel:+1{digits}">{e(p["phone"])}</a></dd></div>'
+        if p.get('dre'):
+            rows += f'<div><dt>DRE</dt><dd>#{e(p["dre"])}</dd></div>'
+        bio = ''.join(f'<p>{e(t)}</p>' for t in p.get('bio', [])) or '<p>Full bio coming soon.</p>'
+        cards += (f'<article class="ft-card ft-wide" style="--i:{i}">'
+                  f'<div class="ft-side">'
+                  f'<div class="ft-top"><span>// {i:02d}</span><span>RE/MAX ONE COMMERCIAL</span></div>'
+                  f'<div class="ft-photo"><img src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" loading="lazy"><span class="ft-scan" aria-hidden="true"></span></div>'
+                  f'<h2 class="ft-name">{e(p["name"])}</h2>'
+                  f'<p class="ft-role">{e((p.get("short") or p["title"]).upper())}</p>'
+                  f'<dl class="ft-data">{rows}</dl>'
+                  f'<a class="ft-link" href="team-{slug(p["name"])}.html">View profile <span aria-hidden="true">&rarr;</span></a></div>'
+                  f'<div class="ft-bio"><p class="ft-label">// BIO</p>{bio}</div></article>')
+    return f'''<section class="ft ft-team" id="team-list">
+  <div class="wrap">
+    <p class="ft-eyebrow">// SIMONTON COMMERCIAL &middot; RE/MAX ONE COMMERCIAL</p>
+    <h1 class="ft-title">Meet the Team</h1>
+    <div class="ft-list">{cards}</div>
+  </div>
+</section>'''
+
+
+# Built only on local machines: GitHub Actions sets CI, so the deployed site never includes the preview.
+if not os.environ.get('CI'):
+    (SITE / 'team-preview.html').write_text(page(
+        'Our Team (preview) | Simonton Commercial',
+        'Meet the multifamily investment brokerage team at Simonton Commercial, RE/MAX One Commercial.',
+        team_wide_html(), 'subpage'))
 
 
 for fname, sec, title, desc, extra in TAB_PAGES:
