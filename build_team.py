@@ -561,7 +561,8 @@ for a in ac.FULL:
         + (f'<small>{e(note)}</small>' if note else '') + '</div>' for l, v, note in a['indicators'])
     body = (area_hero(f'{n} Multifamily Broker', 'RE/MAX One Commercial', a['intro'])
             + comps_html(a['slug'], n)
-            + snapshot_html(f'{n} Multifamily Market Snapshot', a['snapshot'])
+            + snapshot_html(f'{n} Multifamily Market Snapshot', ac.SNAPSHOTS.get(a['slug'], a['snapshot']),
+                            figures(a['slug'], n))
             + f'<section class="section"><div class="wrap"><h2>{e(n)} Multifamily Market Indicators</h2><div class="ind-grid">{tiles}</div><p class="disclaimer">{e(a["note"])}</p></div></section>'
             + valuation_block(f'What Is My {n} Apartment Building Worth?', a['worth'], n)
             )

@@ -245,7 +245,7 @@ def filename(slug):
 # Market snapshots for the pages that had none. Written Nov 2026 as a starting point for client review;
 # the figures paragraph under each one is generated from CoStar data (area_comps.STATS), not written here.
 # Separate cities with their own rent rules, so the figures paragraph does not mention the City of LA's RSO.
-OWN_CITY = {'west-hollywood', 'beverly-hills', 'santa-monica'}
+OWN_CITY = {'west-hollywood', 'beverly-hills', 'santa-monica', 'marina-del-rey'}
 
 SNAPSHOTS = {
     'los-angeles': [
@@ -334,3 +334,48 @@ SNAPSHOTS = {
         "Most older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers look closely at unit mix, parking, condition and the potential to raise rents on turnover, so properly presenting those details has a real effect on price.",
     ],
 }
+
+# Rewrites (Nov 2026) of the client's longer snapshots on the full market pages, in the same style as above.
+# The client's originals stay in FULL[...]['snapshot'] for reference; the build prefers these.
+SNAPSHOTS.update({
+    'venice': [
+        "Venice is one of the most distinctive coastal apartment markets in Los Angeles. The beach, the canals, Abbot Kinney Boulevard and Rose Avenue draw renters who want walkability and a coastal lifestyle, and nearby employers in Santa Monica, Marina del Rey and Playa Vista keep demand deep across technology, media and entertainment.",
+        "Most of the apartment inventory is older, from 1920s bungalow courts and walk streets to mid-century buildings, and land values and limited development sites keep new supply scarce. The gap between vintage units and newer or fully renovated apartments is wide, which is where many buyers see their upside.",
+        "Venice is part of the City of Los Angeles, so most older buildings fall under the Rent Stabilization Ordinance, and the coastal zone can add another layer of review for renovations and redevelopment. Pricing depends heavily on the specific block, in-place rents and condition, which makes local comparables more useful here than broad averages.",
+    ],
+    'mar-vista': [
+        "Mar Vista gives investors access to the Westside's renter demand at pricing that is often more accessible than Santa Monica or Venice. Its location between Venice, Santa Monica, Culver City and Palms puts renters close to Silicon Beach employers, and its walkable stretches of Venice Boulevard and Grand View add to its residential appeal.",
+        "The housing stock is mostly small and mid-sized apartment buildings from the 1950s through the 1970s, many of them five to twenty units. Buyers look for below-market rents, renovation potential and operating improvements, and buildings with updated interiors, parking and usable outdoor space tend to lead the market.",
+        "Most older buildings here are covered by the City of Los Angeles Rent Stabilization Ordinance, and financing costs continue to shape what buyers will pay. Well-priced properties with dependable cash flow and a clear path to higher income remain in demand among private investors and 1031 exchange buyers.",
+    ],
+    'sherman-oaks': [
+        "Sherman Oaks is one of the San Fernando Valley's most established apartment markets. Ventura Boulevard's restaurants and shops, good schools and quick access to the 405 and 101 attract professionals, families and long-term renters who want a Valley address with a short drive to the Westside.",
+        "The inventory is largely 1950s through 1970s buildings, from smaller courtyard properties to larger communities with gated parking and pools. Value-add buyers look for below-market rents and dated interiors, while stabilized, renovated buildings with strong collections appeal to investors focused on predictable income.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Cap rates have moved up from earlier lows, so buyers pay close attention to net operating income, deferred maintenance and upcoming capital needs, and accurate underwriting is what keeps a sale on track.",
+    ],
+    'studio-city': [
+        "Studio City sits on the southern edge of the Valley next to Universal City, the studios and the Hollywood Hills, which gives it a steady renter base of entertainment-industry and other professionals. Ventura Boulevard's restaurants and shops make it one of the most walkable parts of the Valley.",
+        "The apartment inventory mixes older courtyard buildings, mid-century properties and some newer luxury buildings. Five to twenty unit buildings are especially popular with private investors, and renovated units with parking and outdoor space command clear premiums over unimproved ones.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. With financing costs higher, buyers focus on in-place income, deferred maintenance and realistic renovation budgets, and properties with clear rental upside continue to draw strong interest.",
+    ],
+    'los-feliz': [
+        "Los Feliz is one of the most architecturally distinctive apartment neighborhoods in Los Angeles. Griffith Park, tree-lined streets and the shops and restaurants along Hillhurst and Vermont avenues draw renters who value character and walkability, with Hollywood, Silver Lake and Downtown close by.",
+        "Much of the inventory dates from the 1920s through the 1960s, including Spanish Colonial Revival courtyards and Art Deco buildings. New construction is limited in the established residential areas, so supply stays tight, and renovated units that keep their original details often rent at a premium.",
+        "Nearly all of the older buildings are covered by the City of Los Angeles Rent Stabilization Ordinance. Owners here tend to hold for a long time, so well-kept buildings with solid income and good unit layouts draw strong interest from private investors and 1031 exchange buyers when they do come to market.",
+    ],
+    'marina-del-rey': [
+        "Marina del Rey is a waterfront rental market between Venice, Playa del Rey and Playa Vista, close to Silicon Beach employers. The harbor, beach access, restaurants and shopping support demand from professionals willing to pay for a coastal lifestyle.",
+        "The inventory ranges from smaller coastal buildings near the Marina Peninsula to large luxury communities around the harbor, and sales of those larger properties can be sizable institutional trades. Much of the marina itself is county-owned land held under long-term ground leases, which buyers factor into value.",
+        "Marina del Rey is unincorporated Los Angeles County, not the City of Los Angeles, so rent rules and transfer taxes can differ from nearby city neighborhoods. Confirming the jurisdiction and any ground lease terms early is an important part of pricing a building here.",
+    ],
+    'echo-park': [
+        "Echo Park, just northwest of Downtown, combines historic architecture, an active restaurant and arts scene, and quick access to Downtown, Silver Lake, Los Feliz and Hollywood. Echo Park Lake and Sunset Boulevard anchor a renter base that values neighborhood character.",
+        "The inventory includes early 20th-century apartment buildings, bungalow courts and mid-century courtyard properties. Compared with Silver Lake and the Westside, pricing can be more accessible and going-in yields higher, which appeals to value-add operators and private investors buying five to twenty unit buildings.",
+        "Most buildings were built before 1979 and are covered by the City of Los Angeles Rent Stabilization Ordinance, so occupancy, current rents and realistic upside drive value. Buyers are looking carefully at income and renovation costs, and properly priced buildings with clear upside continue to sell.",
+    ],
+    'silver-lake': [
+        "Silver Lake is one of the most recognizable apartment neighborhoods on the Eastside. Sunset Junction, the reservoir, independent shops and restaurants, and its hillside streets draw creative-industry and other professionals, with Los Feliz, Echo Park, Hollywood and Downtown all close by.",
+        "Most of the inventory dates from the 1920s through the 1960s, including historic courtyard buildings and mid-century properties, with some newer development. That mix supports several strategies, from long-term holds of stabilized buildings to renovation and repositioning.",
+        "Older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers focus on net operating income, rental upside, expenses and condition, and five to twenty unit buildings remain popular with private investors, local operators and 1031 exchange buyers.",
+    ],
+})
