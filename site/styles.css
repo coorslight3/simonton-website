@@ -555,3 +555,32 @@ blockquote footer strong{font-weight:700}
 @media (max-width:1100px){.area-split{grid-template-columns:minmax(0,1fr)}.area-split .closed{min-width:760px}}
 @media (max-width:760px){.ind-row{grid-template-columns:1fr 1fr;row-gap:14px}
   .ind-row .ind{border-left:0;padding:0}}
+/* 1031 Exchanges page */
+.x-intro{font-size:17px;max-width:62ch;margin-top:var(--s2)}
+.x-grid{display:grid;gap:var(--s3);margin-top:var(--s3)}
+.x-grid-3{grid-template-columns:repeat(3,1fr)}
+.x-grid-4{grid-template-columns:repeat(4,1fr)}
+.x-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ink);padding:var(--s3)}
+.x-card h3{font:800 19px/1.2 var(--font-head);margin:0 0 8px}
+.x-card p,.x-card li{color:var(--ink-2);font-size:15px}
+.x-card ul{margin:0;padding-left:18px}
+.x-card li{margin-bottom:6px}
+.x-rules{margin:0;border-top:1.5px solid var(--ink)}
+.x-rules div{padding:16px 0;border-bottom:1.5px solid var(--ink)}
+.x-rules dt{font:800 18px var(--font-head);margin-bottom:4px}
+.x-rules dd{margin:0;color:var(--muted)}
+.x-proscons{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+.x-proscons h3{font:800 18px var(--font-head);margin:0 0 8px}
+.x-proscons ul{margin:0;padding-left:18px}
+.x-proscons li{margin-bottom:6px}
+.x-sub{font:800 22px var(--font-head);margin:var(--s4) 0 var(--s2)}
+.x-table{min-width:560px}
+.x-timeline{list-style:none;margin:var(--s3) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);border-top:4px solid var(--ink)}
+.x-timeline li{padding-top:var(--s2);display:flex;flex-direction:column;gap:6px}
+.x-when{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.x-timeline strong{font:800 18px var(--font-head)}
+.x-timeline span:last-child{color:var(--ink-2);font-size:15px}
+.x-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-top:var(--s4);padding:var(--s3);background:var(--paper-2);border:1.5px solid var(--ink)}
+.x-cta p{margin:0;max-width:70ch}
+@media (max-width:980px){.x-grid-3,.x-grid-4,.x-timeline{grid-template-columns:1fr 1fr}.x-cta{flex-direction:column;align-items:flex-start}}
+@media (max-width:600px){.x-grid-3,.x-grid-4,.x-timeline,.x-proscons{grid-template-columns:1fr}}

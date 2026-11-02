@@ -75,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=63">
+<link rel="stylesheet" href="styles.css?v=64">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=63"></script>
+{bottom}{scripts}<script src="script.js?v=64"></script>
 </body>
 </html>
 '''
@@ -355,7 +355,7 @@ for fname, sec, title, desc, extra in TAB_PAGES:
         form_part = section_html(sec).replace('<h1 class="sec-h1">Contact</h1>', '<h2>Contact</h2>')
         body = team_part + form_part
     else:
-        body = section_html(sec) + (process_html() if sec == 'exchanges' else '')
+        body = section_html(sec)
     (SITE / fname).write_text(page(title, desc, body, 'subpage', extra))
 
 # One page per person
