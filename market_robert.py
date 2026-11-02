@@ -16,30 +16,33 @@ DESC = ('Multifamily specialist for Palms, Mar Vista and Mid City. Apartment bui
 H1 = 'The Apartment Specialist for Palms, Mar Vista & Mid City'
 SUB = 'Three submarkets. Six ZIP codes. 4,141 apartment buildings, tracked one by one.'
 
-STATS = [('135', 'Units sold'), ('$29.1M', 'Sales volume'), ('$215,592', 'Average price per unit')]
+STATS = [('173', 'Units sold'), ('$37.7M', 'Sales volume'), ('$218,081', 'Average price per unit')]
 
 # Property, submarket, ZIP, units, built, sale price, $/unit
 CLOSINGS = [
-    ('3320 Woodbine St', 'Mar Vista', '90064', 12, 1954, '$4,700,000', '$391,700'),
+    ('3320 Woodbine St', 'Mar Vista', '90064', 20, 1954, '$4,700,000', '$235,000'),
+    ('2756 S Sepulveda Blvd', 'Palms', '90064', 16, 1988, '$4,150,000', '$259,400'),
     ('3763 S Bentley Ave', 'Palms', '90034', 12, 1985, '$3,700,000', '$308,300'),
     ('4646 Coliseum St', 'Mid City', '90016', 18, 1954, '$3,150,000', '$175,000'),
     ('3741-3745 Jasmine Ave', 'Palms', '90034', 14, 1953, '$3,000,000', '$214,300'),
     ('1909 Buckingham Rd', 'Mid City', '90016', 16, 1964, '$2,950,000', '$184,400'),
     ('2610 S Bundy Dr', 'Mar Vista', '90064', 9, 1970, '$2,385,000', '$265,000'),
+    ('1268 Queen Anne Pl', 'Mid City', '90019', 6, 1948, '$2,293,000', '$382,200'),
     ('3421 & 3427 S Norton Ave', 'Mid City', '90018', 16, 1930, '$2,275,000', '$142,200'),
+    ('1339 S Ogden Dr', 'Mid City', '90019', 8, 1958, '$2,200,000', '$275,000'),
     ('1514 S Bronson Ave', 'Mid City', '90019', 5, 1920, '$1,580,000', '$316,000'),
     ('8960 Hargis St', 'Palms', '90034', 6, 1956, '$1,475,000', '$245,800'),
     ('3018 9th Ave', 'Mid City', '90018', 8, 1947, '$1,350,000', '$168,800'),
     ('1542 2nd Ave', 'Mid City', '90019', 8, 1962, '$1,250,000', '$156,200'),
     ('1506 W 36th St', 'Mid City', '90018', 5, 1929, '$880,000', '$176,000'),
-    ('1714 3rd Ave', 'Mid City', '90019', 6, 1907, '$410,000', '$68,300'),
+    ('1714 3rd Ave', 'Mid City', '90019', 6, 1907, '$390,000', '$65,000'),
 ]
-TOTAL = ('Total', '', '', 135, '', '$29,105,000', '$215,592 avg')
+TOTAL = ('Total', '', '', 173, '', '$37,728,000', '$218,081 avg')
 
 BIO = [
     'Robert Carlile is a multifamily investment broker with RE/MAX One Commercial in Santa Monica. He sells apartment buildings in Palms, Mar Vista and Mid City.',
     'That restraint is the whole practice. Most brokers who take a listing in Mar Vista on Tuesday are pitching in Van Nuys on Thursday, pricing both off the same countywide averages. Carlile works three adjacent submarkets across six ZIP codes, and tracks all 4,141 apartment buildings of five to thirty units inside them: who owns each one, how long they have held it, the unit mix, the assessed basis, the rent-regulation exposure. When an owner calls about a building on Keystone or Cattaraugus or Hauser, he knows the building before the conversation starts.',
-    'It shows in how the deals come together. His closings in these neighborhoods run from five-unit 1920s buildings in Mid City to eighteen-unit mid-century properties. That is 135 units and $29.1 million in sales volume, all of it inside the three submarkets, at an average of $215,592 per unit. Those are not countywide numbers padded with deals from the Valley. They are from these streets.',
+    'It shows in how the deals come together. His closings in these neighborhoods run from five-unit 1920s buildings in Mid City to twenty-unit mid-century properties. That is 173 units and $37.7 million in sales volume, all of it inside the three submarkets, at an average of $215,592 per unit. Those are not countywide numbers padded with deals from the Valley. They are from these streets.',
     'Much of his business begins before a building is ever listed. Robert is in direct contact with owners across his coverage area year-round, which means sellers reach a broker who already knows which buyers are active in their specific pocket, and buyers reach one who knows which owners are thinking about it.',
     "A graduate of the University of Southern California, Carlile works as part of the Simonton Commercial Group, RE/MAX One Commercial's multi-family investments team. He lives in Orange County with his wife and young family.",
 ]
@@ -247,7 +250,7 @@ def render(top, bottom):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=65">
+<link rel="stylesheet" href="{ROOT}styles.css?v=66">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -265,7 +268,7 @@ def render(top, bottom):
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=65"></script>
+{bottom}<script src="{ROOT}script.js?v=66"></script>
 </body>
 </html>
 '''

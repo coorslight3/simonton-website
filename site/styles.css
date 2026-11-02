@@ -585,3 +585,45 @@ blockquote footer strong{font-weight:700}
 .x-cta p{margin:0;max-width:70ch}
 @media (max-width:980px){.x-grid-3,.x-grid-4,.x-timeline{grid-template-columns:1fr 1fr}.x-cta{flex-direction:column;align-items:flex-start}}
 @media (max-width:600px){.x-grid-3,.x-grid-4,.x-timeline,.x-proscons{grid-template-columns:1fr}}
+/* Profile: Areas of Expertise, the broker's ZIP codes linked to their area pages */
+.expertise{margin-top:var(--s4)}
+.expertise h2{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.xp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.xp-list a{display:flex;flex-direction:column;gap:2px;min-height:44px;padding:12px 14px;border:1.5px solid var(--ink);text-decoration:none;color:inherit;transition:background .15s,color .15s}
+.xp-list a:hover,.xp-list a:focus-visible{background:var(--ink);color:#fff}
+.xp-zip{font:700 12px var(--font-body);letter-spacing:.1em}
+.xp-list strong{font:800 16px/1.2 var(--font-head)}
+.xp-list small{font-size:12px;color:var(--muted)}
+.xp-list a:hover small,.xp-list a:focus-visible small{color:#ddd}
+@media (max-width:1100px){.xp-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.xp-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Mike's profile */
+.pm-hero{background:var(--ink);color:#fff;padding:var(--s4) 0 var(--s5)}
+.back-light{color:#cfcfcf}
+.pm-hero-grid{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:var(--s5);align-items:center;margin-top:var(--s3)}
+.pm-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.pm-intro h1{font-weight:900;font-size:clamp(40px,6vw,72px);line-height:1;margin:0 0 10px;color:#fff}
+.pm-title{font-size:19px;color:#cfcfcf;margin:0 0 var(--s3)}
+.pm-actions{display:flex;flex-wrap:wrap;gap:12px}
+.pm-meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:var(--s3) 0 0;font-size:14px;color:#bdbdbd}
+.pm-stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:var(--s4);margin:var(--s4) 0 0;padding-top:var(--s3);border-top:1px solid #3a3a3a}
+.pm-stats dt{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#a8a8a8}
+.pm-stats dd{margin:4px 0 0;font:900 clamp(28px,3vw,40px)/1 var(--font-head);color:#fff}
+.pm-about-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:var(--s5);align-items:start}
+.pm-bio h2{margin-top:0}
+.pm-bio p{font-size:17px;line-height:1.75;max-width:66ch}
+.pm-bio .pm-lead{font-size:21px;line-height:1.55;font-weight:500}
+.pm-glance{border:1.5px solid var(--ink);padding:var(--s3);position:sticky;top:110px}
+.pm-glance h2{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 var(--s2)}
+.pm-glance dl{margin:0}
+.pm-glance div{padding:12px 0;border-top:1px solid var(--line)}
+.pm-glance dt{font:800 15px var(--font-head)}
+.pm-glance dd{margin:2px 0 0;color:var(--ink-2);font-size:15px}
+.pm-areas .expertise{margin:0}
+.pm-areas .expertise h2{font:900 clamp(26px,3vw,36px) var(--font-head);letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:var(--s3)}
+.pm-areas .xp-list a{background:#fff}
+.pm-areas .xp-list a:hover,.pm-areas .xp-list a:focus-visible{background:var(--ink)}
+.pm-cta-grid{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);flex-wrap:wrap}
+.pm-cta h2{color:#fff;margin-top:0}
+@media (max-width:900px){.pm-hero-grid,.pm-about-grid{grid-template-columns:1fr}.pm-photo{max-width:260px}.pm-glance{position:static}}
+@media (max-width:520px){.pm-stats{grid-template-columns:repeat(3,1fr);gap:var(--s2)}.pm-actions .btn{flex:1 1 100%}}

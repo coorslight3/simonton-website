@@ -75,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=65">
+<link rel="stylesheet" href="styles.css?v=66">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=65"></script>
+{bottom}{scripts}<script src="script.js?v=66"></script>
 </body>
 </html>
 '''
@@ -358,6 +358,25 @@ for fname, sec, title, desc, extra in TAB_PAGES:
         body = section_html(sec)
     (SITE / fname).write_text(page(title, desc, body, 'subpage', extra))
 
+def expertise_html(zips):
+    """Areas of Expertise on a profile: each ZIP the broker covers, linked to its area page, with a
+    one-line read of that market from the CoStar stats."""
+    by_zip = {h['zip']: h for h in ac.HOODS if h.get('zip')}
+    tiles = ''
+    for z in zips:
+        h = by_zip.get(z)
+        if not h:
+            continue
+        st = area_comps.STATS.get(h['slug']) or {}
+        stat = (f'{st["count"]} sales in 12 months &middot; ${st["ppu"] // 1000}K median per unit'
+                if st.get('count', 0) >= 3 else '')
+        tiles += (f'<li><a href="{ac.filename(h["slug"])}"><span class="xp-zip">{z}</span>'
+                  f'<strong>{e(h["label"])}</strong>' + (f'<small>{stat}</small>' if stat else '') + '</a></li>')
+    return f'<div class="expertise"><h2>Areas of Expertise</h2><ul class="xp-list">{tiles}</ul></div>' if tiles else ''
+
+
+EXPERTISE = {'Mike Torres': market_mike.ZIPS}
+
 # One page per person
 for p in team:
     s = slug(p['name'])
@@ -395,7 +414,70 @@ for p in team:
         closings = ''
     # a short table sits at its natural height instead of stretching to the bio's length
     split_cls = 'person-split' + (' person-split-short' if p['name'] == 'Mike Torres' else '')
-    if closings:
+    if closings and p['name'] in EXPERTISE:
+        # Mike's profile: a dark intro band with photo, name, contact and his numbers, then the bio beside an
+        # at-a-glance panel, his areas, his closings and a valuation prompt.
+        first = p['name'].split()[0]
+        digits = re.sub(r'\D', '', p.get('phone', ''))
+        units = sum(r[3] for r in market_mike.CLOSINGS)
+        volume = sum(int(re.sub(r'\D', '', r[5])) for r in market_mike.CLOSINGS)
+        zips = EXPERTISE[p['name']]
+        bio = p.get('bio', [])
+        lead = f'<p class="pm-lead">{e(bio[0])}</p>' if bio else ''
+        rest = ''.join(f'<p>{e(t)}</p>' for t in bio[1:])
+        glance = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in market_mike.GLANCE)
+        body = f'''<section class="pm-hero">
+  <div class="wrap">
+    <a class="back back-light" href="team.html">&larr; All team members</a>
+    <div class="pm-hero-grid">
+      <img class="pm-photo" src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" width="560" height="700">
+      <div class="pm-intro">
+        <p class="eyebrow">Simonton Commercial &middot; RE/MAX One Commercial</p>
+        <h1>{e(p["name"])}</h1>
+        <p class="pm-title">{e(p["title"])} &middot; Multifamily Investment Sales</p>
+        <div class="pm-actions">
+          <a class="btn btn-light" href="tel:+1{digits}">Call {e(p.get("phone", ""))}</a>
+          <a class="btn btn-ghost" href="mailto:{e(p.get("email", ""))}">Email {e(first)}</a>
+        </div>
+        <p class="pm-meta"><span>{e(p.get("email", ""))}</span><span>{e(p.get("handle", ""))}</span><span>DRE #{e(p.get("dre", ""))}</span></p>
+        <dl class="pm-stats">
+          <div><dt>Units closed</dt><dd>{units}</dd></div>
+          <div><dt>Sales volume</dt><dd>${volume / 1e6:.1f}M</dd></div>
+          <div><dt>ZIP codes covered</dt><dd>{len(zips)}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section pm-about">
+  <div class="wrap pm-about-grid">
+    <div class="pm-bio"><h2>About {e(first)}</h2>{lead}{rest}</div>
+    <aside class="pm-glance" aria-label="{e(first)} at a glance"><h2>At a Glance</h2><dl>{glance}</dl></aside>
+  </div>
+</section>
+<section class="section alt pm-areas">
+  <div class="wrap">{expertise_html(zips)}</div>
+</section>
+<section class="section pm-closings" id="closings">
+  <div class="wrap">{closings}</div>
+</section>
+<section class="section dark pm-cta">
+  <div class="wrap pm-cta-grid">
+    <div><h2>What Is Your Building Worth?</h2>
+      <p class="lead">Send {e(first)} the address and rent roll for a free, confidential valuation with the comparable sales behind it.</p></div>
+    <div class="pm-actions"><a class="btn btn-light" href="mailto:{e(p.get("email", ""))}?subject=Valuation%20request">Request a valuation</a>
+      <a class="btn btn-ghost" href="tel:+1{digits}">Call {e(first)}</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <h2>More from the team</h2>
+    <div class="team">
+{others}
+    </div>
+  </div>
+</section>'''
+    elif closings:
         # compact top so the closings table shows on first load; the bio moves below it
         body = f'''<section class="section person person-compact">
   <div class="wrap">
@@ -409,6 +491,7 @@ for p in team:
         {territory_link}
       </div>
     </div>
+    {expertise_html(EXPERTISE.get(p['name'], []))}
     <div class="{split_cls}">
       <div class="person-closings" id="closings">
       {closings}
