@@ -525,3 +525,7 @@ blockquote footer strong{font-weight:700}
 .ft-bio p:last-child{margin-bottom:0}
 .ft-label{font:500 12px var(--mono);letter-spacing:.2em;color:#8f8f8f}
 @media (max-width:860px){.ft-wide{grid-template-columns:1fr;gap:var(--s3);padding:20px}.ft-side{position:static}}
+/* Recent sales table on the area pages */
+.comps h2{margin-bottom:6px}
+.comps-sub{margin:0 0 var(--s3);color:var(--muted)}
+.comps .disclaimer{margin-top:12px}

@@ -1,0 +1,141 @@
+"""Turn CoStar sales exports into area_comps.py: the 15 most recent sales for each Areas We Serve page.
+
+Usage:  python3 tools/costar_comps.py ~/Downloads/CostarExport*.xlsx
+
+The raw exports stay off GitHub (the repo is public); only the rows shown on the site are written.
+Each sale is placed by CoStar's neighborhood (Submarket Name), city or ZIP, per RULES below.
+"""
+import datetime, re, sys, zipfile
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+PER_AREA = 15
+MONTHS = 12  # only sales this recent count as comps
+NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+
+# Valley ZIPs inside the City of LA plus San Fernando (city); Burbank and Glendale are left out.
+VALLEY_ZIPS = {'91040', '91042', '91303', '91304', '91306', '91307', '91311', '91316', '91324', '91325', '91326',
+               '91330', '91331', '91335', '91340', '91342', '91343', '91344', '91345', '91352', '91356', '91364',
+               '91367', '91401', '91402', '91403', '91405', '91406', '91411', '91423', '91436', '91601', '91602',
+               '91604', '91605', '91606', '91607'}
+
+
+def sub(*names):
+    return lambda s: s['sub'] in names
+
+
+def city(*names):
+    names = {n.lower() for n in names}
+    return lambda s: s['city'].lower() in names
+
+
+def expo_park(s):
+    """Exposition Blvd to Vernon Ave, Normandie Ave to the 110."""
+    return s['lat'] is not None and 34.0035 <= s['lat'] < 34.0183 and -118.3005 <= s['lon'] <= -118.274
+
+
+RULES = {
+    'los-angeles': city('Los Angeles'),
+    'west-hollywood': city('West Hollywood'),
+    'beverly-grove': sub('Beverly Grove'),
+    'beverly-hills': city('Beverly Hills'),
+    'fairfax-miracle-mile': sub('Miracle Mile', 'Melrose'),
+    'mid-wilshire': sub('Koreatown', 'Hancock Park'),
+    'downtown-la': sub('Historic Downtown LA', 'Financial District', 'South Park', 'City West', 'Chinatown',
+                       'Flower District', 'Little Tokyo', 'Arts District', 'Bunker Hill', 'Fashion District'),
+    'westlake': sub('Westlake North', 'Westlake South'),
+    'macarthur-park': sub('MacArthur Park'),
+    'pico-union': sub('Pico-Union'),
+    'west-adams': sub('West Adams'),
+    'exposition-park': expo_park,
+    'pico-robertson-beverlywood': sub('Pico-Robertson', 'Beverlywood'),
+    'hollywood-hills-laurel-canyon': sub('Hollywood Hills'),
+    'los-feliz': sub('Los Feliz'),
+    'silver-lake': sub('Silver Lake'),
+    'echo-park': sub('Echo Park'),
+    'santa-monica': city('Santa Monica'),
+    'venice': sub('Venice'),
+    'marina-del-rey': city('Marina del Rey'),
+    'mar-vista': sub('Mar Vista'),
+    'west-la': sub('West Los Angeles'),
+    'studio-city': sub('Studio City'),
+    'sherman-oaks': sub('Sherman Oaks'),
+    'san-fernando-valley': lambda s: s['zip'] in VALLEY_ZIPS,
+    'san-pedro': city('San Pedro'),
+}
+
+
+def read_xlsx(path):
+    """Rows of the first sheet as dicts keyed by the header row (no openpyxl needed)."""
+    z = zipfile.ZipFile(path)
+    strings = []
+    if 'xl/sharedStrings.xml' in z.namelist():
+        for si in ET.fromstring(z.read('xl/sharedStrings.xml')).iter(NS + 'si'):
+            strings.append(''.join(t.text or '' for t in si.iter(NS + 't')))
+    rows = []
+    for r in ET.fromstring(z.read('xl/worksheets/sheet1.xml')).iter(NS + 'row'):
+        row = {}
+        for c in r.iter(NS + 'c'):
+            col = re.match(r'[A-Z]+', c.get('r')).group()
+            v, t = c.find(NS + 'v'), c.get('t')
+            if t == 'inlineStr':
+                row[col] = ''.join(x.text or '' for x in c.iter(NS + 't'))
+            elif v is not None:
+                row[col] = strings[int(v.text)] if t == 's' else v.text
+        rows.append(row)
+    head = rows[0]
+    return [{head[k]: v for k, v in r.items() if k in head} for r in rows[1:]]
+
+
+def num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def month(iso):
+    return datetime.date.fromisoformat(iso).strftime('%b %Y')
+
+
+def main(paths):
+    sales = {}
+    for p in paths:
+        for r in read_xlsx(p):
+            price, units, when = num(r.get('Sale Price')), num(r.get('Number of Units')), num(r.get('Sale Date'))
+            if r.get('Sale Status') != 'Sold' or not price or not units or not when:
+                continue
+            age = num(r.get('Age'))
+            sales[r['Comp ID']] = dict(
+                address=re.sub(r'\s*\(Part of .*?\)', '', r['Property Address']).strip(),
+                city=r.get('Property City', ''), zip=(r.get('Property Zip Code') or '')[:5],
+                sub=r.get('Submarket Name', ''), lat=num(r.get('Latitude')), lon=num(r.get('Longitude')),
+                units=int(units), price=int(price), ppu=round(price / units),
+                built=(2026 - int(age)) if age is not None else None,
+                date=(datetime.date(1899, 12, 30) + datetime.timedelta(days=int(when))).isoformat())
+    latest = datetime.date.fromisoformat(max(s['date'] for s in sales.values()))
+    cutoff = latest.replace(year=latest.year - MONTHS // 12).isoformat()
+    sales = {k: s for k, s in sales.items() if s['date'] > cutoff}
+    newest = sorted(sales.values(), key=lambda s: (s['date'], s['price']), reverse=True)
+    out = {}
+    for slug, rule in RULES.items():
+        out[slug] = [(s['address'], s['sub'] or s['city'], s['units'], s['built'], s['date'], s['price'], s['ppu'])
+                     for s in newest if rule(s)][:PER_AREA]
+    dates = [s['date'] for s in sales.values()]
+    lines = ['"""Recent apartment building sales per area page. Generated by tools/costar_comps.py from CoStar exports;',
+             'do not edit by hand."""', '',
+             f'SOURCE = {"CoStar, sales from " + month(min(dates)) + " to " + month(max(dates))!r}', '',
+             '# slug: [(address, neighborhood, units, year built, sale date, sale price, price per unit)]', 'COMPS = {']
+    for slug, rows in out.items():
+        lines.append(f'    {slug!r}: [')
+        lines += [f'        {r!r},' for r in rows]
+        lines.append('    ],')
+    lines.append('}')
+    Path(__file__).resolve().parent.parent.joinpath('area_comps.py').write_text('\n'.join(lines) + '\n')
+    print(f'{len(sales)} sales read')
+    for slug, rows in out.items():
+        print(f'  {slug:32} {len(rows):2}  {rows[-1][4] if rows else ""}')
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
