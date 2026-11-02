@@ -140,18 +140,19 @@ def rebase(s):
     return s
 
 
-def closings_table():
-    """Heading and table of Robert's closed sales."""
+def closings_table(closings=None, total=None,
+                   caption='Closed apartment building sales in Palms, Mar Vista and Mid City'):
+    """Heading and table of closed sales. Robert's by default; Mike's page passes its own rows."""
     rows = ''.join(
         f'<tr><th scope="row">{e(p)}</th><td>{e(s)}</td><td class="num">{u}</td><td class="num">{b}</td>'
-        f'<td class="num">{e(sp)}</td><td class="num">{e(pu)}</td></tr>' for p, s, u, b, sp, pu in CLOSINGS)
-    t = TOTAL
+        f'<td class="num">{e(sp)}</td><td class="num">{e(pu)}</td></tr>' for p, s, u, b, sp, pu in (closings or CLOSINGS))
+    t = total or TOTAL
     foot = (f'<tr><th scope="row">{t[0]}</th><td></td><td class="num">{t[2]}</td><td></td>'
             f'<td class="num">{t[4]}</td><td class="num">{t[5]}</td></tr>')
     return f'''<div class="head"><h2>Recently Closed Transactions</h2></div>
     <div class="table-wrap" role="region" aria-label="Closed transactions table" tabindex="0">
       <table class="closed">
-        <caption class="sr-only">Closed apartment building sales in Palms, Mar Vista and Mid City</caption>
+        <caption class="sr-only">{e(caption)}</caption>
         <thead><tr><th scope="col">Property</th><th scope="col">Submarket</th><th scope="col" class="num">Units</th><th scope="col" class="num">Built</th><th scope="col" class="num">Sale Price</th><th scope="col" class="num">$/Unit</th></tr></thead>
         <tbody>{rows}</tbody>
         <tfoot>{foot}</tfoot>
@@ -246,7 +247,7 @@ def render(top, bottom):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=55">
+<link rel="stylesheet" href="{ROOT}styles.css?v=56">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -264,7 +265,7 @@ def render(top, bottom):
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=55"></script>
+{bottom}<script src="{ROOT}script.js?v=56"></script>
 </body>
 </html>
 '''

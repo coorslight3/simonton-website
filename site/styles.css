@@ -256,6 +256,9 @@ button.member{cursor:pointer}
 .person-split .table-wrap{display:grid}
 .person-split .closed{height:100%}
 .person-split .person-bio p:last-child{margin-bottom:0}
+.person-split-short .person-closings{align-self:start;display:block}
+.person-split-short .table-wrap{display:block}
+.person-split-short .closed{height:auto}
 /* less space between the top section and Coverage Area */
 .section.person-compact{padding-bottom:var(--s4)}
 .person-compact + #coverage{padding-top:var(--s4)}

@@ -8,6 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import market_robert
+import market_mike
 import about_page
 import areas_content as ac
 import broker_market
@@ -73,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=55">
+<link rel="stylesheet" href="styles.css?v=56">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=55"></script>
+{bottom}{scripts}<script src="script.js?v=56"></script>
 </body>
 </html>
 '''
@@ -386,7 +387,14 @@ for p in team:
     market = market_robert.sections('', profile=True) if p['name'] == 'Robert Carlile' else ''
     if market:
         market_link = ''
-    if market:
+        closings = market_robert.closings_table()
+    elif p['name'] == 'Mike Torres':
+        closings = market_robert.closings_table(market_mike.CLOSINGS, market_mike.TOTAL, market_mike.CAPTION)
+    else:
+        closings = ''
+    # a short table sits at its natural height instead of stretching to the bio's length
+    split_cls = 'person-split' + (' person-split-short' if p['name'] == 'Mike Torres' else '')
+    if closings:
         # compact top so the closings table shows on first load; the bio moves below it
         body = f'''<section class="section person person-compact">
   <div class="wrap">
@@ -400,9 +408,9 @@ for p in team:
         {territory_link}
       </div>
     </div>
-    <div class="person-split">
+    <div class="{split_cls}">
       <div class="person-closings" id="closings">
-      {market_robert.closings_table()}
+      {closings}
       </div>
       <div class="person-bio bio-long"><h2>About {e(p["name"])}</h2>{paras}</div>
     </div>
