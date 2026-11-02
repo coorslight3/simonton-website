@@ -5,7 +5,7 @@ Usage:  python3 tools/costar_comps.py ~/Downloads/CostarExport*.xlsx
 The raw exports stay off GitHub (the repo is public); only the rows shown on the site are written.
 Each sale is placed by CoStar's neighborhood (Submarket Name), city or ZIP, per RULES below.
 """
-import datetime, re, sys, zipfile
+import datetime, re, statistics, sys, zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -94,6 +94,19 @@ def num(v):
         return None
 
 
+def summary(area):
+    if not area:
+        return None
+    med = lambda xs: statistics.median(xs) if xs else None
+    built = [s['built'] for s in area if s['built']]
+    caps = [s['cap'] for s in area if s['cap']]
+    return dict(count=len(area), volume=sum(s['price'] for s in area),
+                price=round(med([s['price'] for s in area])), ppu=round(med([s['ppu'] for s in area])),
+                units=med([s['units'] for s in area]), built=round(med(built)) if built else None,
+                pre1979=round(100 * sum(b < 1979 for b in built) / len(built)) if built else None,
+                cap=round(med(caps), 2) if len(caps) >= 3 else None, caps=len(caps))
+
+
 def month(iso):
     return datetime.date.fromisoformat(iso).strftime('%b %Y')
 
@@ -111,14 +124,16 @@ def main(paths):
                 city=r.get('Property City', ''), zip=(r.get('Property Zip Code') or '')[:5],
                 sub=r.get('Submarket Name', ''), lat=num(r.get('Latitude')), lon=num(r.get('Longitude')),
                 units=int(units), price=int(price), ppu=round(price / units),
-                built=(2026 - int(age)) if age is not None else None,
+                built=(2026 - int(age)) if age is not None else None, cap=num(r.get('Actual Cap Rate')),
                 date=(datetime.date(1899, 12, 30) + datetime.timedelta(days=int(when))).isoformat())
     latest = datetime.date.fromisoformat(max(s['date'] for s in sales.values()))
     cutoff = latest.replace(year=latest.year - MONTHS // 12).isoformat()
     sales = {k: s for k, s in sales.items() if s['date'] > cutoff}
     newest = sorted(sales.values(), key=lambda s: (s['date'], s['price']), reverse=True)
-    out = {}
+    out, stats = {}, {}
     for slug, rule in RULES.items():
+        area = [s for s in newest if rule(s)]
+        stats[slug] = summary(area)
         out[slug] = [(s['address'], s['sub'] or s['city'], s['units'], s['built'], s['date'], s['price'], s['ppu'])
                      for s in newest if rule(s)][:PER_AREA]
     dates = [s['date'] for s in sales.values()]
@@ -130,6 +145,12 @@ def main(paths):
         lines.append(f'    {slug!r}: [')
         lines += [f'        {r!r},' for r in rows]
         lines.append('    ],')
+    lines.append('}')
+    lines += ['', '# Every sale in the area over the period, not just the 15 shown:',
+              '# count, total volume, median price, median $/unit, median units, median year built,',
+              '# share built before 1979, median reported cap rate (None if under 3 reported), cap rates reported',
+              'STATS = {']
+    lines += [f'    {k!r}: {v!r},' for k, v in stats.items()]
     lines.append('}')
     Path(__file__).resolve().parent.parent.joinpath('area_comps.py').write_text('\n'.join(lines) + '\n')
     print(f'{len(sales)} sales read')

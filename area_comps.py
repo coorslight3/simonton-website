@@ -390,3 +390,35 @@ COMPS = {
         ('1350 W 9th St', 'Northwest San Pedro', 15, 1973, '2026-02-26', 3530600, 235373),
     ],
 }
+
+# Every sale in the area over the period, not just the 15 shown:
+# count, total volume, median price, median $/unit, median units, median year built,
+# share built before 1979, median reported cap rate (None if under 3 reported), cap rates reported
+STATS = {
+    'los-angeles': {'count': 664, 'volume': 2954954374, 'price': 1944000, 'ppu': 208333, 'units': 9.0, 'built': 1957, 'pre1979': 84, 'cap': 6.09, 'caps': 456},
+    'west-hollywood': {'count': 23, 'volume': 162344234, 'price': 2850000, 'ppu': 285000, 'units': 10, 'built': 1959, 'pre1979': 83, 'cap': 5.33, 'caps': 17},
+    'beverly-grove': {'count': 9, 'volume': 75914000, 'price': 3910000, 'ppu': 340333, 'units': 8, 'built': 1956, 'pre1979': 67, 'cap': 4.94, 'caps': 8},
+    'beverly-hills': {'count': 21, 'volume': 112835000, 'price': 3800000, 'ppu': 499375, 'units': 8, 'built': 1954, 'pre1979': 95, 'cap': 4.5, 'caps': 17},
+    'fairfax-miracle-mile': {'count': 13, 'volume': 290780000, 'price': 2550000, 'ppu': 388258, 'units': 12, 'built': 1951, 'pre1979': 62, 'cap': 5.7, 'caps': 11},
+    'mid-wilshire': {'count': 36, 'volume': 296234001, 'price': 2177500, 'ppu': 183750, 'units': 16.0, 'built': 1955, 'pre1979': 94, 'cap': 6.47, 'caps': 24},
+    'downtown-la': {'count': 12, 'volume': 154070000, 'price': 6130000, 'ppu': 152123, 'units': 39.0, 'built': 1928, 'pre1979': 73, 'cap': 6.51, 'caps': 4},
+    'westlake': {'count': 14, 'volume': 97418220, 'price': 1667500, 'ppu': 141562, 'units': 9.5, 'built': 1940, 'pre1979': 93, 'cap': 6.0, 'caps': 9},
+    'macarthur-park': {'count': 6, 'volume': 15160164, 'price': 2115082, 'ppu': 137070, 'units': 17.5, 'built': 1938, 'pre1979': 83, 'cap': 7.19, 'caps': 5},
+    'pico-union': {'count': 6, 'volume': 7485000, 'price': 1130000, 'ppu': 140834, 'units': 7.5, 'built': 1910, 'pre1979': 100, 'cap': 7.42, 'caps': 6},
+    'west-adams': {'count': 20, 'volume': 39849500, 'price': 1278750, 'ppu': 197857, 'units': 6.0, 'built': 1960, 'pre1979': 74, 'cap': 6.19, 'caps': 10},
+    'exposition-park': {'count': 9, 'volume': 12884438, 'price': 1100000, 'ppu': 122222, 'units': 9, 'built': 1924, 'pre1979': 100, 'cap': 7.97, 'caps': 5},
+    'pico-robertson-beverlywood': {'count': 28, 'volume': 71174450, 'price': 2047000, 'ppu': 342916, 'units': 6.0, 'built': 1958, 'pre1979': 93, 'cap': 5.44, 'caps': 20},
+    'hollywood-hills-laurel-canyon': {'count': 13, 'volume': 40814650, 'price': 2280500, 'ppu': 278571, 'units': 7, 'built': 1962, 'pre1979': 77, 'cap': 5.91, 'caps': 13},
+    'los-feliz': {'count': 18, 'volume': 50122154, 'price': 2687500, 'ppu': 242198, 'units': 10.5, 'built': 1951, 'pre1979': 100, 'cap': 6.0, 'caps': 17},
+    'silver-lake': {'count': 17, 'volume': 45298000, 'price': 1925000, 'ppu': 266667, 'units': 6, 'built': 1942, 'pre1979': 94, 'cap': 6.12, 'caps': 10},
+    'echo-park': {'count': 14, 'volume': 31321250, 'price': 1637500, 'ppu': 199584, 'units': 8.0, 'built': 1948, 'pre1979': 79, 'cap': 5.94, 'caps': 10},
+    'santa-monica': {'count': 59, 'volume': 316783528, 'price': 2700000, 'ppu': 390000, 'units': 7, 'built': 1961, 'pre1979': 90, 'cap': 5.49, 'caps': 27},
+    'venice': {'count': 12, 'volume': 33909000, 'price': 2484500, 'ppu': 328166, 'units': 8.5, 'built': 1926, 'pre1979': 100, 'cap': 5.84, 'caps': 8},
+    'marina-del-rey': {'count': 2, 'volume': 194750000, 'price': 97375000, 'ppu': 278775, 'units': 322.5, 'built': 1992, 'pre1979': 50, 'cap': None, 'caps': 0},
+    'mar-vista': {'count': 15, 'volume': 63597239, 'price': 2450000, 'ppu': 245000, 'units': 10, 'built': 1961, 'pre1979': 80, 'cap': 5.6, 'caps': 11},
+    'west-la': {'count': 43, 'volume': 301884015, 'price': 2900000, 'ppu': 362500, 'units': 9, 'built': 1965, 'pre1979': 77, 'cap': 5.39, 'caps': 28},
+    'studio-city': {'count': 12, 'volume': 35313772, 'price': 2562500, 'ppu': 319916, 'units': 8.5, 'built': 1971, 'pre1979': 67, 'cap': 5.46, 'caps': 10},
+    'sherman-oaks': {'count': 25, 'volume': 91426549, 'price': 2850000, 'ppu': 284286, 'units': 12, 'built': 1964, 'pre1979': 68, 'cap': 5.83, 'caps': 19},
+    'san-fernando-valley': {'count': 224, 'volume': 1254006448, 'price': 2035000, 'ppu': 207638, 'units': 10.0, 'built': 1963, 'pre1979': 75, 'cap': 5.86, 'caps': 172},
+    'san-pedro': {'count': 22, 'volume': 41953600, 'price': 1590000, 'ppu': 198000, 'units': 8.0, 'built': 1958, 'pre1979': 77, 'cap': 6.21, 'caps': 18},
+}

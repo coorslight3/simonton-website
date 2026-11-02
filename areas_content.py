@@ -240,3 +240,97 @@ def filename(slug):
     if slug == 'san-fernando-valley':
         return 'san-fernando-valley-multifamily-market.html'
     return f'{slug}-multifamily-broker.html'
+
+
+# Market snapshots for the pages that had none. Written Nov 2026 as a starting point for client review;
+# the figures paragraph under each one is generated from CoStar data (area_comps.STATS), not written here.
+# Separate cities with their own rent rules, so the figures paragraph does not mention the City of LA's RSO.
+OWN_CITY = {'west-hollywood', 'beverly-hills', 'santa-monica'}
+
+SNAPSHOTS = {
+    'los-angeles': [
+        "The City of Los Angeles is one of the largest and deepest apartment markets in the country. Most households in the city rent, and demand reaches from the Westside and Hollywood to Downtown, South LA, the Harbor area and the San Fernando Valley, so the city is really a collection of distinct submarkets that price very differently from one another.",
+        "Most of the city's apartment inventory is older, smaller buildings, and most of it falls under the Los Angeles Rent Stabilization Ordinance, which generally covers rental units in buildings with a certificate of occupancy issued before October 1, 1978. RSO status shapes allowable rent increases, relocation obligations and, as a result, value. Measure ULA's transfer tax on higher-value sales within the city is another factor sellers and buyers model before going to market.",
+        "Buyers today are underwriting carefully, with a focus on in-place income, expenses, deferred maintenance and realistic rent growth. Well-priced buildings with sound cash flow and a clear path to improvement continue to trade, and pricing a building against the right neighborhood, not a citywide average, is what separates a quick sale from a stale listing.",
+    ],
+    'west-hollywood': [
+        "West Hollywood is one of the most supply-constrained apartment markets in Los Angeles County. The city is small, densely built and largely renter-occupied, and new construction is limited, so buildings that come to market here draw attention from private investors, long-term family holders and 1031 exchange buyers.",
+        "Much of the inventory is older buildings and courts of roughly five to twenty units on the streets between Sunset and Santa Monica Boulevard and south toward Melrose. Because West Hollywood is its own city, its rent stabilization rules, not the City of LA's, govern rent increases, evictions and relocation, and those rules are a central part of every valuation here.",
+        "Pricing tends to hold up well because of the location and the scarcity of product, but buyers look closely at in-place rents against market, deferred maintenance and the cost of turning units. Clean operating history and accurate rent rolls make a meaningful difference in how a West Hollywood building is received.",
+    ],
+    'hollywood-hills-laurel-canyon': [
+        "Apartment inventory in the Hollywood Hills and Laurel Canyon is thin. Most of the hillside is single-family, so income property is concentrated on the lower streets near the flats, along the canyon roads, and in pockets near Cahuenga Pass, where duplexes, small buildings and older courts sit close to Hollywood and the Westside.",
+        "That scarcity works in sellers' favor. Buyers value privacy, views and location, and many are long-term holders who are less sensitive to short-term rent movements. At the same time, hillside properties can carry more complicated due diligence than buildings in the flats, from parking and access to slope and foundation questions, so preparation matters.",
+        "Buildings here fall within the City of Los Angeles, so most older properties are subject to the Rent Stabilization Ordinance. Comparable sales are few, which makes careful, property-specific pricing more important than in denser neighborhoods.",
+    ],
+    'beverly-grove': [
+        "Beverly Grove is one of the most consistently in-demand apartment neighborhoods on the Westside. Its location between Beverly Hills, West Hollywood and the Fairfax District, together with Cedars-Sinai Medical Center and the shopping and dining along West Third Street, supports a steady, well-qualified renter base.",
+        "The housing stock is mostly Spanish-style duplexes, fourplexes and small apartment buildings on tree-lined residential streets, with relatively few larger complexes. Sales are infrequent and pricing per unit sits well above the citywide level, reflecting how rarely these buildings change hands.",
+        "Most older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance, so the spread between in-place and market rents is often the main driver of value. Owners preparing to sell benefit from documenting rents, recent improvements and any vacant or turned units clearly.",
+    ],
+    'fairfax-miracle-mile': [
+        "The Fairfax District and Miracle Mile combine walkability, cultural anchors and new transit access. The Grove, the Original Farmers Market and Museum Row draw people throughout the week, and the D Line's Wilshire/La Brea and Wilshire/Fairfax stations add a long-term tailwind for rental demand along the corridor.",
+        "Much of the apartment inventory dates to the 1920s through the 1960s, from classic courtyard buildings and fourplexes to mid-century walk-ups, with some larger properties near Wilshire and Park La Brea. Investors are drawn to the character of the older stock and to the upside in buildings with below-market rents.",
+        "Most of these buildings are covered by the City of Los Angeles Rent Stabilization Ordinance, and the area's proximity to transit can bring transit-oriented development incentives into play for some sites. Both affect how buyers value a property, and both are worth understanding before going to market.",
+    ],
+    'mid-wilshire': [
+        "Mid-Wilshire, centered on Koreatown and the Wilshire corridor and bordered by Hancock Park, is one of the densest rental markets in Los Angeles. Office towers along Wilshire, a deep base of restaurants and services, and D Line stations at Wilshire/Normandie and Wilshire/Western support strong, consistent renter demand.",
+        "Buildings here tend to be larger than in many neighborhoods, with pre-war brick and courtyard buildings alongside 1960s and 1980s apartment properties. That mix gives investors a range of options, from stabilized income to value-add repositioning through interior renovations and better management.",
+        "Nearly all of the older inventory is subject to the City of Los Angeles Rent Stabilization Ordinance, and cap rates typically run higher than on the Westside. Buyers focus on rent rolls, expenses and capital needs, so a well-documented property with clear upside tends to stand out.",
+    ],
+    'pico-robertson-beverlywood': [
+        "Pico-Robertson and Beverlywood are a stable, close-knit residential area between Beverly Hills, Century City and Culver City. Pico Boulevard's shops, schools and houses of worship anchor a renter base that tends to stay for years, which supports low turnover and predictable income.",
+        "The apartment inventory is mostly duplexes and small buildings, many built in the 1950s and 1960s, on residential streets south of Beverly Hills. Larger buildings are uncommon, and Beverlywood itself is primarily single-family, which keeps apartment supply tight.",
+        "Most older buildings are covered by the City of Los Angeles Rent Stabilization Ordinance. Pricing per unit here is well above the citywide level, and buyers pay particular attention to unit sizes, parking and the condition of building systems.",
+    ],
+    'san-pedro': [
+        "San Pedro offers a different profile from most of Los Angeles: a waterfront community with its own downtown, a strong port and maritime employment base, and pricing that is generally more accessible than the Westside or Hollywood. The West Harbor redevelopment and ongoing downtown investment add to the area's long-term appeal.",
+        "The apartment inventory ranges from older small buildings and courts near downtown to mid-century and newer properties further up the hill, many with harbor or ocean views. Investors are drawn by yields that are often higher than in more central neighborhoods, along with a steady local renter base.",
+        "San Pedro is part of the City of Los Angeles, so the Rent Stabilization Ordinance applies to most older buildings. Local knowledge of individual blocks matters here, since view, proximity to downtown and the waterfront, and building condition all move value considerably.",
+    ],
+    'macarthur-park': [
+        "MacArthur Park is one of the densest neighborhoods in Los Angeles, with a deep renter base, strong transit access through the Westlake/MacArthur Park station on the B and D Lines, and quick connections to Downtown.",
+        "The apartment stock is largely pre-war brick and courtyard buildings, many with more units than the typical Westside property. Cap rates here generally run above the citywide average, which attracts investors focused on cash flow and value-add plans built on renovation and better management.",
+        "Nearly every older building is covered by the City of Los Angeles Rent Stabilization Ordinance. Buyers underwrite carefully for deferred maintenance, seismic retrofit status and operating costs, so an accurate rent roll and a clear picture of capital needs are essential when selling.",
+    ],
+    'downtown-la': [
+        "Downtown Los Angeles is the most varied apartment market in the city, from historic conversions in the Historic Core to newer construction in South Park, the Arts District and around Bunker Hill. It is the region's transit hub and civic center, and its residential population has grown substantially over the past two decades.",
+        "The buildings that trade here are typically larger than in other neighborhoods, which means a different buyer pool, often institutional and private-capital groups as well as experienced private investors. Smaller buildings and mixed-use properties come up less often and can attract strong interest when they do.",
+        "Downtown values are closely tied to building age and type. Older properties may be subject to the Rent Stabilization Ordinance and to seismic requirements, while newer buildings are generally priced on stabilized income. Concessions, operating costs and financing terms all play a large role in how buyers value Downtown assets.",
+    ],
+    'west-adams': [
+        "West Adams combines historic architecture with central location. Its Craftsman, Victorian and Colonial Revival homes and small apartment buildings sit near the E Line, USC and the Expo corridor, and the neighborhood continues to draw renters looking for character at prices below the Westside.",
+        "The multifamily inventory is mostly small buildings, duplexes and multi-unit lots, which appeals to private investors, developers and buyers looking at ADU additions. Several parts of the area are Historic Preservation Overlay Zones, which affects exterior changes and should be confirmed early for any property.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers here weigh in-place rents, lot size and development potential together, so pricing a West Adams property often means considering more than its current income.",
+    ],
+    'exposition-park': [
+        "The area around Exposition Park benefits from some of the most durable demand drivers in the city: USC, the Coliseum, BMO Stadium, the museums of Exposition Park and E Line service along Exposition Boulevard. Students, university staff and longtime residents together support high occupancy.",
+        "Most of the apartment inventory is older, much of it built before World War II, and buildings tend to be small to mid-sized. Cap rates are generally among the higher ones in central Los Angeles, which attracts investors focused on yield and on renovation upside.",
+        "Older buildings here are subject to the City of Los Angeles Rent Stabilization Ordinance. Condition, seismic status and management quality vary widely from property to property, so detailed due diligence and accurate operating numbers are central to a successful sale.",
+    ],
+    'pico-union': [
+        "Pico-Union, just west of Downtown, is one of the oldest residential neighborhoods in Los Angeles, with apartment buildings and early 20th-century homes close to Downtown jobs, the Convention Center and the 10 and 110 freeways.",
+        "Much of the housing stock dates to the early 1900s, and many buildings are small to mid-sized. Prices per unit have generally been more accessible than in neighboring areas and cap rates higher, which draws investors focused on cash flow and value-add improvements.",
+        "Nearly every older building is covered by the City of Los Angeles Rent Stabilization Ordinance, and many require attention to deferred maintenance and seismic retrofit. Buyers look for clear rent rolls and a realistic picture of capital needs.",
+    ],
+    'westlake': [
+        "Westlake is a dense, transit-rich neighborhood next to MacArthur Park and Downtown, with busy commercial corridors along Alvarado Street, Wilshire and Sixth Street and a deep, consistent renter base.",
+        "The apartment inventory is largely older brick and courtyard buildings, many from the 1920s through the 1940s. Investors are attracted to yields above the citywide average and to upside through renovation and stronger management, while transit-oriented incentives are drawing new interest from developers.",
+        "Most buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Seismic retrofit status, deferred maintenance and operating costs are central to underwriting, so sellers benefit from having that information ready before going to market.",
+    ],
+    'beverly-hills': [
+        "Beverly Hills is one of the most prestigious apartment markets in the region. The city's address, schools, services and proximity to Century City and the Westside support long-term renter demand and a buyer pool that includes many long-term and family investors.",
+        "Most of the city's apartments are south of Wilshire Boulevard, in small and mid-sized buildings on tree-lined residential streets, many built in the 1950s and 1960s. Pricing per unit is among the highest in Los Angeles County, reflecting how rarely these buildings come to market.",
+        "Beverly Hills is its own city with its own rent stabilization rules, separate from the City of Los Angeles. Those rules, along with building condition and the gap between in-place and market rents, are central to every valuation here.",
+    ],
+    'santa-monica': [
+        "Santa Monica is one of the most supply-constrained coastal apartment markets in Southern California. The beach, a strong local job base in technology, media and healthcare, the E Line and a walkable downtown keep demand high across neighborhoods from North of Montana and Wilshire Montana to Sunset Park, Pico and Ocean Park.",
+        "Much of the inventory is small and mid-sized buildings from the 1950s and 1960s. Prices per unit sit well above the county average, and buyers are drawn by location, long-term appreciation and the limited supply of new construction.",
+        "Santa Monica has its own rent control system, separate from the City of Los Angeles, and it plays a major role in valuation. Buyers focus on the spread between controlled and market rents, unit turnover and building condition, so an accurate, well-documented rent roll is essential.",
+    ],
+    'west-la': [
+        "West Los Angeles sits between Santa Monica, Brentwood, Westwood and Century City, giving renters access to major Westside employers, UCLA and the E Line. The Sawtelle corridor and Santa Monica Boulevard add dining and retail that keep the area popular with renters.",
+        "The apartment inventory is dominated by 1950s through 1970s buildings, many of them mid-sized stucco properties with parking, along with some newer construction near transit. Pricing per unit is well above the citywide level, and demand from private investors and 1031 exchange buyers is consistent.",
+        "Most older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers look closely at unit mix, parking, condition and the potential to raise rents on turnover, so properly presenting those details has a real effect on price.",
+    ],
+}
