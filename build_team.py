@@ -75,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=58">
+<link rel="stylesheet" href="styles.css?v=63">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=58"></script>
+{bottom}{scripts}<script src="script.js?v=63"></script>
 </body>
 </html>
 '''
@@ -500,22 +500,25 @@ def comps_html(slug, label):
     if not rows:
         return ''
     when = lambda d: datetime.date.fromisoformat(d).strftime('%b %Y')
+    # the Neighborhood column only earns its space when the rows span more than one neighborhood
+    hood = len({r[1] for r in rows}) > 1
     body = ''.join(
-        f'<tr><th scope="row">{e(a)}</th><td>{e(n)}</td><td class="num">{u}</td><td class="num">{b or ""}</td>'
-        f'<td class="num">{when(d)}</td><td class="num">${p:,}</td><td class="num">${pu:,}</td></tr>'
-        for a, n, u, b, d, p, pu in rows)
-    return f'''<section class="section comps"><div class="wrap">
+        f'<tr><th scope="row">{e(a)}</th>{f"<td>{e(n)}</td>" if hood else ""}<td class="num">{u}</td><td class="num">{b or ""}</td>'
+        f'<td class="num">{when(d)}</td><td class="num">${p:,}</td><td class="num">${pu:,}</td>'
+        f'<td class="num">{f"${sf:,}" if sf else "&ndash;"}</td><td class="num">{f"{g:.2f}" if g else "&ndash;"}</td></tr>'
+        for a, n, u, b, d, p, pu, sf, g in rows)
+    return f'''<div class="comps">
   <h2>Recent {e(label)} Apartment Sales</h2>
   <p class="comps-sub">The {len(rows)} most recent multifamily sales{" in " + e(label) if slug != "los-angeles" else " with a Los Angeles address"}.</p>
   <div class="table-wrap" role="region" aria-label="Recent {e(label)} sales" tabindex="0">
     <table class="closed">
       <caption class="sr-only">Recent apartment building sales in {e(label)}</caption>
-      <thead><tr><th scope="col">Property</th><th scope="col">Neighborhood</th><th scope="col" class="num">Units</th><th scope="col" class="num">Built</th><th scope="col" class="num">Sold</th><th scope="col" class="num">Sale Price</th><th scope="col" class="num">$/Unit</th></tr></thead>
+      <thead><tr><th scope="col">Property</th>{'<th scope="col">Neighborhood</th>' if hood else ''}<th scope="col" class="num">Units</th><th scope="col" class="num">Built</th><th scope="col" class="num">Sold</th><th scope="col" class="num">Sale Price</th><th scope="col" class="num">$/Unit</th><th scope="col" class="num">$/SF</th><th scope="col" class="num"><abbr title="Gross rent multiplier">GRM</abbr></th></tr></thead>
       <tbody>{body}</tbody>
     </table>
   </div>
-  <p class="disclaimer">Source: {e(area_comps.SOURCE)}. Prices and unit counts as reported; not verified by RE/MAX One Commercial.</p>
-</div></section>'''
+  <p class="disclaimer">Source: {e(area_comps.SOURCE)}. Prices, unit counts and GRM as reported; a dash means not reported. Not verified by RE/MAX One Commercial.</p>
+</div>'''
 
 
 def money(n):
@@ -542,28 +545,80 @@ def figures(slug, label):
     return f'<p class="figures">{e(t)}</p>'
 
 
+def indicators_html(slug, label, client=()):
+    """Market indicator tiles from the CoStar stats. Cap rate and $/unit fall back to the client's tiles when
+    there are too few sales; the client's vacancy and rent growth tiles (full market pages) are kept as they are."""
+    st = area_comps.STATS.get(slug) or {}
+    theirs = {l: (v, note) for l, v, note in client}
+    k = lambda n: f'${n / 1000:,.0f}K'
+    tiles = []
+    if st.get('cap_mid'):
+        lo, hi = st['cap_mid']
+        tiles.append(('Cap rate', f'{lo:.1f}%–{hi:.1f}%', f'middle half of {st["caps"]} reported sales'))
+    elif 'Cap rate' in theirs:
+        tiles.append(('Cap rate',) + theirs['Cap rate'])
+    if st.get('ppu_mid'):
+        lo, hi = st['ppu_mid']
+        tiles.append(('Price per unit', f'{k(lo)}–{k(hi)}', f'middle half; median ${st["ppu"]:,}'))
+    elif 'Price per unit' in theirs:
+        tiles.append(('Price per unit',) + theirs['Price per unit'])
+    if st.get('psf_mid'):
+        lo, hi = st['psf_mid']
+        tiles.append(('Price per SF', f'${lo:,.0f}\u2013${hi:,.0f}', f'middle half; median ${st["psf"]:,}'))
+    if st.get('grm_mid'):
+        lo, hi = st['grm_mid']
+        tiles.append(('GRM', f'{lo:.1f}\u2013{hi:.1f}', f'middle half of {st["grms"]} reported sales'))
+    if st.get('count'):
+        tiles.append(('Sales, last 12 months', f'{st["count"]}', f'{money(st["volume"])} total'))
+    if st.get('count', 0) >= 3 and st.get('built'):
+        units = round(st['units'])
+        tiles.append(('Typical building', f'{units} unit{"s" if units != 1 else ""}', f'median; built around {st["built"]}'))
+    tiles += [(l,) + theirs[l] for l in ('Vacancy rate', 'Rental growth') if l in theirs]
+    if not tiles:
+        return ''
+    html_tiles = ''.join(f'<div class="ind"><span class="ind-l">{e(l)}</span><strong>{e(v)}</strong>'
+                         + (f'<small>{e(n)}</small>' if n else '') + '</div>' for l, v, n in tiles)
+    note = (f'Cap rate, price per unit, price per SF, GRM (gross rent multiplier), sales and building figures are '
+            f'from {area_comps.SOURCE}; ranges show the middle half of sales (25th to 75th percentile).')
+    if any(l in theirs for l in ('Vacancy rate', 'Rental growth')):
+        note += ' Vacancy and rental growth are broader apartment-market indicators.'
+    return (f'<section class="ind-banner" aria-labelledby="ind-{slug}"><div class="wrap">'
+            f'<h2 class="ind-banner-h" id="ind-{slug}">{e(label)} Market Indicators</h2>'
+            f'<div class="ind-row" style="--n:{len(tiles)}">{html_tiles}</div><p class="disclaimer">{e(note)}</p></div></section>')
+
+
+def robert_link(slug, label):
+    """Palms, Mid City and Mar Vista point to Robert's in-depth market page."""
+    if slug not in ac.ROBERT_AREAS:
+        return ''
+    return (f'<p><a class="link" href="{market_robert.PATH}">See Robert Carlile\u2019s in-depth Palms, Mar Vista '
+            f'and Mid City market page &rarr;</a></p>')
+
+
 def snapshot_html(title, paras, extra=''):
-    return (f'<section class="section alt"><div class="wrap narrow about-body"><h2>{e(title)}</h2>'
-            f'{paras_html(paras)}{extra}</div></section>')
+    return f'<div class="area-snap about-body"><h2>{e(title)}</h2>{paras_html(paras)}{extra}</div>'
+
+
+def area_main(comps, snapshot):
+    """Recent sales and the market snapshot side by side (stacked on phones)."""
+    return f'<section class="section area-main"><div class="wrap area-split">{comps}{snapshot}</div></section>'
 
 
 def paras_html(paras):
     return ''.join(f'<p>{e(t)}</p>' for t in paras)
 
 
-# Every area page runs in the same order: hero, recent sales, market snapshot, page extras, valuation form.
+# Every area page runs in the same order: hero, indicator banner, recent sales beside the market snapshot,
+# page extras, valuation form.
 
 # Full market pages
 for a in ac.FULL:
     n = a['name']
-    tiles = ''.join(
-        f'<div class="ind"><span class="ind-l">{e(l)}</span><strong>{e(v)}</strong>'
-        + (f'<small>{e(note)}</small>' if note else '') + '</div>' for l, v, note in a['indicators'])
     body = (area_hero(f'{n} Multifamily Broker', 'RE/MAX One Commercial', a['intro'])
-            + comps_html(a['slug'], n)
-            + snapshot_html(f'{n} Multifamily Market Snapshot', ac.SNAPSHOTS.get(a['slug'], a['snapshot']),
-                            figures(a['slug'], n))
-            + f'<section class="section"><div class="wrap"><h2>{e(n)} Multifamily Market Indicators</h2><div class="ind-grid">{tiles}</div><p class="disclaimer">{e(a["note"])}</p></div></section>'
+            + indicators_html(a['slug'], n, a['indicators'])
+            + area_main(comps_html(a['slug'], n),
+                        snapshot_html(f'{n} Multifamily Market Snapshot', ac.SNAPSHOTS.get(a['slug'], a['snapshot']),
+                                      figures(a['slug'], n) + robert_link(a['slug'], n)))
             + valuation_block(f'What Is My {n} Apartment Building Worth?', a['worth'], n)
             )
     (SITE / ac.filename(a['slug'])).write_text(page(
@@ -573,9 +628,10 @@ for a in ac.FULL:
 v = ac.VALLEY
 cards = ''.join(f'<article class="hood"><h3>{e(n)}</h3><p>{e(t)}</p></article>' for n, t in v['hoods'])
 body = (area_hero(v['h1'], 'RE/MAX One Commercial')
-        + comps_html(v['slug'], v['name'])
-        + snapshot_html(f'{v["name"]} Multifamily Market Snapshot', [v['intro']] + v['paras'])
-        + f'<section class="section"><div class="wrap"><h2>Valley Neighborhoods</h2><div class="hood-grid">{cards}</div></div></section>'
+        + indicators_html(v['slug'], v['name'])
+        + area_main(comps_html(v['slug'], v['name']),
+                    snapshot_html(f'{v["name"]} Multifamily Market Snapshot', [v['intro']] + v['paras']))
+        + f'<section class="section alt"><div class="wrap"><h2>Valley Neighborhoods</h2><div class="hood-grid">{cards}</div></div></section>'
         + valuation_block('What Is My Valley Apartment Building Worth?',
                           ['Request a free, confidential valuation for your San Fernando Valley apartment building from the RE/MAX One Commercial multifamily team.'],
                           v['name'])
@@ -586,9 +642,10 @@ body = (area_hero(v['h1'], 'RE/MAX One Commercial')
 # Neighborhood pages: the client's overview paragraph leads the snapshot
 for h in ac.HOODS:
     body = (area_hero(h['name'], (f'ZIP {h["zip"]} \u00b7 ' if h.get('zip') else '') + 'Multifamily Broker')
-            + comps_html(h['slug'], h['label'])
-            + snapshot_html(f'{h["label"]} Multifamily Market Snapshot', h['paras'] + ac.SNAPSHOTS.get(h['slug'], []),
-                            figures(h['slug'], h['label']))
+            + indicators_html(h['slug'], h['label'])
+            + area_main(comps_html(h['slug'], h['label']),
+                        snapshot_html(f'{h["label"]} Multifamily Market Snapshot', h['paras'] + ac.SNAPSHOTS.get(h['slug'], []),
+                                      figures(h['slug'], h['label'])))
             + valuation_block(f'What Is My {h["label"]} Apartment Building Worth?',
                               [f'Request a free, confidential valuation for your {h["label"]} apartment building from the RE/MAX One Commercial multifamily team.'],
                               h['label'])
@@ -600,10 +657,11 @@ for h in ac.HOODS:
 for slug_, label in ac.PLACEHOLDERS:
     snap = ac.SNAPSHOTS.get(slug_)
     body = (area_hero(f'{label} Multifamily Broker', 'RE/MAX One Commercial')
-            + comps_html(slug_, label)
-            + snapshot_html(f'{label} Multifamily Market Snapshot', snap or [
-                f'Detailed {label} market information is coming soon. In the meantime, request a free, confidential valuation for your apartment building below.'],
-                figures(slug_, label))
+            + indicators_html(slug_, label)
+            + area_main(comps_html(slug_, label),
+                        snapshot_html(f'{label} Multifamily Market Snapshot', snap or [
+                            f'Detailed {label} market information is coming soon. In the meantime, request a free, confidential valuation for your apartment building below.'],
+                            figures(slug_, label) + robert_link(slug_, label)))
             + valuation_block(f'What Is My {label} Apartment Building Worth?',
                               [f'Request a free, confidential valuation for your {label} apartment building from the RE/MAX One Commercial multifamily team.'],
                               label)

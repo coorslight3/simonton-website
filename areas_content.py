@@ -216,22 +216,30 @@ HOODS = [
          paras=['A lively, high-energy neighborhood next to MacArthur Park, with busy commercial corridors along Alvarado and Wilshire. Excellent Metro access and proximity to Downtown keep renter demand strong, and transit-oriented zoning incentives are drawing new attention to the area. For multifamily investors, Westlake offers dependable income today with long-term upside as the area continues to grow.']),
 ]
 
-# Areas that had a footer link before but no text yet.
+# Areas with no client text: their page uses the written snapshot in SNAPSHOTS.
 PLACEHOLDERS = [('los-angeles', 'Los Angeles'), ('beverly-hills', 'Beverly Hills'), ('santa-monica', 'Santa Monica'),
-                ('mid-wilshire', 'Mid-Wilshire'), ('west-la', 'West LA')]
+                ('mid-wilshire', 'Mid-Wilshire'), ('west-la', 'West LA'),
+                ('hollywood', 'Hollywood'), ('east-hollywood', 'East Hollywood'), ('koreatown', 'Koreatown'),
+                ('mid-city', 'Mid City'), ('palms', 'Palms'), ('culver-city', 'Culver City'), ('westwood', 'Westwood'),
+                ('brentwood', 'Brentwood'), ('el-segundo', 'El Segundo'), ('inglewood', 'Inglewood'),
+                ('north-hollywood', 'North Hollywood'), ('valley-village', 'Valley Village'), ('van-nuys', 'Van Nuys'),
+                ('encino', 'Encino'), ('reseda', 'Reseda'), ('northridge', 'Northridge')]
 
 ORDER = [
-    ('los-angeles', 'Los Angeles'), ('west-hollywood', 'West Hollywood'), ('beverly-grove', 'Beverly Grove'),
-    ('beverly-hills', 'Beverly Hills'), ('fairfax-miracle-mile', 'Fairfax & Miracle Mile'),
-    ('mid-wilshire', 'Mid-Wilshire'),
+    ('los-angeles', 'Los Angeles'), ('hollywood', 'Hollywood'), ('east-hollywood', 'East Hollywood'),
+    ('west-hollywood', 'West Hollywood'), ('hollywood-hills-laurel-canyon', 'Hollywood Hills & Laurel Canyon'),
+    ('beverly-grove', 'Beverly Grove'), ('beverly-hills', 'Beverly Hills'), ('fairfax-miracle-mile', 'Fairfax & Miracle Mile'),
+    ('mid-wilshire', 'Mid-Wilshire'), ('koreatown', 'Koreatown'), ('mid-city', 'Mid City'),
     ('downtown-la', 'Downtown LA'), ('westlake', 'Westlake'), ('macarthur-park', 'MacArthur Park'),
     ('pico-union', 'Pico-Union'), ('west-adams', 'West Adams'), ('exposition-park', 'Exposition Park'),
-    ('pico-robertson-beverlywood', 'Pico-Robertson & Beverlywood'),
-    ('hollywood-hills-laurel-canyon', 'Hollywood Hills & Laurel Canyon'), ('los-feliz', 'Los Feliz'),
-    ('silver-lake', 'Silver Lake'), ('echo-park', 'Echo Park'), ('santa-monica', 'Santa Monica'),
-    ('venice', 'Venice'), ('marina-del-rey', 'Marina del Rey'), ('mar-vista', 'Mar Vista'),
-    ('west-la', 'West LA'), ('studio-city', 'Studio City'), ('sherman-oaks', 'Sherman Oaks'),
-    ('san-fernando-valley', 'San Fernando Valley'), ('san-pedro', 'San Pedro'),
+    ('los-feliz', 'Los Feliz'), ('silver-lake', 'Silver Lake'), ('echo-park', 'Echo Park'),
+    ('pico-robertson-beverlywood', 'Pico-Robertson & Beverlywood'), ('santa-monica', 'Santa Monica'),
+    ('venice', 'Venice'), ('marina-del-rey', 'Marina del Rey'), ('mar-vista', 'Mar Vista'), ('palms', 'Palms'),
+    ('culver-city', 'Culver City'), ('west-la', 'West LA'), ('westwood', 'Westwood'), ('brentwood', 'Brentwood'),
+    ('el-segundo', 'El Segundo'), ('inglewood', 'Inglewood'),
+    ('studio-city', 'Studio City'), ('sherman-oaks', 'Sherman Oaks'), ('north-hollywood', 'North Hollywood'),
+    ('valley-village', 'Valley Village'), ('van-nuys', 'Van Nuys'), ('encino', 'Encino'), ('reseda', 'Reseda'),
+    ('northridge', 'Northridge'), ('san-fernando-valley', 'San Fernando Valley'), ('san-pedro', 'San Pedro'),
 ]
 
 
@@ -245,7 +253,7 @@ def filename(slug):
 # Market snapshots for the pages that had none. Written Nov 2026 as a starting point for client review;
 # the figures paragraph under each one is generated from CoStar data (area_comps.STATS), not written here.
 # Separate cities with their own rent rules, so the figures paragraph does not mention the City of LA's RSO.
-OWN_CITY = {'west-hollywood', 'beverly-hills', 'santa-monica', 'marina-del-rey'}
+OWN_CITY = {'west-hollywood', 'beverly-hills', 'santa-monica', 'marina-del-rey', 'culver-city', 'inglewood', 'el-segundo'}
 
 SNAPSHOTS = {
     'los-angeles': [
@@ -379,3 +387,91 @@ SNAPSHOTS.update({
         "Older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers focus on net operating income, rental upside, expenses and condition, and five to twenty unit buildings remain popular with private investors, local operators and 1031 exchange buyers.",
     ],
 })
+
+# Areas added Nov 2026 (broker territories, more of the Valley, Robert's Palms and Mid City, Inglewood and
+# El Segundo). Written snapshots for client review, same style as above.
+SNAPSHOTS.update({
+    'hollywood': [
+        "Hollywood is one of the most recognized rental markets in the world and one of the busiest in Los Angeles. Entertainment and media employers, nightlife and tourism along Hollywood Boulevard and Sunset, and B Line stations at Hollywood/Highland, Hollywood/Vine and Hollywood/Western support deep, year-round renter demand.",
+        "The inventory spans 1920s courtyard and brick buildings, mid-century walk-ups and a wave of newer mid-rise and high-rise construction near transit. That range gives investors options from small value-add buildings on residential side streets to larger stabilized properties.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance, and transit-oriented incentives make some sites attractive to developers. Buyers look closely at rent rolls, seismic retrofit status and the condition of building systems.",
+    ],
+    'east-hollywood': [
+        "East Hollywood, home to Thai Town, Little Armenia and Barnsdall Park, is a dense, transit-connected neighborhood between Hollywood, Los Feliz and Silver Lake. The hospitals clustered around Sunset and Vermont are major employers, and B Line stations at Vermont/Sunset and Hollywood/Western keep it well connected.",
+        "Most of the apartment inventory is older, from pre-war courtyard buildings to 1960s and 1980s walk-ups. Pricing per unit is generally more accessible than in neighboring Los Feliz and Silver Lake, which draws investors looking for yield and renovation upside.",
+        "Nearly all older buildings here are covered by the City of Los Angeles Rent Stabilization Ordinance. Clear rent rolls, a realistic view of deferred maintenance and seismic status, and well-matched comparables are what move a sale forward.",
+    ],
+    'koreatown': [
+        "Koreatown is the densest neighborhood in Los Angeles and one of its most active rental markets. Wilshire Boulevard's office towers, a nightlife and restaurant scene that runs late, and D Line stations at Wilshire/Vermont, Wilshire/Normandie and Wilshire/Western support constant renter demand.",
+        "Apartment buildings here tend to be larger than in most of the city, from pre-war brick and courtyard buildings to 1980s stucco properties and newer mid-rises. Investors are drawn by cap rates above Westside levels and by the value-add potential in older, well-located buildings.",
+        "Most older buildings are subject to the City of Los Angeles Rent Stabilization Ordinance. Buyers underwrite carefully for expenses, deferred maintenance and seismic retrofit, so documented operating history makes a meaningful difference.",
+    ],
+    'mid-city': [
+        "Mid City sits at the center of the Los Angeles basin, between Mid-Wilshire, West Adams, Culver City and Pico-Robertson. Pico, Washington and Venice boulevards connect it in every direction, and the E Line runs along its southern edge, which makes it practical for renters who work across the city.",
+        "Most of the inventory is older, with the median building dating to the late 1940s, and much of it is small and mid-sized buildings on residential streets. Pricing per unit is more accessible than on the Westside, which attracts investors focused on cash flow and long-term value.",
+        "Nearly every older building is covered by the City of Los Angeles Rent Stabilization Ordinance. Pricing varies sharply from block to block, which makes building-level knowledge more useful here than neighborhood averages.",
+    ],
+    'palms': [
+        "Palms is one of the densest apartment neighborhoods on the Westside, close to Culver City, Century City, Sony Pictures and the Expo corridor. The E Line's Palms station and quick access to the 10 and 405 make it popular with young professionals and renters who work across the Westside.",
+        "Much of the inventory is 1950s through 1980s apartment buildings, many of them mid-sized stucco properties with parking. Pricing per unit sits below Santa Monica and West LA, which makes Palms an entry point for investors who want Westside exposure.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers focus on in-place rents against market, unit mix, parking and building condition, and those details drive pricing more than any neighborhood-wide figure.",
+    ],
+    'culver-city': [
+        "Culver City has grown into one of the Westside's most sought-after places to live and work. Studio and technology employers, a walkable downtown and the E Line's Culver City station support strong demand from renters who want a shorter commute and a lively neighborhood.",
+        "The city's apartment inventory is limited, mostly small and mid-sized buildings from the 1950s through the 1970s with some newer construction near downtown and the Expo corridor. Sales are infrequent, and buyers compete for well-located buildings when they do come up.",
+        "Culver City is its own city with its own rent control and tenant protection rules, separate from the City of Los Angeles. Understanding how those rules apply to a specific building is an important part of pricing it.",
+    ],
+    'westwood': [
+        "Westwood is anchored by UCLA, one of the largest employers in Los Angeles, along with Westwood Village and the Wilshire corridor. Students, faculty, medical center staff and Westside professionals give it one of the most dependable renter bases in the city, and the D Line extension toward Westwood/UCLA adds a long-term tailwind.",
+        "The inventory ranges from student-oriented buildings south of campus to mid-century properties and newer construction along Wilshire and in the surrounding blocks. Investors value the stable occupancy, though student-heavy buildings carry their own turnover and management considerations.",
+        "Most older buildings are covered by the City of Los Angeles Rent Stabilization Ordinance. Buyers look at unit mix, proximity to campus, parking and building condition, all of which move value noticeably here.",
+    ],
+    'brentwood': [
+        "Brentwood is one of the most affluent neighborhoods in Los Angeles, with San Vicente Boulevard, Brentwood Village and the Getty Center nearby and quick access to Santa Monica and the 405. Its renter base is largely professionals and households willing to pay for the location.",
+        "Most of Brentwood is single-family, so apartments are concentrated south of Sunset, around San Vicente and Barrington and toward Wilshire, largely in 1950s through 1970s buildings. Limited supply and high land values support pricing well above the citywide level.",
+        "Older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers pay close attention to the gap between in-place and market rents, unit sizes and condition, since Brentwood tenants expect a higher standard.",
+    ],
+    'el-segundo': [
+        "El Segundo is a small, self-contained beach city next to LAX, home to major aerospace and corporate employers and a walkable downtown along Main Street. Its daytime workforce and coastal location support steady demand for the city's limited rental housing.",
+        "Apartment inventory is small, mostly modest buildings on residential streets west of Sepulveda, so sales are rare. Buyers tend to be long-term holders drawn to the city's stability and its location near the beach and the South Bay.",
+        "El Segundo is its own city, outside the City of Los Angeles rent rules, so for many older buildings rent increases follow the statewide Tenant Protection Act instead of a local ordinance. Confirming which rules apply is part of every valuation here.",
+    ],
+    'inglewood': [
+        "Inglewood has seen some of the largest investment of any city in the region, with SoFi Stadium, the Kia Forum and the Intuit Dome bringing new attention and jobs. The K Line and proximity to LAX and the 405 connect it to the rest of the region.",
+        "The apartment inventory is mostly older, small and mid-sized buildings, many from the 1950s and 1960s. Pricing per unit remains well below the Westside, and investors are drawn by higher yields and the area's long-term trajectory.",
+        "Inglewood is its own city with its own rent stabilization rules, separate from the City of Los Angeles. Those rules, along with building condition and in-place rents, are central to how buyers value a property here.",
+    ],
+    'north-hollywood': [
+        "North Hollywood is one of the San Fernando Valley's most active rental markets. The NoHo Arts District's theaters and restaurants, the North Hollywood Station where the B Line meets the G Line, and quick access to Burbank and Hollywood studios support strong renter demand.",
+        "The inventory mixes vintage courtyard buildings and mid-century properties with newer, larger construction near the station. Pricing per unit is generally below Studio City and Sherman Oaks, which draws investors looking for value and transit-driven upside.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers look closely at rent rolls, deferred maintenance and the amenities renters expect, such as parking and in-unit improvements.",
+    ],
+    'valley-village': [
+        "Valley Village is a quiet, residential neighborhood between North Hollywood, Studio City and Sherman Oaks. Tree-lined streets and easy access to the 101, 170 and Ventura Boulevard make it popular with renters who want a neighborhood feel close to the Valley's job centers.",
+        "Most of the apartment inventory is 1950s through 1980s buildings, many with parking and courtyard or pool layouts, along with some newer construction. Buildings here often trade at a discount to Studio City and Sherman Oaks while drawing a similar renter base.",
+        "Nearly all older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Buyers focus on in-place income, unit sizes and parking, and properties with renovated units tend to stand out.",
+    ],
+    'van-nuys': [
+        "Van Nuys is the civic and commercial center of the San Fernando Valley, with the Van Nuys Civic Center, Van Nuys Boulevard, Van Nuys Airport and regional connections through the G Line and Metrolink.",
+        "The inventory ranges from small buildings to larger garden-style complexes, much of it from the 1950s through the 1980s. Pricing per unit is accessible relative to the southern Valley, which draws investors focused on cash flow and value-add improvements.",
+        "Most older buildings are covered by the City of Los Angeles Rent Stabilization Ordinance. Condition, unit mix and operating costs vary widely from building to building, so property-specific underwriting and well-chosen comparables matter here.",
+    ],
+    'encino': [
+        "Encino is an established, higher-income Valley neighborhood centered on Ventura Boulevard, with the Sepulveda Basin and Balboa Park nearby and quick access to the 405 and 101. Renters are drawn by the neighborhood's quieter character and proximity to the Westside.",
+        "Most of Encino is single-family, so apartments are concentrated near Ventura Boulevard and south of the 101, largely in mid-century and 1970s and 1980s buildings. With limited supply, sales are infrequent and well-kept buildings attract strong interest.",
+        "Older buildings here fall under the City of Los Angeles Rent Stabilization Ordinance. Because comparable sales are few, careful pricing based on the building's own income and condition is especially important.",
+    ],
+    'reseda': [
+        "Reseda is a centrally located Valley neighborhood anchored by Reseda Boulevard and Sherman Way, with local retail, parks and quick access to the 101 and the G Line.",
+        "The inventory mixes smaller apartment buildings with larger garden-style complexes, much of it from the 1950s through the 1980s. Pricing per unit is among the more accessible in the Valley, which attracts investors looking for yield and value-add opportunities.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. In-place rents, unit mix, condition and deferred maintenance are what buyers focus on most.",
+    ],
+    'northridge': [
+        "Northridge has a broad tenant base supported by California State University, Northridge, Northridge Fashion Center and Northridge Hospital Medical Center. Students, university and hospital staff, and families all rent here.",
+        "The housing stock ranges from older garden-style complexes to newer infill buildings, many with parking and pools. Buildings close to campus can carry student turnover, while those further out tend to draw longer-term tenants.",
+        "Most older buildings fall under the City of Los Angeles Rent Stabilization Ordinance. Proximity to campus and employers, unit mix and condition all affect value, so local comparables are important.",
+    ],
+})
+
+# Robert Carlile's market page covers these areas in depth; their pages link to it.
+ROBERT_AREAS = {'palms', 'mid-city', 'mar-vista'}

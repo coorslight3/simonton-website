@@ -449,6 +449,7 @@ blockquote footer strong{font-weight:700}
 .area-chips a:hover{background:var(--ink);color:#fff}
 .f-areas ul{display:block;columns:2;column-gap:24px}
 .f-areas li{break-inside:avoid;margin-bottom:12px}
+.ind-grid-6{grid-template-columns:repeat(3,1fr)}
 @media (max-width:980px){.ind-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.ind-grid{grid-template-columns:1fr}.f-areas ul{columns:1}}
 
@@ -461,7 +462,7 @@ blockquote footer strong{font-weight:700}
 .nav-dd-btn svg{transition:transform .2s}
 .nav-dd-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
 .nav-dd-btn:hover{text-decoration:underline;text-underline-offset:6px}
-.nav-dd-menu{position:absolute;left:-12px;top:100%;z-index:70;list-style:none;margin:0;padding:12px;width:min(520px,92vw);background:#fff;border:1.5px solid var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.18);columns:2;column-gap:8px}
+.nav-dd-menu{position:absolute;left:50%;transform:translateX(-50%);top:100%;z-index:70;list-style:none;margin:0;padding:12px;width:min(760px,94vw);background:#fff;border:1.5px solid var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.18);columns:3;column-gap:8px}
 .nav-dd-menu[hidden]{display:none}
 .nav-dd-menu li{break-inside:avoid}
 .nav-dd-menu a{display:block;padding:10px 12px;font-size:15px;text-decoration:none;border-radius:4px}
@@ -469,7 +470,7 @@ blockquote footer strong{font-weight:700}
 @media (max-width:980px){
   .nav-dd{border-bottom:1px solid var(--line)}
   .nav-dd-btn{width:100%;justify-content:space-between;padding:12px 0}
-  .nav-dd-menu{position:static;width:auto;box-shadow:none;border:0;padding:0 0 8px 12px;columns:1}
+  .nav-dd-menu{position:static;transform:none;width:auto;box-shadow:none;border:0;padding:0 0 8px 12px;columns:2}
 }
 
 /* Broker market pages: contact line, area cards */
@@ -530,3 +531,27 @@ blockquote footer strong{font-weight:700}
 .comps-sub{margin:0 0 var(--s3);color:var(--muted)}
 .comps .disclaimer{margin-top:12px}
 .about-body .figures{border-left:3px solid var(--ink);padding-left:16px;font-weight:500}
+/* Area pages: indicator banner under the hero, then recent sales beside the market snapshot */
+.ind-banner{background:var(--paper-2);border-bottom:1px solid var(--line);padding:22px 0 18px}
+.ind-banner-h{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.ind-row{display:grid;grid-template-columns:repeat(4,1fr);row-gap:16px}
+@media (min-width:1240px){.ind-row{grid-template-columns:repeat(var(--n,4),1fr)}}
+.ind-row .ind{background:none;border:0;border-left:1px solid var(--line);padding:2px 16px}
+.ind-row .ind:first-child{border-left:0;padding-left:0}
+.ind-row .ind:nth-child(4n+1){border-left:0;padding-left:0}
+@media (min-width:1240px){.ind-row .ind:nth-child(4n+1){border-left:1px solid var(--line);padding-left:16px}.ind-row .ind:first-child{border-left:0;padding-left:0}}
+.ind-row .ind-l{font-size:11px;letter-spacing:.1em;margin-bottom:4px}
+.ind-row .ind strong{font-size:clamp(17px,1.5vw,21px);white-space:nowrap}
+.ind-row .ind small{margin-top:4px;font-size:12px}
+.ind-banner .disclaimer{margin:12px 0 0;font-size:12px}
+.area-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--s4);align-items:start}
+.area-split .closed{font-size:13px;min-width:0}
+.area-split .closed th,.area-split .closed td{padding:9px 6px}
+.area-split .closed tbody th{white-space:normal;min-width:120px}
+.area-split .closed td:not(.num){white-space:normal;min-width:90px}
+.area-split .closed thead th{font-size:11px;letter-spacing:.06em}
+.area-split h2{font-size:clamp(24px,2.2vw,32px);margin-bottom:var(--s2)}
+.area-snap p{font-size:16px}
+@media (max-width:1100px){.area-split{grid-template-columns:minmax(0,1fr)}.area-split .closed{min-width:760px}}
+@media (max-width:760px){.ind-row{grid-template-columns:1fr 1fr;row-gap:14px}
+  .ind-row .ind{border-left:0;padding:0}}
