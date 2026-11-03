@@ -704,3 +704,10 @@ blockquote footer strong{font-weight:700}
 
 /* Buttons read in Title Case ("Request My Valuation") */
 .btn,button.btn,.nav a,.nav-dd-btn,.chat-label,.sell-actions .btn{text-transform:capitalize}
+
+/* Featured Listings and Recent Closings: same 4-across grid, same gap, same image size */
+#listings .cards,#closings .closings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+#listings .listing-img,#closings .closing .ph{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+#closings .closing .ph.has-img img{width:100%;height:100%;object-fit:cover}
+@media (max-width:980px){#listings .cards,#closings .closings{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){#listings .cards,#closings .closings{grid-template-columns:minmax(0,1fr)}}

@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=73">
+<link rel="stylesheet" href="styles.css?v=74">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=73"></script>
+{bottom}{scripts}<script src="script.js?v=74"></script>
 </body>
 </html>
 '''
