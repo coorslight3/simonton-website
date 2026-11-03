@@ -701,3 +701,6 @@ blockquote footer strong{font-weight:700}
 .sell-form .form-msg{margin-top:var(--s2)}
 @media (max-width:980px){.sell-steps{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.sell-steps{grid-template-columns:1fr}.ml input,.ml-m,.ml-l{width:100%}.ml-s{width:6em}.ml{line-height:1.7}}
+
+/* Buttons read in Title Case ("Request My Valuation") */
+.btn,button.btn,.nav a,.nav-dd-btn,.chat-label,.sell-actions .btn{text-transform:capitalize}
