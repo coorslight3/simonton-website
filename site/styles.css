@@ -723,3 +723,9 @@ blockquote footer strong{font-weight:700}
 .ft-photo{aspect-ratio:1/1}
 .ft-photo img{object-position:50% 12%}
 .person-photo,.pm-photo,.mk-photo{aspect-ratio:1/1;object-position:50% 12%}
+
+/* Footer social icons */
+.f-social{list-style:none;margin:var(--s3) 0 0;padding:0;display:flex;gap:10px}
+.f-social a{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;color:#fff;transition:background .2s,color .2s,border-color .2s}
+.f-social a:hover{background:#fff;color:var(--ink);border-color:#fff}
+.f-social a:focus-visible{outline:3px solid #fff;outline-offset:3px}
