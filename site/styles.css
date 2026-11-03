@@ -751,10 +751,15 @@ blockquote footer strong{font-weight:700}
 .stat-link{color:inherit;text-decoration:none;display:block}
 .stat-link:hover span{text-decoration:underline;text-underline-offset:3px}
 
-/* Social icons in the top bar (left side; hidden on phones, where the footer has them) */
-.top-social{position:absolute;left:8px;top:50%;transform:translateY(-50%);list-style:none;margin:0;padding:0;display:flex;gap:2px}
-.top-social a{display:grid;place-items:center;width:36px;height:36px;color:#fff;border-radius:50%;transition:background .2s,color .2s}
-.top-social a:hover{background:#fff;color:var(--ink)}
-.top-social a:focus-visible{outline:2px solid #fff;outline-offset:1px}
-.top-social svg{width:16px;height:16px}
-@media (max-width:900px){.top-social{display:none}}
+/* Social icons in the white header: a small row above the menu on wide screens, beside the menu button otherwise */
+.head-social{list-style:none;margin:0 0 0 auto;padding:0;display:flex;gap:2px}
+.head-social a{display:grid;place-items:center;width:36px;height:36px;color:var(--ink);border-radius:50%;transition:background .2s,color .2s}
+.head-social a:hover{background:var(--ink);color:#fff}
+.head-social svg{width:17px;height:17px}
+@media (min-width:1740px){
+  .header-inner{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;row-gap:0;padding-top:6px;padding-bottom:6px}
+  .header-inner .brand{grid-row:1 / 3}
+  .head-social{grid-column:2;grid-row:1;justify-self:end;margin:0 -6px 0 0}
+  .header-inner .nav{grid-column:2;grid-row:2;justify-self:end}
+}
+@media (max-width:560px){.head-social{display:none}}
