@@ -739,3 +739,10 @@ blockquote footer strong{font-weight:700}
 @media (max-width:520px){.photo-stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:6px}}
 /* ...pinned to the bottom of the photo instead of the top */
 .photo-stats{top:auto;bottom:0}
+
+/* Stats banner back on the hero video, slimmer */
+.hero-stats .stats-grid{padding:8px 6vw;gap:var(--s2)}
+.hero-stats strong{font-size:clamp(17px,1.6vw,22px)}
+.hero-stats span{font-size:11.5px;line-height:1.3}
+.hero:has(.hero-stats) .hero-inner{padding-top:110px}
+@media (max-width:700px){.hero-stats .stats-grid{padding:8px 16px}.hero:has(.hero-stats) .hero-inner{padding-top:130px}}
