@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=67">
+<link rel="stylesheet" href="styles.css?v=69">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=67"></script>
+{bottom}{scripts}<script src="script.js?v=69"></script>
 </body>
 </html>
 '''
@@ -277,6 +277,8 @@ TAB_PAGES = [
      'Los Angeles multifamily market updates and guides from Simonton Commercial.', ''),
     ('faqs.html', 'faqs', 'FAQs | Simonton Commercial',
      'Answers to common questions about selling and buying apartment buildings in Los Angeles.', ''),
+    ('trust-estate-probate-sales.html', 'trust', 'Trust / Estate / Probate Sales | Simonton Commercial',
+     'Trust, estate and probate sales of apartment buildings from Simonton Commercial, RE/MAX One Commercial.', ''),
     ('contact.html', 'contact', 'Contact | Simonton Commercial',
      'Contact Simonton Commercial at RE/MAX One Commercial in Santa Monica.', ''),
 ]
