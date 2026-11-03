@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=79">
+<link rel="stylesheet" href="styles.css?v=80">
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -52,14 +52,6 @@
   <section class="hero" id="top" aria-labelledby="hero-title">
     <video class="hero-video" id="hero-video" muted loop playsinline preload="none" poster="assets/hero-poster.jpg" data-src="assets/hero.mp4" aria-hidden="true" tabindex="-1"></video>
     <div class="hero-shade" aria-hidden="true"></div>
-    <section class="stats hero-stats" aria-label="Team highlights">
-      <div class="wrap stats-grid">
-        <div><strong id="stat-vol">$0M+</strong><span>Multifamily sold volume</span></div>
-        <div><strong id="stat-count">0</strong><span>Apartment buildings sold</span></div>
-        <div><strong>#1</strong><span>Producing team (placeholder)</span></div>
-        <div><strong>5.0</strong><span>Client rating (placeholder)</span></div>
-      </div>
-    </section>
     <svg class="skyline" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
       <path d="M0 260V190h60v-30h40v30h50v-70h30v-20h24v20h26v90h40v-40h50v-60h22v-30h18v30h22v60h56v40h40v-110h18v-24h6v-26h6v26h6v24h18v110h50v-50h60v-80h34v-40h8v40h34v80h50v50h60v-70h40v-90h26v-18h12v18h26v90h40v70h70v-40h50v-50h40v50h60v40h50v-120h20v-50h4v-30h4v30h4v50h20v120h56v-60h60v-40h40v40h50v60h60v-30h70v30h60v-80h40v-30h30v30h40v80h50v-40h60v-60h30v60h60v40h50v-20h60v50H0Z" fill="currentColor"/>
     </svg>
@@ -77,7 +69,15 @@
     <div class="wrap split">
       <div class="who">
         <h2>The Simonton Commercial Team</h2>
-        <figure class="team-photo who-photo"><img src="assets/team/team-group.jpg" alt="The Simonton Commercial Group team" width="1600" height="1066"></figure>
+        <figure class="team-photo who-photo">
+          <div class="photo-stats" role="group" aria-label="Team highlights">
+            <div><strong id="stat-vol">$0M+</strong><span>Multifamily sold volume</span></div>
+            <div><strong id="stat-count">0</strong><span>Apartment buildings sold</span></div>
+            <div><strong>#1</strong><span>Producing team (placeholder)</span></div>
+            <div><strong>5.0</strong><span>Client rating (placeholder)</span></div>
+          </div>
+          <img src="assets/team/team-group.jpg" alt="The Simonton Commercial Group team" width="1600" height="1066">
+        </figure>
         <p>The Simonton Commercial Group is a team of nine commercial real estate professionals specializing in multifamily investment sales throughout Los Angeles County.</p>
         <p>With decades of combined experience, our team brings together extensive transaction expertise, strong industry relationships, and in-depth knowledge of the neighborhoods we serve. Each broker specializes in specific Los Angeles submarkets, giving our clients a distinct advantage when buying, selling, or evaluating investment properties.</p>
         <p class="approach">Our Approach is Simple: <strong>Local Expertise, Strategic Guidance, and Results Built on Relationships.</strong></p>
@@ -319,6 +319,6 @@
 
 <script src="closings-data.js"></script>
 <script src="team-data.js?v=38"></script>
-<script src="script.js?v=79"></script>
+<script src="script.js?v=80"></script>
 </body>
 </html>
