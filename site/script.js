@@ -231,33 +231,14 @@ document.querySelectorAll('form[data-form]').forEach(f => {
 })();
 
 // Hero background video. Starts automatically on larger screens; people who prefer reduced motion
-// (or Data Saver) get the still image plus a Play button. A Pause/Play button is always available.
+// (or Data Saver) keep the still image.
 (() => {
   const v = $('#hero-video');
-  const hero = $('#top');
-  if (!v || !hero || innerWidth < 768) return;
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const saver = navigator.connection && navigator.connection.saveData;
-
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'hero-toggle';
-  hero.appendChild(btn);
-
-  const label = playing => {
-    btn.setAttribute('aria-pressed', String(playing));
-    btn.innerHTML = playing
-      ? '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span>Pause video</span>'
-      : '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 4l13 8-13 8z"/></svg><span>Play video</span>';
-  };
-  const play = () => {
-    if (!v.src) v.src = v.dataset.src;
-    return v.play().then(() => label(true)).catch(() => label(false));
-  };
-
-  btn.addEventListener('click', () => { if (v.paused) play(); else { v.pause(); label(false); } });
-  label(false);
-  if (!calm && !saver) play();
+  if (!v || innerWidth < 768) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (navigator.connection && navigator.connection.saveData) return;
+  v.src = v.dataset.src;
+  v.play().catch(() => {});
 })();
 
 // "Areas We Serve" drop-down: click or hover to open; Escape or an outside click closes it.

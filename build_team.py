@@ -36,9 +36,7 @@ index = (SITE / 'index.html').read_text()
 
 # Shared chrome copied from the home page so every page stays in sync.
 top = index[index.index('<a class="skip"'):index.index('<main id="main">')]
-_band_start = index.index('<section class="meet-band"')
-_band = index[_band_start:index.index('</section>', _band_start) + len('</section>')]
-bottom = _band + '\n\n' + index[index.index('<footer class="footer">'):index.index('<script src="closings-data.js">')]
+bottom = index[index.index('<footer class="footer">'):index.index('<script src="closings-data.js">')]
 CONTENT = Path(__file__).parent / 'content'  # sections that no longer live on the home page
 
 
@@ -76,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=66">
+<link rel="stylesheet" href="styles.css?v=67">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=66"></script>
+{bottom}{scripts}<script src="script.js?v=67"></script>
 </body>
 </html>
 '''

@@ -30,7 +30,7 @@ p{margin:0 0 var(--s2)}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
 .brand img{height:48px;width:auto}
 .brand-name{font:800 14px/1.1 var(--font-head);text-transform:uppercase;letter-spacing:.14em;border-left:2px solid var(--ink);padding-left:14px}
-.nav{display:flex;align-items:center;gap:6px 22px;flex-wrap:wrap;justify-content:flex-end;font-size:15px}
+.nav{display:flex;align-items:center;gap:6px clamp(14px,1.4vw,22px);flex-wrap:wrap;justify-content:flex-end;font-size:15px}
 .nav a:not(.btn){text-decoration:none;padding:10px 0;font-weight:500}
 .nav a:not(.btn):hover{text-decoration:underline;text-underline-offset:6px}
 .nav-toggle{display:none;background:none;border:0;width:48px;height:48px;cursor:pointer;flex-direction:column;justify-content:center;gap:6px;align-items:center}
@@ -124,7 +124,6 @@ address{font-style:normal;margin-top:var(--s3)}
   .nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 20px 24px}
   .nav.open{display:flex}
   .nav a:not(.btn){padding:12px 0;border-bottom:1px solid var(--line)}
-  .nav-cta{margin-top:12px}
   .header-inner{position:relative}
   .split{grid-template-columns:1fr;gap:var(--s4)}
   .cards,.quotes{grid-template-columns:1fr}
@@ -426,11 +425,6 @@ blockquote footer strong{font-weight:700}
 #contact{border-top:1px solid rgba(255,255,255,.14)}
 @media (prefers-reduced-motion:reduce){.ft-card,.ft-photo img{transition:none!important}.ft-card:hover .ft-scan::after{animation:none}.ft-ready .ft-card:not(.in){opacity:1;transform:none}}
 @media (max-width:600px){.ft{padding:64px 0 80px}.ft-grid{grid-template-columns:1fr}}
-
-/* Hero video play/pause control */
-.hero-toggle{position:absolute;right:20px;bottom:20px;z-index:3;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1.5px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(0,0,0,.45);color:#fff;font:500 14px var(--font-body);cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.hero-toggle:hover{background:#fff;color:var(--ink)}
-.hero-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
 /* Areas Served pages */
 .area-hero{padding:var(--s5) 0 var(--s5)}
