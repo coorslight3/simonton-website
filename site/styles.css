@@ -716,3 +716,10 @@ blockquote footer strong{font-weight:700}
 .intro .who h2,.intro .services h2{margin:0 0 var(--s3);line-height:1.15}
 .intro .who .team-photo.who-photo{margin:0 0 var(--s3)}
 .intro .svc{margin-top:0}
+
+/* Team grid headshots: crop off the lower arms, keep the head and shoulders */
+.team img{aspect-ratio:1/1;object-position:50% 12%}
+/* ...and the same head-and-shoulders crop on every other headshot (contact cards, profile and market pages) */
+.ft-photo{aspect-ratio:1/1}
+.ft-photo img{object-position:50% 12%}
+.person-photo,.pm-photo,.mk-photo{aspect-ratio:1/1;object-position:50% 12%}
