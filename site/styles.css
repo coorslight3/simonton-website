@@ -711,3 +711,8 @@ blockquote footer strong{font-weight:700}
 #closings .closing .ph.has-img img{width:100%;height:100%;object-fit:cover}
 @media (max-width:980px){#listings .cards,#closings .closings{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){#listings .cards,#closings .closings{grid-template-columns:minmax(0,1fr)}}
+
+/* Team + Services: headings on one line, and the photo and first card start at the same height */
+.intro .who h2,.intro .services h2{margin:0 0 var(--s3);line-height:1.15}
+.intro .who .team-photo.who-photo{margin:0 0 var(--s3)}
+.intro .svc{margin-top:0}
