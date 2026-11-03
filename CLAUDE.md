@@ -8,7 +8,8 @@ the build, `EDITING.md` the browser workflow and `SETUP.md` local setup with Cla
 - Published folder: `site/`. Static HTML/CSS/JS. No framework.
 - `build_team.py` generates: `team.html`, `team-<name>.html`, `about.html`, the tab pages (`listings`, `closings`, `testimonials`,
   `1031-exchanges`, `blog`, `faqs`, `contact`), all area pages (`*-multifamily-broker.html`, the San Fernando Valley page),
-  Robert's page and John's page under `site/apartment-broker/`. **Never hand-edit generated files; edit the source and rerun the build.**
+  Robert's page and John's page under `site/apartment-broker/`, and one `blog-<slug>.html` per entry in
+  `blog_posts.py` (which also fills the post list on `blog.html`). **Never hand-edit generated files; edit the source and rerun the build.**
 - `site/index.html` is hand-edited. Its header and footer (including the Chase "Meet The Team" band) are copied to every page by the build.
 - The "Areas We Serve" list appears in two places in `site/index.html` (header drop-down `nav-dd-menu` and footer `f-areas`).
   When adding an area in `areas_content.py` (`HOODS`/`FULL` and `ORDER`), regenerate both lists from `ORDER`.

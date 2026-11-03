@@ -11,6 +11,7 @@ import market_robert
 import market_mike
 import area_comps
 import about_page
+import blog_posts
 import areas_content as ac
 import broker_market
 import market_john
@@ -210,6 +211,60 @@ def section_html(sec_id):
     return re.sub(r'<h2>(.*?)</h2>', r'<h1 class="sec-h1">\1</h1>', s, count=1, flags=re.S)
 
 
+def post_date(iso):
+    d = datetime.date.fromisoformat(iso)
+    return f'{d:%B} {d.day}, {d.year}'
+
+
+def post_file(post):
+    return f'blog-{post["slug"]}.html'
+
+
+def post_body_html(post):
+    """A post's blocks: paragraphs, subheadings, a left-ruled emphasis line and lists."""
+    out = ''
+    for b in post['body']:
+        if isinstance(b, str):
+            out += f'    <p>{md(b)}</p>\n'
+            continue
+        kind, val = b
+        if kind == 'h2':
+            out += f'    <h2>{e(val)}</h2>\n'
+        elif kind == 'pull':
+            out += f'    <p class="figures">{md(val)}</p>\n'
+        elif kind == 'ul':
+            # a plain list: .checks is white-on-dark and would vanish in the light post body
+            items = ''.join(f'<li>{md(t)}</li>' for t in val)
+            out += f'    <ul>{items}</ul>\n'
+        else:
+            raise ValueError(f'unknown blog block {kind!r}')
+    return out
+
+
+def blog_card(post):
+    return (f'        <article class="card">\n'
+            f'          <div class="card-body">\n'
+            f'            <span class="tag">{e(post_date(post["date"]))}</span>\n'
+            f'            <h3><a href="{post_file(post)}">{e(post["title"])}</a></h3>\n'
+            f'            <p>{e(post["dek"])}</p>\n'
+            f'            <p><a class="link" href="{post_file(post)}">Read the post &rarr;</a></p>\n'
+            f'          </div>\n'
+            f'        </article>\n')
+
+
+def blog_list_html():
+    """The post list on blog.html. Newest first, one card each."""
+    if not blog_posts.POSTS:
+        return ''
+    cards = ''.join(blog_card(p) for p in blog_posts.POSTS)
+    return ('<section class="section">\n'
+            '    <div class="wrap">\n'
+            '      <div class="head"><h2>Market Notes</h2></div>\n'
+            f'      <div class="cards">\n{cards}      </div>\n'
+            '    </div>\n'
+            '  </section>')
+
+
 TAB_PAGES = [
     ('listings.html', 'listings', 'Listings | Simonton Commercial',
      'Current multifamily listings from Simonton Commercial, RE/MAX One Commercial.', ''),
@@ -354,6 +409,8 @@ for fname, sec, title, desc, extra in TAB_PAGES:
         team_part = contact_team_html().replace('<h2 class="ft-title">', '<h1 class="ft-title">').replace('Contact Our Team</h2>', 'Contact Our Team</h1>')
         form_part = section_html(sec).replace('<h1 class="sec-h1">Contact</h1>', '<h2>Contact</h2>')
         body = team_part + form_part
+    elif sec == 'blog':
+        body = section_html(sec) + blog_list_html()
     else:
         body = section_html(sec)
     (SITE / fname).write_text(page(title, desc, body, 'subpage', extra))
@@ -764,5 +821,23 @@ _out = SITE / market_john.PATH
 _out.mkdir(parents=True, exist_ok=True)
 _ver = re.search(r'styles\.css\?v=(\d+)', index).group(1)
 (_out / 'index.html').write_text(broker_market.render(market_john, _john, top, bottom).replace('__V__', _ver))
+
+# One page per blog post (source: blog_posts.py)
+for _post in blog_posts.POSTS:
+    _byline = (f'<p class="note">By <a href="{_post["author_page"]}">{e(_post["author"])}</a>, '
+               f'{e(_post["author_title"])}, Simonton Commercial at RE/MAX One Commercial. '
+               f'Published {e(post_date(_post["date"]))}.</p>')
+    _body = (area_hero(_post['title'], f'Blog · {post_date(_post["date"])}', _post['dek'])
+             + '<section class="section alt">\n  <div class="wrap narrow about-body">\n'
+             + '    <a class="back" href="blog.html">&larr; All posts</a>\n'
+             + post_body_html(_post)
+             + _byline
+             + '\n  </div>\n</section>'
+             + valuation_block('What Is My Apartment Building Worth?',
+                               ['Request a free, confidential valuation of your Los Angeles apartment '
+                                'building from the RE/MAX One Commercial multifamily team.'],
+                               'blog'))
+    (SITE / post_file(_post)).write_text(page(
+        f'{_post["title"]} | Simonton Commercial', _post['dek'], _body, 'subpage'))
 
 print('Generated tab pages, team.html,', len(team), 'profile pages and the Palms/Mar Vista/Mid City page')

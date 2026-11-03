@@ -19,6 +19,7 @@ next publish. Edit the source, and the page rebuilds itself.
 | An area page, or the "Areas We Serve" menu | `areas_content.py` |
 | Robert's market page content | `market_robert.py` |
 | John's market page content and closings | `market_john.py` |
+| A blog post, or a new one | `blog_posts.py` |
 | The 1031, Blog, FAQs or Contact page text | `content/` folder |
 | The home page, top menu, or footer | `site/index.html` |
 | The closings list | `site/closings-data.js` |
