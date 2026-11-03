@@ -630,19 +630,18 @@ blockquote footer strong{font-weight:700}
 .hero:has(.hero-stats) .hero-inner{padding-top:150px;padding-bottom:var(--s5)}
 @media (max-width:700px){.hero-stats .stats-grid{grid-template-columns:repeat(2,1fr);padding:var(--s2) 20px}.hero:has(.hero-stats) .hero-inner{padding-top:170px}}
 
-/* ---- Nov 3: top menu as one line of pill buttons (hamburger below 1830px) ---- */
+/* ---- Nov 3: top menu as one clean line of text links (hamburger below 1740px); Sell button stays filled ---- */
 .brand{flex:none}
 .nav a.nav-sell{background:var(--ink);color:#fff;border-color:var(--ink)}
-@media (min-width:1830px){
-  .header-inner{max-width:none;padding:0 24px;gap:var(--s2)}
-  .nav{flex-wrap:nowrap;gap:5px;white-space:nowrap}
-  .nav a:not(.btn),.nav-dd-btn{padding:8px 11px;min-height:44px;display:inline-flex;align-items:center;border:1.5px solid var(--ink);border-radius:999px;font:500 13.5px var(--font-body);background:#fff;transition:background .2s,color .2s}
-  .nav a:not(.btn):hover,.nav-dd-btn:hover,.nav-dd-btn[aria-expanded="true"]{background:var(--ink);color:#fff;text-decoration:none}
-  .nav a.nav-sell{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .nav a.nav-sell:hover{background:#fff;color:var(--ink)}
-  .nav-dd-btn:focus-visible,.nav a:not(.btn):focus-visible{outline-offset:2px}
+@media (min-width:1740px){
+  .header-inner{max-width:none;padding:0 28px;gap:var(--s2)}
+  .nav{flex-wrap:nowrap;gap:2px;white-space:nowrap}
+  .nav a:not(.btn),.nav-dd-btn{padding:8px 7px;min-height:44px;display:inline-flex;align-items:center;font:500 14px var(--font-body)}
+  .nav a:not(.btn):hover,.nav-dd-btn:hover{text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:1.5px}
+  .nav a.nav-sell{margin-left:12px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink)}
+  .nav a.nav-sell:hover{background:#fff;color:var(--ink);text-decoration:none}
 }
-@media (min-width:981px) and (max-width:1829px){
+@media (min-width:981px) and (max-width:1739px){
   .nav-toggle{display:flex}
   .nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 20px 24px}
   .nav.open{display:flex}
@@ -652,7 +651,7 @@ blockquote footer strong{font-weight:700}
   .nav-dd-btn{width:100%;justify-content:space-between;padding:12px 0}
   .nav-dd-menu{position:static;width:auto;box-shadow:none;border:0;padding:0 0 8px 12px;columns:1}
 }
-@media (max-width:1829px){.nav a.nav-sell{display:inline-flex;justify-content:center;margin-top:12px;padding:12px 20px;border-radius:999px;border:1.5px solid var(--ink)}}
+@media (max-width:1739px){.nav a.nav-sell{display:inline-flex;justify-content:center;margin-top:12px;padding:12px 20px;border-radius:999px;border:1.5px solid var(--ink)}}
 
 /* ---- Nov 3: team + services section: wider, same-size headings, linked cards ---- */
 .intro .wrap{max-width:1480px;padding:0 clamp(20px,3.5vw,56px)}
