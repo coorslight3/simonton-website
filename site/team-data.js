@@ -38,7 +38,7 @@ window.TEAM = [
   {
     name: 'Koby Sarna',
     title: 'Associate Partner',
-    photo: 'koby-sarna.jpg',
+    photo: 'koby-sarna-2.jpg',
     email: 'Koby@remaxonecommercial.com',
     phone: '661 992 4266',
     dre: '02207055',
@@ -51,7 +51,7 @@ window.TEAM = [
     name: 'Brett Carlile',
     title: 'Associate Partner, Multifamily | RE/MAX One Commercial',
     short: 'Associate Partner',
-    photo: 'brett.jpg',
+    photo: 'brett-carlile-2.jpg',
     email: 'Brett@remaxonecommercial.com',
     phone: '714 930 3166',
     dre: '02243690',
@@ -65,7 +65,7 @@ window.TEAM = [
   {
     name: 'Josh Merrin',
     title: 'Associate Partner',
-    photo: 'josh-merrin-headshot-black.jpg',
+    photo: 'josh-merrin-2.jpg',
     email: 'Josh@remaxonecommercial.com',
     phone: '310 804 8355',
     dre: '02023670',
@@ -133,12 +133,17 @@ window.TEAM = [
       "Andrew specializes in multifamily investment sales throughout Los Angeles, with an emphasis on the Westside and coastal submarkets. His core markets include Santa Monica, Venice, Mar Vista, West Los Angeles, Culver City, Brentwood, and Westwood, as well as surrounding communities. He has particular expertise in Santa Monica’s prime neighborhoods north of Wilshire Boulevard, Venice’s sought-after residential corridors near Abbot Kinney Boulevard, and established apartment markets throughout the Westside. His areas of specialization include apartment building acquisitions and dispositions, investment property valuation, market analysis, and identifying value-add opportunities for private investors, property owners, and 1031 exchange buyers.",
       "With a combination of economic insight, transaction experience, and neighborhood-specific market expertise, Andrew provides strategic guidance tailored to each client’s investment objectives. He is committed to delivering thoughtful pricing strategies, identifying opportunities in competitive markets, and providing professional representation throughout every stage of the transaction."
     ]
+  },
+  {
+    name: 'Rochelle Becker',
+    title: 'Transaction Coordinator',
+    photo: 'rochelle-becker.jpg'
   }
 ];
 
 // Display order used everywhere the team is listed (home grid, Team page, Contact rows, profile pages).
 (() => {
   const order = ['Chase Simonton', 'Zvon Jedvaj', 'Andrew Wong', 'Robert Carlile', 'John Sarna',
-                 'Mike Torres', 'Brett Carlile', 'Josh Merrin', 'Koby Sarna'];
+                 'Mike Torres', 'Brett Carlile', 'Josh Merrin', 'Koby Sarna', 'Rochelle Becker'];
   window.TEAM.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
 })();
