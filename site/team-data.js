@@ -4,7 +4,7 @@ window.TEAM = [
     name: 'Chase Simonton',
     title: 'Vice President | Multifamily Investments | RE/MAX ONE',
     short: 'Vice President',
-    photo: 'chase-simonton.jpg',
+    photo: 'chase-simonton-headshot.jpg',
     phone: '310 383 5927',
     email: 'Chase@remaxonecommercial.com',
     dre: '01766871',
@@ -22,7 +22,7 @@ window.TEAM = [
     name: 'John Sarna',
     title: 'Senior Partner | RE/MAX One Commercial',
     short: 'Senior Partner',
-    photo: 'john-sarna-1.jpg',
+    photo: 'john-sarna-headshot.jpg',
     phone: '310 383 5927',
     email: 'John@remaxonecommercial.com',
     dre: '02134610',
@@ -38,7 +38,7 @@ window.TEAM = [
   {
     name: 'Koby Sarna',
     title: 'Associate Partner',
-    photo: 'koby-sarna-final.jpg',
+    photo: 'koby-sarna-headshot.jpg',
     email: 'Koby@remaxonecommercial.com',
     phone: '661 992 4266',
     dre: '02207055',
@@ -51,7 +51,7 @@ window.TEAM = [
     name: 'Brett Carlile',
     title: 'Associate Partner, Multifamily | RE/MAX One Commercial',
     short: 'Associate Partner',
-    photo: 'brett-carlile-final.jpg',
+    photo: 'brett-carlile-headshot.jpg',
     email: 'Brett@remaxonecommercial.com',
     phone: '714 930 3166',
     dre: '02243690',
@@ -65,7 +65,7 @@ window.TEAM = [
   {
     name: 'Josh Merrin',
     title: 'Associate Partner',
-    photo: 'josh-merrin-final.jpg',
+    photo: 'josh-merrin-headshot.jpg',
     email: 'Josh@remaxonecommercial.com',
     phone: '310 804 8355',
     dre: '02023670',
@@ -77,7 +77,7 @@ window.TEAM = [
   {
     name: 'Mike Torres',
     title: 'Associate Partner',
-    photo: 'mike-torres.jpg',
+    photo: 'mike-torres-headshot.jpg',
     phone: '714 881 6268',
     email: 'Mike@remaxonecommercial.com',
     handle: '@MikeTorresCRE',
@@ -92,7 +92,7 @@ window.TEAM = [
   {
     name: 'Robert Carlile',
     title: 'Senior Partner',
-    photo: 'robert-carlile.jpg',
+    photo: 'robert-carlile-headshot.jpg',
     email: 'Robert@remaxonecommercial.com',
     phone: '310 853 3016',
     dre: '02066811',
@@ -109,7 +109,7 @@ window.TEAM = [
   {
     name: 'Zvon Jedvaj',
     title: 'Senior Partner',
-    photo: 'zvon-jedvaj.jpg',
+    photo: 'zvon-jedvaj-headshot.jpg',
     email: 'Zvon@remaxonecommercial.com',
     phone: '310 567 3028',
     dre: '00689731',
@@ -124,7 +124,7 @@ window.TEAM = [
   {
     name: 'Andrew Wong',
     title: 'Senior Partner',
-    photo: 'andrew-wong.jpg',
+    photo: 'andrew-wong-headshot.jpg',
     email: 'Andrew@remaxonecommercial.com',
     phone: '925 708 3786',
     dre: '02066504',
@@ -137,7 +137,7 @@ window.TEAM = [
   {
     name: 'Rochelle Becker',
     title: 'Transaction Coordinator',
-    photo: 'rochelle-becker-final.jpg'
+    photo: 'rochelle-becker-headshot.jpg'
   }
 ];
 

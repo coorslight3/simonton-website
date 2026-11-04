@@ -763,3 +763,6 @@ blockquote footer strong{font-weight:700}
   .header-inner .nav{grid-column:2;grid-row:2;justify-self:end}
 }
 @media (max-width:560px){.head-social{display:none}}
+
+/* Headshots are all framed alike (same headroom, face size and centering), so show them from the top */
+.team img,.ft-photo img,.person-photo,.pm-photo,.mk-photo{object-position:50% 0}
