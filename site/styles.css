@@ -974,3 +974,14 @@ blockquote footer strong{font-weight:700}
 .xp-list{grid-auto-rows:1fr}
 .xp-list li{display:flex;min-width:0}
 .xp-list a{flex:1;justify-content:flex-start}
+
+/* Mike's profile: closings table runs the full height of the bio beside it */
+.pm-about-grid{align-items:stretch}
+.pm-closings{display:flex;flex-direction:column}
+.pm-closings .table-wrap{flex:1}
+.pm-closings .closed{height:100%}
+@media (max-width:900px){.pm-closings .closed{height:auto}}
+.pm-closings .closed{font-size:14.5px}
+.pm-closings .closed thead th{font-size:11px}
+.pm-bio h2,.pm-closings .head h2{font-size:clamp(24px,1.9vw,30px);margin:0 0 var(--s2)}
+.pm-closings .head{margin-bottom:0}

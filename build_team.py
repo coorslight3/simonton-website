@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=103">
+<link rel="stylesheet" href="styles.css?v=105">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=103"></script>
+{bottom}{scripts}<script src="script.js?v=105"></script>
 </body>
 </html>
 '''
@@ -494,8 +494,6 @@ for p in team:
         # at-a-glance panel, his areas, his closings and a valuation prompt.
         first = p['name'].split()[0]
         digits = re.sub(r'\D', '', p.get('phone', ''))
-        units = sum(r[3] for r in market_mike.CLOSINGS)
-        volume = sum(int(re.sub(r'\D', '', r[5])) for r in market_mike.CLOSINGS)
         zips = EXPERTISE[p['name']]
         bio = p.get('bio', [])
         lead = f'<p class="pm-lead">{e(bio[0])}</p>' if bio else ''
@@ -514,11 +512,6 @@ for p in team:
           <a class="btn btn-ghost" href="mailto:{e(p.get("email", ""))}">Email {e(first)}</a>
         </div>
         <p class="pm-meta"><span>{e(p.get("email", ""))}</span><span>{e(p.get("handle", ""))}</span><span>DRE #{e(p.get("dre", ""))}</span></p>
-        <dl class="pm-stats">
-          <div><dt>Units closed</dt><dd>{units}</dd></div>
-          <div><dt>Sales volume</dt><dd>${volume / 1e6:.1f}M</dd></div>
-          <div><dt>ZIP codes covered</dt><dd>{len(zips)}</dd></div>
-        </dl>
       </div>
     </div>
     <div class="pm-areas">{expertise_html(zips)}</div>
