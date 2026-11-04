@@ -31,11 +31,27 @@ document.querySelectorAll('form[data-form]').forEach(f => {
     data.append('access_key', FORM_KEY);
     data.append('subject', f.dataset.subject);
     data.append('from_name', 'Simonton Commercial website');
-    try {
-      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    const file = data.get('attachment');
+    const hasFile = file && file.size > 0;
+    if (hasFile) data.append('rent_roll_file_name', file.name);
+    else data.delete('attachment');
+    const send = async body => {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
       const j = await r.json();
       if (!j.success) throw new Error(j.message);
-      msg.textContent = 'Thank you! We received your request and will be in touch soon.';
+    };
+    try {
+      let thanks = 'Thank you! We received your request and will be in touch soon.';
+      try {
+        await send(data);
+      } catch (err) {
+        // A rejected file must never lose the lead: send the details alone and ask for the file by email.
+        if (!hasFile) throw err;
+        data.delete('attachment');
+        await send(data);
+        thanks = 'Thank you! We received your details, but the rent roll did not upload. Please email it to Chase@remaxonecommercial.com.';
+      }
+      msg.textContent = thanks;
       f.reset();
     } catch {
       msg.textContent = 'Sorry, something went wrong. Please call or text us instead.';
@@ -43,6 +59,27 @@ document.querySelectorAll('form[data-form]').forEach(f => {
       btn.disabled = false;
     }
   });
+});
+
+// Rent roll drop zone: drag a file on or click to choose; shows the file name and checks the size.
+document.querySelectorAll('[data-drop]').forEach(zone => {
+  const input = $('input[type=file]', zone), label = $('[data-drop-text]', zone);
+  const blank = label.textContent, MAX = 5 * 1024 * 1024;
+  const show = () => {
+    const file = input.files[0];
+    if (file && file.size > MAX) {
+      input.value = '';
+      label.textContent = 'That file is over 5MB. Please choose a smaller one or email it to us.';
+      zone.classList.remove('has-file');
+      return;
+    }
+    label.textContent = file ? file.name : blank;
+    zone.classList.toggle('has-file', !!file);
+  };
+  input.addEventListener('change', show);
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, () => zone.classList.add('over')));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, () => zone.classList.remove('over')));
+  zone.closest('form').addEventListener('reset', () => setTimeout(show));
 });
 
 // Recent Closings (data from closings-data.js; photos from assets/closings/<MLS>.jpg when present)

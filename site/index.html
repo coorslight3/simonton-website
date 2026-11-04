@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=105">
+<link rel="stylesheet" href="styles.css?v=106">
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -207,7 +207,7 @@
 
 </main>
 
-  <section class="section sell" id="valuation" aria-labelledby="sell-title">
+  <section class="section sell" aria-labelledby="sell-title">
     <div class="wrap">
       <header class="sell-head">
         <p class="eyebrow-dark">Sell My Apartment Building</p>
@@ -224,13 +224,42 @@
       </ol>
 
       <p class="sell-honest"><strong>Our honest approach:</strong> if holding the building is the better financial decision, we will tell you.</p>
+    </div>
+  </section>
 
-      <form class="sell-form" action="#" method="post" data-form data-subject="New valuation request"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <p class="ml">I own a <label><span class="sr-only">Number of units</span><input class="ml-s" name="units" inputmode="numeric" placeholder="number of"></label>-unit apartment building at <label><span class="sr-only">Property address</span><input class="ml-l" name="address" autocomplete="street-address" placeholder="street address, city" required></label>.</p>
-        <p class="ml">Right now I am <label><span class="sr-only">Where you are in the decision</span><select class="ml-m" name="stage"><option>just curious what it is worth</option><option>thinking about selling</option><option>ready to sell</option><option>planning a 1031 exchange</option></select></label>.</p>
-        <p class="ml">My name is <label><span class="sr-only">Full name</span><input class="ml-m" name="name" autocomplete="name" placeholder="full name" required></label>. You can reach me at <label><span class="sr-only">Email</span><input class="ml-m" name="email" type="email" autocomplete="email" placeholder="email" required></label> or <label><span class="sr-only">Phone</span><input class="ml-m" name="phone" type="tel" autocomplete="tel" placeholder="phone"></label>.</p>
-        <p class="ml-note"><label for="sell-notes">Anything that helps us value it (unit mix, rents, last known value)?</label><textarea id="sell-notes" name="notes" rows="2" placeholder="Optional"></textarea></p>
-        <div class="sell-actions"><button class="btn btn-light" type="submit">Request my valuation</button><span>Confidential. No obligation.</span></div>
+  <section class="section dark val" id="valuation" aria-labelledby="val-title">
+    <div class="wrap split">
+      <div>
+        <h2 id="val-title">Free Valuation on Your Apartment Building</h2>
+        <p class="lead">Send the details and your rent roll, and we will come back with a confidential opinion of value and the comparable sales behind it.</p>
+        <div class="val-call">
+          <h3>Prefer to talk it through?</h3>
+          <p>Speak with the team directly about your building.</p>
+          <!-- Swap this for the Calendly booking link once it is available -->
+          <a class="btn btn-ghost" href="tel:+13103835927">Call (310) 383-5927</a>
+        </div>
+      </div>
+      <form class="form val-form" action="#" method="post" enctype="multipart/form-data" data-form data-subject="New valuation request"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <div class="field"><label for="v-name">Full name</label><input id="v-name" name="name" autocomplete="name" required></div>
+        <div class="val-row">
+          <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="v-phone">Phone</label><input id="v-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        </div>
+        <div class="field"><label for="v-addr">Property address</label><input id="v-addr" name="address" autocomplete="street-address" required></div>
+        <div class="val-row">
+          <div class="field"><label for="v-units">Number of units</label><input id="v-units" name="units" inputmode="numeric"></div>
+          <div class="field"><label for="v-gross">Monthly gross income</label><input id="v-gross" name="monthly_gross" inputmode="decimal" placeholder="$"></div>
+        </div>
+        <div class="field">
+          <label for="v-file">Rent roll <span class="val-opt">(optional)</span></label>
+          <div class="val-drop" data-drop>
+            <input id="v-file" name="attachment" type="file" accept=".pdf,.xls,.xlsx,.csv,.doc,.docx,.jpg,.jpeg,.png">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
+            <span class="val-drop-text" data-drop-text>Drop your file here or click to choose</span>
+            <span class="val-drop-hint">PDF, Excel, Word or image, up to 5MB</span>
+          </div>
+        </div>
+        <button class="btn btn-light" type="submit">Request Free Valuation</button>
         <p class="form-msg" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -353,6 +382,6 @@
 
 <script src="closings-data.js"></script>
 <script src="team-data.js?v=44"></script>
-<script src="script.js?v=105"></script>
+<script src="script.js?v=106"></script>
 </body>
 </html>
