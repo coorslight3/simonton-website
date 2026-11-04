@@ -952,3 +952,10 @@ blockquote footer strong{font-weight:700}
 .rv-more span:last-child{font-size:13px;color:var(--muted)}
 .rv-more a:hover span:last-child{color:#d9d9d9}
 @media (max-width:860px){.rv-top{grid-template-columns:minmax(0,1fr)}}
+
+/* Team card: markets to the right of the name */
+.team-cap.has-mkts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
+.tc-who{display:block}
+.team-cap span.tc-mkts{border-left:1px solid #444;padding-left:12px;font-size:12px;line-height:1.4;color:#b5b5b5}
+.tc-mkts b{display:block;font:700 10.5px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:3px}
+@media (max-width:700px){.team-cap.has-mkts{grid-template-columns:minmax(0,1fr);gap:8px}.team-cap span.tc-mkts{border-left:0;padding-left:0;border-top:1px solid #444;padding-top:8px}}

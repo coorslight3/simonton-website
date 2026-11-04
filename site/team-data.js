@@ -78,6 +78,7 @@ window.TEAM = [
     name: 'Mike Torres',
     title: 'Associate Partner',
     photo: 'mike-torres-56.jpg',
+    markets: 'West Hollywood, Hollywood Hills, Beverly Grove, Fairfax & Miracle Mile, Pico-Robertson, San Pedro',
     phone: '714 881 6268',
     email: 'Mike@remaxonecommercial.com',
     handle: '@MikeTorresCRE',
