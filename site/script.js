@@ -138,9 +138,7 @@ document.querySelectorAll('form[data-form]').forEach(f => {
   grid.innerHTML = team.map(p => `
     <a class="member" href="team-${slug(p.name)}.html">
       <img src="assets/team/${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">
-      ${p.markets
-        ? `<span class="team-cap has-mkts"><span class="tc-who"><strong>${esc(p.name)}</strong><span>${esc(p.short || p.title)}</span><em>View profile</em></span><span class="tc-mkts"><b>Markets</b>${esc(p.markets)}</span></span>`
-        : `<span class="team-cap"><strong>${esc(p.name)}</strong><span>${esc(p.short || p.title)}</span><em>View profile</em></span>`}
+      <span class="team-cap"><strong>${esc(p.name)}</strong><span>${esc(p.short || p.title)}</span>${p.markets ? `<span class="tc-mkts">${esc(p.markets)}</span>` : ''}<em>View profile</em></span>
     </a>`).join('');
 })();
 

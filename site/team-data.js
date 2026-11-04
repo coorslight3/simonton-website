@@ -78,7 +78,7 @@ window.TEAM = [
     name: 'Mike Torres',
     title: 'Associate Partner',
     photo: 'mike-torres-56.jpg',
-    markets: 'West Hollywood, Hollywood Hills, Beverly Grove, Fairfax & Miracle Mile, Pico-Robertson, San Pedro',
+    markets: 'West Hollywood \u00b7 Hollywood Hills \u00b7 Beverly Grove \u00b7 Fairfax & Miracle Mile \u00b7 Pico-Robertson \u00b7 San Pedro',
     phone: '714 881 6268',
     email: 'Mike@remaxonecommercial.com',
     handle: '@MikeTorresCRE',

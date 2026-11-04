@@ -74,30 +74,25 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=100">
+<link rel="stylesheet" href="styles.css?v=101">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=100"></script>
+{bottom}{scripts}<script src="script.js?v=101"></script>
 </body>
 </html>
 '''
 
 
 def card(p):
-    who = (f'<strong>{e(p["name"])}</strong><span>{e(p.get("short") or p["title"])}</span>'
-           f'<em>View profile</em>')
-    if p.get('markets'):
-        cap = (f'<span class="team-cap has-mkts"><span class="tc-who">{who}</span>'
-               f'<span class="tc-mkts"><b>Markets</b>{e(p["markets"])}</span></span>')
-    else:
-        cap = f'<span class="team-cap">{who}</span>'
+    mkts = f'<span class="tc-mkts">{e(p["markets"])}</span>' if p.get('markets') else ''
     return (f'<a class="member" href="team-{slug(p["name"])}.html">'
             f'<img src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" loading="lazy">'
-            f'{cap}</a>')
+            f'<span class="team-cap"><strong>{e(p["name"])}</strong><span>{e(p.get("short") or p["title"])}</span>'
+            f'{mkts}<em>View profile</em></span></a>')
 
 
 team = load_team()
