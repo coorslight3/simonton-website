@@ -38,7 +38,7 @@ window.TEAM = [
   {
     name: 'Koby Sarna',
     title: 'Associate Partner',
-    photo: 'koby-sarna-2.jpg',
+    photo: 'koby-sarna-final.jpg',
     email: 'Koby@remaxonecommercial.com',
     phone: '661 992 4266',
     dre: '02207055',
@@ -51,7 +51,7 @@ window.TEAM = [
     name: 'Brett Carlile',
     title: 'Associate Partner, Multifamily | RE/MAX One Commercial',
     short: 'Associate Partner',
-    photo: 'brett-carlile-2.jpg',
+    photo: 'brett-carlile-final.jpg',
     email: 'Brett@remaxonecommercial.com',
     phone: '714 930 3166',
     dre: '02243690',
@@ -65,7 +65,7 @@ window.TEAM = [
   {
     name: 'Josh Merrin',
     title: 'Associate Partner',
-    photo: 'josh-merrin-2.jpg',
+    photo: 'josh-merrin-final.jpg',
     email: 'Josh@remaxonecommercial.com',
     phone: '310 804 8355',
     dre: '02023670',
@@ -137,7 +137,7 @@ window.TEAM = [
   {
     name: 'Rochelle Becker',
     title: 'Transaction Coordinator',
-    photo: 'rochelle-becker.jpg'
+    photo: 'rochelle-becker-final.jpg'
   }
 ];
 
