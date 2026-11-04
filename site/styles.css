@@ -766,3 +766,5 @@ blockquote footer strong{font-weight:700}
 
 /* Headshots are all framed alike (same headroom, face size and centering), so show them from the top */
 .team img,.ft-photo img,.person-photo,.pm-photo,.mk-photo{object-position:50% 0}
+/* Headshots are 5:6 (head, shoulders and a little more of the jacket) */
+.team img,.ft-photo,.person-photo,.pm-photo,.mk-photo{aspect-ratio:5/6}

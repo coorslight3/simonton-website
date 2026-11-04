@@ -3,7 +3,7 @@
 PATH = 'apartment-broker/los-feliz-silver-lake-echo-park-studio-city-sherman-oaks/'
 
 NAME = 'John Sarna'
-PHOTO = 'john-sarna-sq.jpg'
+PHOTO = 'john-sarna-56.jpg'
 AREA_NAMES = 'Los Feliz, Silver Lake, Echo Park, Studio City & Sherman Oaks'
 TITLE = f'Multifamily Broker for {AREA_NAMES} | John Sarna, RE/MAX One Commercial'
 DESC = ('Multifamily broker John Sarna sells apartment buildings in Los Feliz, Silver Lake, Echo Park, '

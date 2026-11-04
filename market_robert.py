@@ -113,7 +113,7 @@ def schema():
         'name': 'Robert Carlile',
         'description': DESC,
         'url': f'{DOMAIN}/{PATH}',
-        'image': f'{DOMAIN}/assets/team/robert-carlile-sq.jpg',
+        'image': f'{DOMAIN}/assets/team/robert-carlile-56.jpg',
         'jobTitle': 'Multifamily Investment Broker',
         'worksFor': {'@type': 'RealEstateAgent', 'name': 'RE/MAX One Commercial'},
         'address': {'@type': 'PostalAddress', 'streetAddress': '2601 Ocean Park Blvd, Ste 311',
@@ -246,11 +246,11 @@ def render(top, bottom):
 <meta property="og:description" content="{e(DESC)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{canon}">
-<meta property="og:image" content="{DOMAIN}/assets/team/robert-carlile-sq.jpg">
+<meta property="og:image" content="{DOMAIN}/assets/team/robert-carlile-56.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=86">
+<link rel="stylesheet" href="{ROOT}styles.css?v=87">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -262,13 +262,13 @@ def render(top, bottom):
       <p class="mk-sub">{e(SUB)}</p>
       <div class="hero-actions"><a class="btn btn-light" href="#valuation">Get a free valuation</a><a class="btn btn-ghost" href="#closings">See closed sales</a></div>
     </div>
-    <img class="mk-photo" src="{ROOT}assets/team/robert-carlile-sq.jpg" alt="Robert Carlile, multifamily broker" width="560" height="700">
+    <img class="mk-photo" src="{ROOT}assets/team/robert-carlile-56.jpg" alt="Robert Carlile, multifamily broker" width="560" height="700">
   </div>
 </section>
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=86"></script>
+{bottom}<script src="{ROOT}script.js?v=87"></script>
 </body>
 </html>
 '''
