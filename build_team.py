@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=95">
+<link rel="stylesheet" href="styles.css?v=96">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=95"></script>
+{bottom}{scripts}<script src="script.js?v=96"></script>
 </body>
 </html>
 '''
@@ -134,63 +134,80 @@ MAP_DEEPLINK_JS = """<script>
 </script>"""
 
 
+ABOUT_ICONS = {
+    'grid': '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+    'cal': '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    'key': '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/>',
+    'swap': '<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+    'dollar': '<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.8 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.6-.6-3-1.6M12 6v2M12 16v2"/>',
+    'doc': '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
+    'shield': '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    'tag': '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+    'people': '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/>',
+    'eye': '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    'pause': '<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',
+    'bars': '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',
+    'layers': '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+}
+
+
+def about_icon(k, cls):
+    return (f'<span class="{cls}" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" '
+            f'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{ABOUT_ICONS[k]}</svg></span>')
+
+
+ap = about_page
 (SITE / 'about.html').write_text(page(
-    about_page.TITLE, about_page.DESC,
+    ap.TITLE, ap.DESC,
     f"""<section class="section dark page-top">
   <div class="wrap">
     <p class="eyebrow">Simonton Commercial &middot; RE/MAX One Commercial</p>
-    <h1 class="page-title">{e(about_page.HEADLINE)}</h1>
-  </div>
-</section>
-<section class="section">
-  <div class="wrap narrow about-body">
-{''.join(f'    <p>{md(t)}</p>' for t in about_page.LEAD)}
-  </div>
-</section>
-<section class="section alt">
-  <div class="wrap narrow about-body">
-    <div class="head"><h2>{e(about_page.MODEL_HEAD)}</h2></div>
-{''.join(f'    <p>{md(t)}</p>' for t in about_page.MODEL)}
-  </div>
-</section>
-<section class="section">
-  <div class="wrap narrow">
-    <div class="head"><h2>What that is worth to an owner</h2></div>
-    <ul class="why">
-{''.join(f'      <li><strong>{e(h)}</strong> {e(b)}</li>' for h, b in about_page.BENEFITS)}
-    </ul>
-  </div>
-</section>
-<section class="section alt">
-  <div class="wrap narrow about-body">
-    <div class="head"><h2>{e(about_page.TEAM_HEAD)}</h2></div>
-{''.join(f'    <p>{md(t)}</p>' for t in about_page.TEAM)}
+    <h1 class="page-title">{e(ap.HEADLINE)}</h1>
+    <p class="lead ab-lead">{md(ap.LEAD_SHORT)}</p>
   </div>
 </section>
 <section class="section" id="coverage">
   <div class="wrap">
-    <div class="head"><h2>{e(about_page.MAP_HEAD)}</h2></div>
-    <p class="about-body">{e(about_page.MAP_INTRO)}</p>
+    <div class="head"><h2>{e(ap.MAP_HEAD)}</h2></div>
+    <p class="ab-intro">{e(ap.MAP_INTRO)}</p>
     <iframe class="map-frame" src="coverage-map.html" loading="lazy"
             title="Map of Simonton Commercial broker territories across Los Angeles County"></iframe>
-    <div class="table-wrap" role="region" aria-label="Broker territories" tabindex="0">
-      <table class="closed">
-        <caption class="sr-only">Which broker covers which Los Angeles submarkets</caption>
-        <thead><tr><th scope="col">Broker</th><th scope="col">Submarkets</th></tr></thead>
-        <tbody>
-{''.join(f'          <tr><th scope="row">{e(n)}</th><td>{e(a)}</td></tr>' for n, a in about_page.TERRITORIES)}
-        </tbody>
-      </table>
-    </div>
-    <p class="note">{e(about_page.MAP_NOTE)}</p>
+    <ul class="ab-terr" aria-label="Broker territories">
+{''.join(f'      <li><strong>{e(n)}</strong><span>{e(t)}</span></li>' for n, t in ap.TERRITORIES)}
+    </ul>
+    <p class="note">{e(ap.MAP_NOTE)}</p>
   </div>
 </section>
 <section class="section alt">
-  <div class="wrap narrow about-body">
-{''.join(f'    <p>{md(t)}</p>' for t in about_page.CLOSE)}
-    <div class="about-cta">
-      <a class="btn btn-dark" href="team.html">Meet the team</a>
-      <a class="btn btn-ghost-dark" href="index.html#valuation">Request a free valuation</a>
+  <div class="wrap">
+    <div class="head"><h2>{e(ap.MODEL_HEAD)}</h2></div>
+    <ul class="ab-stats">
+{''.join(f'      <li><strong>{v}</strong><span>{l}</span></li>' for v, l in ap.STATS)}
+    </ul>
+    <p class="ab-intro">{md(ap.MODEL_SHORT)}</p>
+    <ul class="ab-chips">
+{''.join(f'      <li>{about_icon(k, "ab-chip-ico")}{l}</li>' for k, l in ap.RECORD)}
+    </ul>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="head"><h2>What that is worth to an owner</h2></div>
+    <ul class="ab-tiles">
+{''.join(f'      <li>{about_icon(k, "x-ico")}<h3>{e(h)}</h3><p>{e(t)}</p></li>' for k, h, t in ap.BENEFITS_SHORT)}
+    </ul>
+  </div>
+</section>
+<section class="section alt">
+  <div class="wrap">
+    <div class="head"><h2>{e(ap.TEAM_HEAD)}</h2></div>
+    <p class="ab-intro">{md(ap.TEAM_SHORT)}</p>
+    <ul class="ab-chips">
+{''.join(f'      <li>{about_icon(k, "ab-chip-ico")}{l}</li>' for k, l in ap.SERVICES)}
+    </ul>
+    <div class="x-cta">
+      <p>{md(ap.CLOSE[0])}</p>
+      <span class="t-ctas"><a class="btn btn-dark" href="team.html">Meet the team</a> <a class="btn btn-ghost-dark" href="index.html#valuation">Request a free valuation</a></span>
     </div>
   </div>
 </section>""", 'subpage', MAP_DEEPLINK_JS))

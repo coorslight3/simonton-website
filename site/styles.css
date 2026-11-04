@@ -876,3 +876,27 @@ blockquote footer strong{font-weight:700}
 #trust-help .x-cta{margin-top:var(--s4)}
 .t-ctas{display:flex;gap:10px;flex-wrap:wrap}
 @media (max-width:860px){.t-paths{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- About page, condensed ---- */
+.ab-lead{max-width:760px;color:#d9d9d9;margin:0}
+.ab-intro{max-width:72ch;margin:0 0 var(--s3);font-size:17px}
+#coverage .map-frame{margin-bottom:var(--s3)}
+.ab-terr{list-style:none;margin:0 0 var(--s2);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ab-terr li{border:1px solid var(--line);border-left:4px solid var(--ink);border-radius:10px;padding:10px 14px;background:#fff}
+.ab-terr strong{display:block;font:800 15px var(--font-head)}
+.ab-terr span{display:block;font-size:14px;color:var(--ink-2)}
+.ab-stats{list-style:none;margin:0 0 var(--s4);padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2)}
+.ab-stats li{border-top:4px solid var(--ink);padding-top:var(--s2)}
+.ab-stats strong{display:block;font:900 clamp(32px,4vw,48px)/1 var(--font-head)}
+.ab-stats span{display:block;margin-top:8px;font-size:14px;color:var(--ink-2)}
+.ab-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.ab-chips li{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:6px 16px 6px 6px;font:700 15px var(--font-body)}
+.ab-chip-ico{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff}
+.ab-chip-ico svg{width:17px;height:17px}
+.ab-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2)}
+.ab-tiles li{border:1px solid var(--line);border-radius:16px;padding:var(--s3);background:#fff}
+.ab-tiles h3{font:800 18px/1.25 var(--font-head);margin:0 0 8px}
+.ab-tiles p{margin:0;font-size:15px;color:var(--ink-2)}
+.section.alt .x-cta{margin-top:var(--s4)}
+@media (max-width:980px){.ab-terr{grid-template-columns:repeat(2,minmax(0,1fr))}.ab-stats,.ab-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ab-terr,.ab-tiles{grid-template-columns:minmax(0,1fr)}}

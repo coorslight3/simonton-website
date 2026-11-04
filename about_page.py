@@ -112,3 +112,46 @@ MAP_AGENTS = {
 COUNTYWIDE = {'Chase Simonton'}
 MAP_LABEL            = "See {first}'s territory"
 MAP_LABEL_COUNTYWIDE = "See {first}'s countywide coverage"
+
+# ---- Condensed page (Nov 2026): the map comes first, then short, graphic sections. ----
+LEAD_SHORT = ('Most brokers say they cover Los Angeles, a county of eighty-eight cities where a building eight '
+              'blocks away can be worth a hundred thousand dollars more per unit. Nobody knows all of it, so each '
+              'of our brokers owns a territory.')
+
+# (big figure, label) for the stats strip
+STATS = [
+    ('9', 'Brokers, each with their own territory'),
+    ('2014', 'Founded by Chase Simonton'),
+    ('4,141', 'Apartment buildings tracked in Palms, Mar Vista &amp; Mid City'),
+    ('41,210', 'Units across those six ZIP codes'),
+]
+
+MODEL_SHORT = ('Brokers are assigned by **geography**, not by product type, seniority or whoever answers the phone. '
+               'Inside their territory each keeps a record on every apartment building:')
+
+# (icon, label) the building record covers
+RECORD = [
+    ('grid', 'Unit mix'), ('cal', 'Year built'), ('key', 'How it is owned'), ('swap', 'When it last traded'),
+    ('dollar', 'What the owner paid'), ('doc', 'Assessed basis'), ('shield', 'Rent stabilization'),
+]
+
+# (icon, heading, short body)
+BENEFITS_SHORT = [
+    ('tag', 'Your building gets priced, not estimated.',
+     'We know what the last comparable buildings near you traded for, and which ones should be thrown out.'),
+    ('people', 'The buyer is already known.',
+     'Who closed last quarter, who is in a 1031 window, who has waited years for your street.'),
+    ('eye', 'Off-market works both directions.',
+     'A quiet sale when discretion matters, and buildings that never reach the open market.'),
+    ('pause', 'You will be told not to sell.',
+     'When holding is the better financial decision, we will say so.'),
+]
+
+TEAM_SHORT = ('Our brokers share market intelligence and buyer relationships, so a listing in one territory '
+              'reaches every buyer any of us knows.')
+
+# (icon, label) for what the team handles
+SERVICES = [
+    ('swap', 'Acquisitions &amp; dispositions'), ('doc', 'Broker opinions of value'), ('cal', '1031 exchange timing'),
+    ('bars', 'Financial underwriting'), ('layers', 'Value-add &amp; development'), ('grid', 'Portfolio strategy'),
+]
