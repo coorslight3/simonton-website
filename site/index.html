@@ -240,18 +240,18 @@
         </div>
       </div>
       <form class="form val-form" action="#" method="post" enctype="multipart/form-data" data-form data-subject="New valuation request"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <div class="field"><label for="v-name">Full name</label><input id="v-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="v-name">Full Name</label><input id="v-name" name="name" autocomplete="name" required></div>
         <div class="val-row">
           <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" autocomplete="email" required></div>
           <div class="field"><label for="v-phone">Phone</label><input id="v-phone" name="phone" type="tel" autocomplete="tel" required></div>
         </div>
-        <div class="field"><label for="v-addr">Property address</label><input id="v-addr" name="address" autocomplete="street-address" required></div>
+        <div class="field"><label for="v-addr">Property Address</label><input id="v-addr" name="address" autocomplete="street-address" required></div>
         <div class="val-row">
-          <div class="field"><label for="v-units">Number of units</label><input id="v-units" name="units" inputmode="numeric"></div>
-          <div class="field"><label for="v-gross">Monthly gross income</label><input id="v-gross" name="monthly_gross" inputmode="decimal" placeholder="$"></div>
+          <div class="field"><label for="v-units">Number of Units</label><input id="v-units" name="units" inputmode="numeric" required></div>
+          <div class="field"><label for="v-gross">Monthly Gross Income <span class="val-opt">(optional)</span></label><input id="v-gross" name="monthly_gross" inputmode="decimal" placeholder="$"></div>
         </div>
         <div class="field">
-          <label for="v-file">Rent roll <span class="val-opt">(optional)</span></label>
+          <label for="v-file">Rent Roll <span class="val-opt">(optional)</span></label>
           <div class="val-drop" data-drop>
             <input id="v-file" name="attachment" type="file" accept=".pdf,.xls,.xlsx,.csv,.doc,.docx,.jpg,.jpeg,.png">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
