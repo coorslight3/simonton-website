@@ -924,3 +924,31 @@ blockquote footer strong{font-weight:700}
 @media (max-width:980px){.cc-track{--cols:3}}
 @media (max-width:720px){.cc-track{--cols:2}}
 @media (max-width:480px){.cc-track{--cols:1.25}}
+
+/* ---- Testimonials ---- */
+.rv-head{text-align:center;margin-bottom:var(--s4)}
+.rv-head h2{margin:0}
+.rv-stars{display:inline-block;letter-spacing:2px;font-size:16px;line-height:1}
+.rv-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s3)}
+.rv-score{background:var(--ink);color:#fff;border-radius:20px;padding:var(--s4) var(--s3);text-align:center;display:flex;flex-direction:column;align-items:center}
+.rv-num{margin:0;font:900 clamp(64px,7vw,88px)/1 var(--font-head)}
+.rv-score .rv-stars{font-size:22px;margin-top:8px}
+.rv-count{margin:8px 0 var(--s3);font-size:15px;color:#d9d9d9}
+.rv-label{margin:0 0 10px;font:700 11px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#bdbdbd}
+.rv-themes{list-style:none;margin:0 0 var(--s3);padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.rv-themes li{border:1px solid #555;border-radius:999px;padding:4px 12px;font-size:13px}
+.rv-score .btn{margin-top:auto}
+.rv-quotes{display:grid;gap:var(--s2)}
+.rv-quote{margin:0;border:1px solid var(--line);border-radius:16px;padding:var(--s3);display:flex;flex-direction:column;justify-content:center;gap:8px}
+.rv-quote p{margin:0;font:700 clamp(17px,1.6vw,20px)/1.35 var(--font-head)}
+.rv-quote footer{font-size:14px;color:var(--muted)}
+.rv-quote footer strong{color:var(--ink)}
+.rv-sub{font:800 20px var(--font-head);margin:var(--s4) 0 var(--s2)}
+.rv-more{list-style:none;margin:0 0 var(--s2);padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.rv-more a{display:flex;flex-direction:column;gap:2px;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.rv-more a:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rv-more .rv-stars{font-size:13px}
+.rv-more strong{font:800 15px var(--font-head)}
+.rv-more span:last-child{font-size:13px;color:var(--muted)}
+.rv-more a:hover span:last-child{color:#d9d9d9}
+@media (max-width:860px){.rv-top{grid-template-columns:minmax(0,1fr)}}
