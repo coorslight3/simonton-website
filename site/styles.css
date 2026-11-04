@@ -900,3 +900,27 @@ blockquote footer strong{font-weight:700}
 .section.alt .x-cta{margin-top:var(--s4)}
 @media (max-width:980px){.ab-terr{grid-template-columns:repeat(2,minmax(0,1fr))}.ab-stats,.ab-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.ab-terr,.ab-tiles{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- Home page closings carousel ---- */
+.cc-wrap{max-width:1680px;margin:0 auto;padding:0 clamp(20px,3.5vw,56px)}
+.cc-head{align-items:center;margin-bottom:var(--s3)}
+.cc-controls{display:flex;align-items:center;gap:10px}
+.cc-controls .link{margin-right:8px}
+.cc-btn{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;transition:background .2s,color .2s,opacity .2s}
+.cc-btn:hover:not(:disabled){background:var(--ink);color:#fff}
+.cc-btn:disabled{opacity:.3;cursor:default}
+.cc-track{--cols:4;--gap:16px;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.cc-track::-webkit-scrollbar{display:none}
+.cc-card{scroll-snap-align:start;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.cc-photo{position:relative;aspect-ratio:16/10;background:#e6e6e4}
+.cc-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-tag{position:absolute;top:10px;left:10px;background:var(--ink);color:#fff;font:700 11px var(--font-body);letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.cc-body{padding:14px 16px 16px}
+.cc-price{margin:0 0 2px;font:900 20px var(--font-head)}
+.cc-body h3{margin:0 0 2px;font:700 15px/1.3 var(--font-body)}
+.cc-meta{margin:0;font-size:13.5px;color:var(--muted)}
+@media (min-width:1300px){.cc-track{--cols:5}}
+@media (min-width:1600px){.cc-track{--cols:6}}
+@media (max-width:980px){.cc-track{--cols:3}}
+@media (max-width:720px){.cc-track{--cols:2}}
+@media (max-width:480px){.cc-track{--cols:1.25}}

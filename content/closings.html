@@ -1,0 +1,13 @@
+<section class="section" id="closings">
+    <div class="wrap">
+      <div class="head"><h2>Recent Closings</h2><p class="count" id="closings-count" aria-live="polite"></p></div>
+      <div class="filters" role="group" aria-label="Filter closings">
+        <label>City <select id="f-city"><option value="">All cities</option></select></label>
+        <label>Units <select id="f-units"><option value="">All sizes</option><option value="2-4">2&ndash;4</option><option value="5-9">5&ndash;9</option><option value="10-19">10&ndash;19</option><option value="20-999">20+</option></select></label>
+        <label>Sort <select id="f-sort"><option value="price">Highest price</option><option value="units">Most units</option><option value="dom">Fastest sale</option></select></label>
+      </div>
+      <div class="closings" id="closings-grid"></div>
+      <button type="button" class="btn btn-dark" id="closings-more">Show more closings</button>
+      <p class="disclaimer">Sold data from the MLS. Information deemed reliable but not guaranteed.</p>
+    </div>
+  </section>

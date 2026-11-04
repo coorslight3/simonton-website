@@ -48,16 +48,16 @@ document.querySelectorAll('form[data-form]').forEach(f => {
 // Recent Closings (data from closings-data.js; photos from assets/closings/<MLS>.jpg when present)
 (() => {
   const data = window.CLOSINGS || [];
-  const grid = $('#closings-grid');
-  if (!grid) return;
-  const PAGE = 12;
-  let shown = PAGE;
-  const usd = n => '$' + n.toLocaleString('en-US');
   const volume = data.reduce((s, d) => s + d.price, 0);
   if ($('#stat-vol')) {
     $('#stat-vol').textContent = '$' + Math.floor(volume / 1e6) + 'M+';
     $('#stat-count').textContent = data.length + '+';
   }
+  const grid = $('#closings-grid');
+  if (!grid) return;
+  const PAGE = 12;
+  let shown = PAGE;
+  const usd = n => '$' + n.toLocaleString('en-US');
 
   const city = $('#f-city'), units = $('#f-units'), sort = $('#f-sort'), more = $('#closings-more');
   [...new Set(data.map(d => d.city))].sort().forEach(c => city.add(new Option(c, c)));
@@ -96,6 +96,36 @@ document.querySelectorAll('form[data-form]').forEach(f => {
   [city, units, sort].forEach(el => el.addEventListener('change', () => { shown = PAGE; render(); }));
   more.addEventListener('click', () => { shown += PAGE; render(); });
   render();
+})();
+
+// Home page closings carousel: the 16 largest sales, swipe or use the arrows. Never moves on its own.
+(() => {
+  const track = $('#closings-carousel');
+  if (!track) return;
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const list = [...(window.CLOSINGS || [])].filter(d => d.photos).sort((a, b) => b.price - a.price).slice(0, 16);
+  track.innerHTML = list.map(d => `
+    <article class="cc-card">
+      <div class="cc-photo"><img src="assets/closings/${encodeURIComponent(d.mls)}.jpg" alt="${esc(d.address)}, ${esc(d.city)}" loading="lazy"><span class="cc-tag">Sold</span></div>
+      <div class="cc-body">
+        <p class="cc-price">$${d.price.toLocaleString('en-US')}</p>
+        <h3>${esc(d.address)}</h3>
+        <p class="cc-meta">${esc(d.city)} &middot; ${d.units} units${d.cap ? ` &middot; ${d.cap.toFixed(2)}% cap` : ''}</p>
+      </div>
+    </article>`).join('');
+  track.querySelectorAll('img').forEach(i => i.addEventListener('error', () => { i.closest('.cc-card').hidden = true; }));
+  const prev = $('#cc-prev'), next = $('#cc-next');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go = dir => track.scrollBy({ left: dir * track.clientWidth, behavior: calm ? 'auto' : 'smooth' });
+  const sync = () => {
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  };
+  prev.addEventListener('click', () => go(-1));
+  next.addEventListener('click', () => go(1));
+  track.addEventListener('scroll', sync, { passive: true });
+  addEventListener('resize', sync);
+  sync();
 })();
 
 // Team grid on the home page (data from team-data.js); each card links to that person's page.
