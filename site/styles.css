@@ -768,3 +768,6 @@ blockquote footer strong{font-weight:700}
 .team img,.ft-photo img,.person-photo,.pm-photo,.mk-photo{object-position:50% 0}
 /* Headshots are 5:6 (head, shoulders and a little more of the jacket) */
 .team img,.ft-photo,.person-photo,.pm-photo,.mk-photo{aspect-ratio:5/6}
+/* Trim a little off the bottom of each headshot (shows the top 900 of the 960px-tall files) */
+.team img,.ft-photo,.person-photo,.pm-photo,.mk-photo{aspect-ratio:8/9}
+.team img,.ft-photo img,.person-photo,.pm-photo,.mk-photo{object-position:50% 0}
