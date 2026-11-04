@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=101">
+<link rel="stylesheet" href="styles.css?v=103">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=101"></script>
+{bottom}{scripts}<script src="script.js?v=103"></script>
 </body>
 </html>
 '''
@@ -500,7 +500,6 @@ for p in team:
         bio = p.get('bio', [])
         lead = f'<p class="pm-lead">{e(bio[0])}</p>' if bio else ''
         rest = ''.join(f'<p>{e(t)}</p>' for t in bio[1:])
-        glance = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in market_mike.GLANCE)
         body = f'''<section class="pm-hero">
   <div class="wrap">
     <a class="back back-light" href="team.html">&larr; All team members</a>
@@ -522,19 +521,14 @@ for p in team:
         </dl>
       </div>
     </div>
+    <div class="pm-areas">{expertise_html(zips)}</div>
   </div>
 </section>
 <section class="section pm-about">
   <div class="wrap pm-about-grid">
     <div class="pm-bio"><h2>About {e(first)}</h2>{lead}{rest}</div>
-    <aside class="pm-glance" aria-label="{e(first)} at a glance"><h2>At a Glance</h2><dl>{glance}</dl></aside>
+    <aside class="pm-closings" id="closings">{closings}</aside>
   </div>
-</section>
-<section class="section alt pm-areas">
-  <div class="wrap">{expertise_html(zips)}</div>
-</section>
-<section class="section pm-closings" id="closings">
-  <div class="wrap">{closings}</div>
 </section>
 <section class="section dark pm-cta">
   <div class="wrap pm-cta-grid">

@@ -7,15 +7,6 @@ Source: CoStar export of team closings, Nov 2026. Built year = 2026 minus CoStar
 # ZIP codes Mike covers; his profile's Areas of Expertise links each to its area page.
 ZIPS = ['90069', '90046', '90048', '90036', '90035', '90731']
 
-# Mike's profile 'At a Glance' panel; every line is taken from his bio.
-GLANCE = [
-    ('Focus', 'Multifamily investments, since 2021'),
-    ('Markets', 'West Hollywood, Hollywood Hills, Beverly Grove, Fairfax & Miracle Mile, Pico-Robertson, San Pedro'),
-    ('Services', 'Apartment building sales and purchases, valuations, market research, value-add analysis'),
-    ('Clients', 'Private investors, property owners and 1031 exchange buyers'),
-    ('Education', 'Communications, Cal State Fullerton'),
-]
-
 # Property, submarket, ZIP, units, built, sale price, $/unit
 CLOSINGS = [
     ('210 S Fuller Ave', 'Hancock Park', '90036', 8, 1930, '$3,225,000', '$403,100'),

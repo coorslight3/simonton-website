@@ -955,3 +955,22 @@ blockquote footer strong{font-weight:700}
 
 /* Team card: markets as a small line under the title */
 .team-cap span.tc-mkts{margin-top:6px;font-size:12.5px;line-height:1.45;color:#8f8f8f}
+
+/* Mike's profile: areas in the dark band, closings beside the bio */
+.pm-hero .pm-areas{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid #3a3a3a}
+.pm-hero .pm-areas .expertise h2{font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#a8a8a8;margin:0 0 12px}
+.pm-hero .pm-areas .xp-list a{background:transparent;color:#fff;border-color:#6a6a6a}
+.pm-hero .pm-areas .xp-list small{color:#bdbdbd}
+.pm-hero .pm-areas .xp-list a:hover,.pm-hero .pm-areas .xp-list a:focus-visible{background:#fff;color:var(--ink);border-color:#fff}
+.pm-hero .pm-areas .xp-list a:hover small,.pm-hero .pm-areas .xp-list a:focus-visible small{color:var(--muted)}
+.pm-about-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s4)}
+.pm-closings .closed{min-width:0;font-size:13px}
+.pm-closings .closed th,.pm-closings .closed td{padding:9px 7px}
+.pm-closings .closed thead th{font-size:10.5px;letter-spacing:.05em}
+.pm-closings .closed tbody th{white-space:normal;min-width:96px}
+.pm-closings .closed td:not(.num){white-space:normal}
+@media (max-width:900px){.pm-about-grid{grid-template-columns:minmax(0,1fr)}.pm-closings .closed{min-width:560px}}
+/* Areas of Expertise: every box the same size */
+.xp-list{grid-auto-rows:1fr}
+.xp-list li{display:flex;min-width:0}
+.xp-list a{flex:1;justify-content:flex-start}
