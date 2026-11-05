@@ -135,12 +135,12 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
   render();
 })();
 
-// Home page closings carousel: the 16 largest sales, swipe or use the arrows. Never moves on its own.
+// Home page Recent Closings: the 4 largest sales; the full list is on the Sales page.
 (() => {
   const track = $('#closings-carousel');
   if (!track) return;
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const list = [...(window.CLOSINGS || [])].filter(d => d.photos).sort((a, b) => b.price - a.price).slice(0, 16);
+  const list = [...(window.CLOSINGS || [])].filter(d => d.photos).sort((a, b) => b.price - a.price).slice(0, 4);
   track.innerHTML = list.map(d => `
     <article class="cc-card">
       <div class="cc-photo"><img src="assets/closings/${encodeURIComponent(d.mls)}.jpg" alt="${esc(d.address)}, ${esc(d.city)}" loading="lazy"><span class="cc-tag">Sold</span></div>
@@ -151,18 +151,6 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
       </div>
     </article>`).join('');
   track.querySelectorAll('img').forEach(i => i.addEventListener('error', () => { i.closest('.cc-card').hidden = true; }));
-  const prev = $('#cc-prev'), next = $('#cc-next');
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const go = dir => track.scrollBy({ left: dir * track.clientWidth, behavior: calm ? 'auto' : 'smooth' });
-  const sync = () => {
-    prev.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
-  };
-  prev.addEventListener('click', () => go(-1));
-  next.addEventListener('click', () => go(1));
-  track.addEventListener('scroll', sync, { passive: true });
-  addEventListener('resize', sync);
-  sync();
 })();
 
 // Team grid on the home page (data from team-data.js); each card links to that person's page.

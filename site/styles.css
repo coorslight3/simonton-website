@@ -1012,3 +1012,8 @@ blockquote footer strong{font-weight:700}
 .hero-stats{background:none;border-top:0;-webkit-backdrop-filter:none;backdrop-filter:none;text-shadow:0 1px 8px rgba(0,0,0,.65)}
 .hero-stats span{color:#fff}
 .hero-stats .stats-grid{padding-top:18px}
+
+/* Home Recent Closings: four cards, no scrolling */
+.cc-track{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3);overflow:visible;scroll-snap-type:none;padding-bottom:0}
+@media (max-width:980px){.cc-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.cc-track{grid-template-columns:minmax(0,1fr)}}
