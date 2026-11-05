@@ -1003,3 +1003,7 @@ blockquote footer strong{font-weight:700}
 .val-drop-hint{font-size:13px;color:#bdbdbd}
 .val-form .form-msg{color:#fff}
 @media (max-width:560px){.val-row{grid-template-columns:minmax(0,1fr)}}
+
+/* Group photo links to the team headshots */
+.photo-link{display:block;border-radius:inherit}
+.photo-link:focus-visible{outline:3px solid currentColor;outline-offset:3px}
