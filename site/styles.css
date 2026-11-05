@@ -1007,3 +1007,8 @@ blockquote footer strong{font-weight:700}
 /* Group photo links to the team headshots */
 .photo-link{display:block;border-radius:inherit}
 .photo-link:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+
+/* Hero stats: no banner, just white figures over the video */
+.hero-stats{background:none;border-top:0;-webkit-backdrop-filter:none;backdrop-filter:none;text-shadow:0 1px 8px rgba(0,0,0,.65)}
+.hero-stats span{color:#fff}
+.hero-stats .stats-grid{padding-top:18px}
