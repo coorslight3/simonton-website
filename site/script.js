@@ -142,15 +142,11 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const list = [...(window.CLOSINGS || [])].filter(d => d.photos).sort((a, b) => b.price - a.price).slice(0, 4);
   track.innerHTML = list.map(d => `
-    <article class="cc-card">
-      <div class="cc-photo"><img src="assets/closings/${encodeURIComponent(d.mls)}.jpg" alt="${esc(d.address)}, ${esc(d.city)}" loading="lazy"><span class="cc-tag">Sold</span></div>
-      <div class="cc-body">
-        <p class="cc-price">$${d.price.toLocaleString('en-US')}</p>
-        <h3>${esc(d.address)}</h3>
-        <p class="cc-meta">${esc(d.city)} &middot; ${d.units} units${d.cap ? ` &middot; ${d.cap.toFixed(2)}% cap` : ''}</p>
-      </div>
+    <article class="card listing">
+      <img class="listing-img" src="assets/closings/${encodeURIComponent(d.mls)}.jpg" alt="${esc(d.address)}, ${esc(d.city)}" loading="lazy">
+      <div class="card-body"><span class="tag">Sold</span><h3>${esc(d.address)}</h3><p class="loc">${esc(d.city)}, CA</p><p class="price">$${d.price.toLocaleString('en-US')}</p><p class="mls">${d.units} units${d.cap ? ` &middot; ${d.cap.toFixed(2)}% cap` : ''}</p></div>
     </article>`).join('');
-  track.querySelectorAll('img').forEach(i => i.addEventListener('error', () => { i.closest('.cc-card').hidden = true; }));
+  track.querySelectorAll('img').forEach(i => i.addEventListener('error', () => { i.closest('.card').hidden = true; }));
 })();
 
 // Team grid on the home page (data from team-data.js); each card links to that person's page.
