@@ -1191,3 +1191,6 @@ blockquote footer strong{font-weight:700}
 }
 @media (max-width:520px){.pl .pm-actions .btn{flex:1 1 100%}}
 .pl-white .eyebrow,.pl-gray .eyebrow{color:var(--muted)}
+
+/* Home stats: three across at every width */
+.hero-stats .stats-grid.stats-3{grid-template-columns:repeat(3,minmax(0,1fr))}

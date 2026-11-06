@@ -85,11 +85,6 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
 // Recent Closings (data from closings-data.js; photos from assets/closings/<MLS>.jpg when present)
 (() => {
   const data = window.CLOSINGS || [];
-  const volume = data.reduce((s, d) => s + d.price, 0);
-  if ($('#stat-vol')) {
-    $('#stat-vol').textContent = '$' + Math.floor(volume / 1e6) + 'M+';
-    $('#stat-count').textContent = data.length + '+';
-  }
   const grid = $('#closings-grid');
   if (!grid) return;
   const PAGE = 12;
