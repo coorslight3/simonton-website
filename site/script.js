@@ -158,7 +158,7 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
   grid.innerHTML = team.map(p => `
     <a class="member" href="team-${slug(p.name)}.html">
       <img src="assets/team/${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">
-      <span class="team-cap"><strong>${esc(p.name)}</strong><span>${esc(p.short || p.title)}</span>${p.markets ? `<span class="tc-mkts">${esc(p.markets)}</span>` : ''}<em>View profile</em></span>
+      <span class="team-cap"><strong>${esc(p.name)}</strong><span>${esc(p.short || p.title)}</span>${p.markets ? `<span class="tc-mkts">${esc(p.markets)}</span>` : ''}<em>View Profile</em></span>
     </a>`).join('');
 })();
 
@@ -177,17 +177,17 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
 
   const topics = {
     sell: { q: 'Sell my building', keys: ['sell', 'selling', 'list', 'listing my', 'apartment building', 'owner'],
-      a: 'We specialize in selling apartment buildings in Los Angeles. The best first step is a free, confidential valuation.', link: ['sell-my-apartment-building.html', 'Request a free valuation'], abs: true },
+      a: 'We specialize in selling apartment buildings in Los Angeles. The best first step is a free, confidential valuation.', link: ['sell-my-apartment-building.html', 'Request A Free Valuation'], abs: true },
     value: { q: 'Free valuation', keys: ['value', 'valuation', 'worth', 'price', 'pricing', 'cap rate'],
-      a: 'Tell us about your property and we will follow up with a confidential opinion of value.', link: ['sell-my-apartment-building.html', 'Request a free valuation'], abs: true },
+      a: 'Tell us about your property and we will follow up with a confidential opinion of value.', link: ['sell-my-apartment-building.html', 'Request A Free Valuation'], abs: true },
     x1031: { q: '1031 exchange', keys: ['1031', 'exchange', 'tax', 'defer'],
       a: 'We help multifamily owners plan the sale and find a replacement property for a 1031 exchange. This is not tax or legal advice, so please check with your tax professional.', link: ['1031-exchanges.html', 'About 1031 exchanges'], abs: true },
     listings: { q: 'Current listings', keys: ['listing', 'listings', 'for sale', 'buy', 'available', 'property', 'properties'],
-      a: 'You can see our current listings and what is in escrow on the listings section.', link: ['listings.html', 'View listings'], abs: true },
+      a: 'You can see our current listings and what is in escrow on the listings section.', link: ['listings.html', 'View Listings'], abs: true },
     closings: { q: 'Recent closings', keys: ['closing', 'closings', 'sold', 'track record', 'experience'],
-      a: 'Browse our recent closings, with filters by city and building size.', link: ['closings.html', 'View closings'], abs: true },
+      a: 'Browse our recent closings, with filters by city and building size.', link: ['closings.html', 'View Closings'], abs: true },
     team: { q: 'Meet the team', keys: ['team', 'agent', 'broker', 'who'],
-      a: 'Meet the brokers on our team and read their bios.', link: ['team.html', 'Meet the team'], abs: true }
+      a: 'Meet the brokers on our team and read their bios.', link: ['team.html', 'Meet The Team'], abs: true }
   };
   const person = { q: 'Talk to a real person', keys: ['person', 'human', 'agent', 'call', 'text', 'phone', 'contact', 'speak', 'talk', 'representative', 'someone'] };
 

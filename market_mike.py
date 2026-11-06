@@ -5,7 +5,7 @@ Source: CoStar export of team closings, Nov 2026. Built year = 2026 minus CoStar
 """
 
 # ZIP codes Mike covers; his profile's Areas of Expertise links each to its area page.
-ZIPS = ['90069', '90046', '90048', '90036', '90035', '90731']
+ZIPS = ['90069', '90048', '90046', '90035', '90036', '90731']
 
 # Property, submarket, ZIP, units, built, sale price, $/unit
 CLOSINGS = [

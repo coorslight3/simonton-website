@@ -187,7 +187,7 @@ def sections(root, profile=False):
 
 <section class="section alt" id="about">
   <div class="wrap narrow bio-long"><h2>About Robert Carlile</h2>{bio}
-  <p><a class="link" href="{root}team-robert-carlile.html">Robert&rsquo;s full profile &rarr;</a></p></div>
+  <p><a class="link" href="{root}team-robert-carlile.html">Robert&rsquo;s Full Profile &rarr;</a></p></div>
 </section>
 '''
     return f'''{top}
@@ -222,7 +222,7 @@ def sections(root, profile=False):
       <div class="field"><label for="m-addr">Property address</label><input id="m-addr" name="address" required></div>
       <div class="field"><label for="m-units">Number of units</label><input id="m-units" name="units" inputmode="numeric"></div>
       <p class="note">After you submit, reply to our email with your rent roll so we can underwrite the valuation.</p>
-      <button class="btn btn-light" type="submit">Request free valuation</button>
+      <button class="btn btn-light" type="submit">Request Free Valuation</button>
       <p class="form-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -250,7 +250,7 @@ def render(top, bottom):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{ROOT}styles.css?v=120">
+<link rel="stylesheet" href="{ROOT}styles.css?v=135">
 {schema()}</head>
 <body class="subpage">
 {top}<main id="main">
@@ -260,7 +260,7 @@ def render(top, bottom):
       <p class="eyebrow">Robert Carlile &middot; RE/MAX One Commercial</p>
       <h1>{e(H1)}</h1>
       <p class="mk-sub">{e(SUB)}</p>
-      <div class="hero-actions"><a class="btn btn-light" href="#valuation">Get a free valuation</a><a class="btn btn-ghost" href="#closings">See closed sales</a></div>
+      <div class="hero-actions"><a class="btn btn-light" href="#valuation">Get A Free Valuation</a><a class="btn btn-ghost" href="#closings">See Closed Sales</a></div>
     </div>
     <img class="mk-photo" src="{ROOT}assets/team/robert-carlile-56.jpg" alt="Robert Carlile, multifamily broker" width="560" height="700">
   </div>
@@ -268,7 +268,7 @@ def render(top, bottom):
 
 {sections(ROOT)}</main>
 
-{bottom}<script src="{ROOT}script.js?v=120"></script>
+{bottom}<script src="{ROOT}script.js?v=135"></script>
 </body>
 </html>
 '''

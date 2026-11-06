@@ -15,6 +15,7 @@ import blog_posts
 import areas_content as ac
 import broker_market
 import market_john
+import profile_layouts
 
 SITE = Path(__file__).parent / 'site'
 NODE = shutil.which('node') or str(Path.home() / '.local/node/bin/node')
@@ -74,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=120">
+<link rel="stylesheet" href="styles.css?v=135">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=120"></script>
+{bottom}{scripts}<script src="script.js?v=135"></script>
 </body>
 </html>
 '''
@@ -92,7 +93,7 @@ def card(p):
     return (f'<a class="member" href="team-{slug(p["name"])}.html">'
             f'<img src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" loading="lazy">'
             f'<span class="team-cap"><strong>{e(p["name"])}</strong><span>{e(p.get("short") or p["title"])}</span>'
-            f'{mkts}<em>View profile</em></span></a>')
+            f'{mkts}<em>View Profile</em></span></a>')
 
 
 team = load_team()
@@ -208,7 +209,7 @@ ap = about_page
     </ul>
     <div class="x-cta">
       <p>{md(ap.CLOSE[0])}</p>
-      <span class="t-ctas"><a class="btn btn-dark" href="team.html">Meet the team</a> <a class="btn btn-ghost-dark" href="sell-my-apartment-building.html">Request a free valuation</a></span>
+      <span class="t-ctas"><a class="btn btn-dark" href="team.html">Meet The Team</a> <a class="btn btn-ghost-dark" href="sell-my-apartment-building.html">Request A Free Valuation</a></span>
     </div>
   </div>
 </section>""", 'subpage', MAP_DEEPLINK_JS))
@@ -263,7 +264,7 @@ def blog_card(post):
             f'            <span class="tag">{e(post_date(post["date"]))}</span>\n'
             f'            <h3><a href="{post_file(post)}">{e(post["title"])}</a></h3>\n'
             f'            <p>{e(post["dek"])}</p>\n'
-            f'            <p><a class="link" href="{post_file(post)}">Read the post &rarr;</a></p>\n'
+            f'            <p><a class="link" href="{post_file(post)}">Read The Post &rarr;</a></p>\n'
             f'          </div>\n'
             f'        </article>\n')
 
@@ -370,7 +371,7 @@ def contact_team_html():
                   f'<h3 class="ft-name">{e(p["name"])}</h3>'
                   f'<p class="ft-role">{e((p.get("short") or p["title"]).upper())}</p>'
                   f'<dl class="ft-data">{rows}</dl>'
-                  f'<a class="ft-link" href="team-{slug(p["name"])}.html">View profile <span aria-hidden="true">&rarr;</span></a></article>')
+                  f'<a class="ft-link" href="team-{slug(p["name"])}.html">View Profile <span aria-hidden="true">&rarr;</span></a></article>')
     return f'''<section class="ft" id="team-contacts">
   <div class="wrap">
     <p class="ft-eyebrow">// TEAM DIRECTORY</p>
@@ -402,7 +403,7 @@ def team_wide_html():
                   f'<h2 class="ft-name">{e(p["name"])}</h2>'
                   f'<p class="ft-role">{e((p.get("short") or p["title"]).upper())}</p>'
                   f'<dl class="ft-data">{rows}</dl>'
-                  f'<a class="ft-link" href="team-{slug(p["name"])}.html">View profile <span aria-hidden="true">&rarr;</span></a></div>'
+                  f'<a class="ft-link" href="team-{slug(p["name"])}.html">View Profile <span aria-hidden="true">&rarr;</span></a></div>'
                   f'<div class="ft-bio"><p class="ft-label">// BIO</p>{bio}</div></article>')
     return f'''<section class="ft ft-team" id="team-list">
   <div class="wrap">
@@ -443,7 +444,7 @@ assert '<h2 id="sell-title">' in _sell
     'subpage'))
 
 
-def expertise_html(zips):
+def expertise_html(zips, stats=True):
     """Areas of Expertise on a profile: each ZIP the broker covers, linked to its area page, with a
     one-line read of that market from the CoStar stats."""
     by_zip = {h['zip']: h for h in ac.HOODS if h.get('zip')}
@@ -454,7 +455,7 @@ def expertise_html(zips):
             continue
         st = area_comps.STATS.get(h['slug']) or {}
         stat = (f'{st["count"]} sales in 12 months &middot; ${st["ppu"] // 1000}K median per unit'
-                if st.get('count', 0) >= 3 else '')
+                if stats and st.get('count', 0) >= 3 else '')
         tiles += (f'<li><a href="{ac.filename(h["slug"])}"><span class="xp-zip">{z}</span>'
                   f'<strong>{e(h["label"])}</strong>' + (f'<small>{stat}</small>' if stat else '') + '</a></li>')
     return f'<div class="expertise"><h2>Areas of Expertise</h2><ul class="xp-list">{tiles}</ul></div>' if tiles else ''
@@ -499,48 +500,72 @@ for p in team:
         closings = ''
     # a short table sits at its natural height instead of stretching to the bio's length
     split_cls = 'person-split' + (' person-split-short' if p['name'] == 'Mike Torres' else '')
-    if closings and p['name'] in EXPERTISE:
-        # Mike's profile: a dark intro band with photo, name, contact and his numbers, then the bio beside an
-        # at-a-glance panel, his areas, his closings and a valuation prompt.
+    if p['name'] != 'Robert Carlile':
+        # Dark intro band with photo, name and contact, then the bio and a valuation prompt. Areas and the
+        # closed sales table appear only for brokers who have that data (currently Mike).
         first = p['name'].split()[0]
-        digits = re.sub(r'\D', '', p.get('phone', ''))
-        zips = EXPERTISE[p['name']]
-        bio = p.get('bio', [])
-        lead = f'<p class="pm-lead">{e(bio[0])}</p>' if bio else ''
-        rest = ''.join(f'<p>{e(t)}</p>' for t in bio[1:])
+        digits = re.sub(r'\D', '', p.get('phone') or '')
+        zips = EXPERTISE.get(p['name'])
+        bio_html = ''.join(f'<p>{e(t)}</p>' for t in p.get('bio', [])) or '<p>Full bio coming soon.</p>'
+        title_line = e(p['title']) + (' &middot; Multifamily Investment Sales' if p['name'] == 'Mike Torres' else '')
+        actions = ''
+        if p.get('phone'):
+            actions += f'<a class="btn btn-light pm-contact" href="tel:+1{digits}"><span>Call</span>{e(p["phone"])}</a>\n'
+        if p.get('email'):
+            actions += f'<a class="btn btn-ghost pm-contact" href="mailto:{e(p["email"])}"><span>Email</span>{e(p["email"])}</a>\n'
+        if not actions:
+            actions = '<a class="btn btn-ghost" href="contact.html">Contact The Team</a>\n'
+        meta_bits = ''
+        if p.get('handle'):
+            meta_bits += f'<span>{e(p["handle"])}</span>'
+        if p.get('dre'):
+            meta_bits += f'<span>DRE #{e(p["dre"])}</span>'
+        meta = f'<p class="pm-meta">{meta_bits}</p>' if meta_bits else ''
+        extra = ''
+        if p.get('page'):
+            extra += f'<a class="btn btn-ghost" href="{e(p["page"])}">{e(p["pageLabel"])} <span aria-hidden="true">&rarr;</span></a>'
+        if _ma and _ma[1]:
+            extra += f'<a class="btn btn-ghost" href="about.html#t-{_ma[0]}">{e(_lbl)} <span aria-hidden="true">&rarr;</span></a>'
+        extra = f'<div class="pm-links">{extra}</div>' if extra else ''
+        areas = f'<div class="pm-areas">{expertise_html(zips, stats=False)}</div>' if zips else ''
+        closed = f'<div class="wrap pm-closings" id="closings">{closings}</div>' if closings else ''
+        cta = ''
+        if p.get('email'):
+            call = f'<a class="btn btn-ghost" href="tel:+1{digits}">Call {e(first)}</a>' if p.get('phone') else ''
+            cta = f'''<section class="section dark pm-cta">
+  <div class="wrap pm-cta-grid">
+    <div><h2>What Is Your Building Worth?</h2>
+      <p class="lead">Send {e(first)} the address and rent roll for a free, confidential valuation with the comparable sales behind it.</p></div>
+    <div class="pm-actions"><a class="btn btn-light" href="mailto:{e(p["email"])}?subject=Valuation%20request">Request A Valuation</a>
+      {call}</div>
+  </div>
+</section>'''
         body = f'''<section class="pm-hero">
   <div class="wrap">
-    <a class="back back-light" href="team.html">&larr; All team members</a>
+    <a class="back back-light" href="team.html">&larr; All Team Members</a>
     <div class="pm-hero-grid">
       <img class="pm-photo" src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" width="560" height="700">
       <div class="pm-intro">
         <p class="eyebrow">Simonton Commercial &middot; RE/MAX One Commercial</p>
         <h1>{e(p["name"])}</h1>
-        <p class="pm-title">{e(p["title"])} &middot; Multifamily Investment Sales</p>
+        <p class="pm-title">{title_line}</p>
         <div class="pm-actions">
-          <a class="btn btn-light" href="tel:+1{digits}">Call {e(p.get("phone", ""))}</a>
-          <a class="btn btn-ghost" href="mailto:{e(p.get("email", ""))}">Email {e(first)}</a>
+          {actions}
         </div>
-        <p class="pm-meta"><span>{e(p.get("email", ""))}</span><span>{e(p.get("handle", ""))}</span><span>DRE #{e(p.get("dre", ""))}</span></p>
+        {meta}
+        {extra}
+        {areas}
       </div>
     </div>
-    <div class="pm-areas">{expertise_html(zips)}</div>
   </div>
 </section>
 <section class="section pm-about">
   <div class="wrap pm-about-grid">
-    <div class="pm-bio"><h2>About {e(first)}</h2>{lead}{rest}</div>
-    <aside class="pm-closings" id="closings">{closings}</aside>
+    <div class="pm-bio"><h2>About {e(p["name"])}</h2><div class="pm-bio-text">{bio_html}</div></div>
   </div>
+  {closed}
 </section>
-<section class="section dark pm-cta">
-  <div class="wrap pm-cta-grid">
-    <div><h2>What Is Your Building Worth?</h2>
-      <p class="lead">Send {e(first)} the address and rent roll for a free, confidential valuation with the comparable sales behind it.</p></div>
-    <div class="pm-actions"><a class="btn btn-light" href="mailto:{e(p.get("email", ""))}?subject=Valuation%20request">Request a valuation</a>
-      <a class="btn btn-ghost" href="tel:+1{digits}">Call {e(first)}</a></div>
-  </div>
-</section>
+{cta}
 <section class="section">
   <div class="wrap">
     <h2>More from the team</h2>
@@ -549,11 +574,26 @@ for p in team:
     </div>
   </div>
 </section>'''
-    elif closings:
+        if p['name'] in profile_layouts.LAYOUTS:
+            _links = []
+            if p.get('page'):
+                _links.append((p['page'], p['pageLabel']))
+            if _ma and _ma[1]:
+                _links.append((f'about.html#t-{_ma[0]}', _lbl))
+            _team = f'''<section class="section">
+  <div class="wrap">
+    <h2>More from the team</h2>
+    <div class="team">
+{others}
+    </div>
+  </div>
+</section>'''
+            body = profile_layouts.render(p, _links) + '\n' + cta + '\n' + _team
+    else:
         # compact top so the closings table shows on first load; the bio moves below it
         body = f'''<section class="section person person-compact">
   <div class="wrap">
-    <a class="back" href="team.html">&larr; All team members</a>
+    <a class="back" href="team.html">&larr; All Team Members</a>
     <div class="person-grid">
       <img class="person-photo" src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" width="560" height="700">
       <div class="person-text">
@@ -573,31 +613,6 @@ for p in team:
   </div>
 </section>
 {market}<section class="section dark">
-  <div class="wrap">
-    <h2>More from the team</h2>
-    <div class="team">
-{others}
-    </div>
-  </div>
-</section>'''
-    else:
-        body = f'''<section class="section person">
-  <div class="wrap">
-    <a class="back" href="team.html">&larr; All team members</a>
-    <div class="person-grid">
-      <img class="person-photo" src="assets/team/{e(p["photo"])}" alt="{e(p["name"])}" width="560" height="700">
-      <div class="person-text">
-        <h1>{e(p["name"])}</h1>
-        <p class="person-title">{e(p["title"])}</p>
-        <p class="person-contact">{''.join(contact)}</p>
-        {paras}
-        {market_link}
-        {territory_link}
-      </div>
-    </div>
-  </div>
-</section>
-<section class="section dark">
   <div class="wrap">
     <h2>More from the team</h2>
     <div class="team">
@@ -625,7 +640,7 @@ def area_form(subject):
       <div class="field"><label for="a-phone">Phone</label><input id="a-phone" name="phone" type="tel" autocomplete="tel"></div>
       <div class="field"><label for="a-addr">Property address</label><input id="a-addr" name="address" required></div>
       <div class="field"><label for="a-units">Number of units</label><input id="a-units" name="units" inputmode="numeric"></div>
-      <button class="btn btn-light" type="submit">Request free valuation</button>
+      <button class="btn btn-light" type="submit">Request Free Valuation</button>
       <p class="form-msg" role="status" aria-live="polite"></p>
     </form>'''
 
@@ -645,8 +660,8 @@ def other_areas(current):
 def area_hero(h1, eyebrow, intro=''):
     sub = f'<p class="mk-sub">{e(intro)}</p>' if intro else ''
     return (f'<section class="mk-hero area-hero"><div class="wrap"><p class="eyebrow">{e(eyebrow)}</p><h1>{e(h1)}</h1>{sub}'
-            f'<div class="hero-actions"><a class="btn btn-light" href="#valuation">Get a free valuation</a>'
-            f'<a class="btn btn-ghost" href="contact.html">Contact the team</a></div></div></section>')
+            f'<div class="hero-actions"><a class="btn btn-light" href="#valuation">Get A Free Valuation</a>'
+            f'<a class="btn btn-ghost" href="contact.html">Contact The Team</a></div></div></section>')
 
 
 def comps_html(slug, label):
@@ -844,7 +859,7 @@ for _post in blog_posts.POSTS:
                f'Published {e(post_date(_post["date"]))}.</p>')
     _body = (area_hero(_post['title'], f'Blog · {post_date(_post["date"])}', _post['dek'])
              + '<section class="section alt">\n  <div class="wrap narrow about-body">\n'
-             + '    <a class="back" href="blog.html">&larr; All posts</a>\n'
+             + '    <a class="back" href="blog.html">&larr; All Posts</a>\n'
              + post_body_html(_post)
              + _byline
              + '\n  </div>\n</section>'

@@ -100,7 +100,7 @@ def render(m, member, top, bottom):
       <p class="eyebrow">{e(m.NAME)} &middot; RE/MAX One Commercial</p>
       <h1>{e(m.H1)}</h1>
       <p class="mk-sub">{len(rows)} closed sales. {units} units. {money(volume)} in sales volume.</p>
-      <div class="hero-actions"><a class="btn btn-light" href="#valuation">Get a free valuation</a><a class="btn btn-ghost" href="#closings">See closed sales</a></div>
+      <div class="hero-actions"><a class="btn btn-light" href="#valuation">Get A Free Valuation</a><a class="btn btn-ghost" href="#closings">See Closed Sales</a></div>
       <p class="mk-contact">{''.join(contact)}</p>
     </div>
     <img class="mk-photo" src="{ROOT}assets/team/{m.PHOTO}" alt="{e(m.NAME)}, multifamily broker" width="560" height="700">
@@ -125,7 +125,7 @@ def render(m, member, top, bottom):
 
 <section class="section alt" id="about">
   <div class="wrap narrow bio-long"><h2>About {e(m.NAME)}</h2>{bio}
-  <p><a class="link" href="{ROOT}team-{re.sub(r"[^a-z0-9]+", "-", m.NAME.lower()).strip("-")}.html">{e(m.NAME)}&rsquo;s full profile &rarr;</a></p></div>
+  <p><a class="link" href="{ROOT}team-{re.sub(r"[^a-z0-9]+", "-", m.NAME.lower()).strip("-")}.html">{e(m.NAME)}&rsquo;s Full Profile &rarr;</a></p></div>
 </section>
 
 <section class="section" id="coverage">
@@ -144,7 +144,7 @@ def render(m, member, top, bottom):
       <div class="field"><label for="m-phone">Phone</label><input id="m-phone" name="phone" type="tel" autocomplete="tel"></div>
       <div class="field"><label for="m-addr">Property address</label><input id="m-addr" name="address" required></div>
       <div class="field"><label for="m-units">Number of units</label><input id="m-units" name="units" inputmode="numeric"></div>
-      <button class="btn btn-light" type="submit">Request free valuation</button>
+      <button class="btn btn-light" type="submit">Request Free Valuation</button>
       <p class="form-msg" role="status" aria-live="polite"></p>
     </form>
   </div>

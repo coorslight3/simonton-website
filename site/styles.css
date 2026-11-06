@@ -1071,3 +1071,123 @@ blockquote footer strong{font-weight:700}
 /* More 5-Star Reviews: ten cards always fill their rows */
 .rv-more{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (min-width:1101px){.rv-more{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+/* Profile: slim areas list beside the photo, About in two columns, closed transactions underneath */
+.pm-hero-grid{grid-template-columns:minmax(240px,400px) minmax(0,1fr);gap:var(--s4);align-items:center}
+.pm-hero .pm-intro h1{font-size:clamp(40px,5vw,64px)}
+.pm-hero .pm-title{margin-bottom:var(--s2)}
+.pm-hero .pm-meta{margin-top:var(--s2)}
+.pm-hero .pm-areas{margin-top:var(--s3);padding-top:0;border-top:0}
+.pm-hero .pm-areas .expertise h2{margin:0 0 4px}
+.pm-hero .pm-areas .xp-list{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,auto);grid-auto-rows:auto;grid-auto-flow:column;gap:0 var(--s4)}
+.pm-hero .pm-areas .xp-list a{flex-direction:row;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:8px 0;border:0;border-bottom:1px solid #3a3a3a;background:transparent;color:#fff}
+.pm-hero .pm-areas .xp-list strong{font:700 15px/1.25 var(--font-head)}
+.pm-hero .pm-areas .xp-zip{order:2;flex:none;font:500 13px var(--font-body);letter-spacing:.06em;color:#a8a8a8}
+.pm-hero .pm-areas .xp-list a:hover,.pm-hero .pm-areas .xp-list a:focus-visible{background:transparent;color:#fff;border-color:#fff}
+@media (max-width:900px){.pm-hero-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.pm-hero .pm-areas .xp-list{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-auto-flow:row}}
+
+.pm-about-grid{display:block}
+.pm-bio p{font:400 17px/1.75 var(--font-body);color:var(--ink);max-width:none;margin:0 0 var(--s2)}
+.pm-bio-text{columns:2;column-gap:var(--s4)}
+.pm-bio-text p{break-inside:avoid}
+.pm-bio h2,.pm-closings .head h2{font:800 clamp(24px,1.9vw,30px)/1.2 var(--font-head);letter-spacing:0;text-transform:none;color:var(--ink);margin:0 0 var(--s2)}
+.pm-closings{display:block;margin-top:var(--s3)}
+.pm-closings .closed{height:auto}
+@media (max-width:900px){.pm-bio-text{columns:1}}
+.pm-hero .pm-actions a[href^="mailto:"]{text-transform:none}
+.pm-hero .pm-contact{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.2;padding-top:10px;padding-bottom:10px}
+.pm-hero .pm-contact span{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.pm-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s2)}
+
+/* ---- Team profile layouts (profile_layouts.py) ---- */
+.pl{padding:var(--s4) 0 var(--s5)}
+.pl h1{margin:0 0 8px;font:900 clamp(40px,5.5vw,68px)/1.02 var(--font-head)}
+.pl h2{margin:0 0 var(--s2);font:800 clamp(24px,1.9vw,30px)/1.2 var(--font-head)}
+.pl-title{margin:0 0 var(--s3);font-size:19px}
+.pl-dre{margin:var(--s2) 0 0;font-size:14px}
+.pl-photo img{display:block;width:100%;height:auto;aspect-ratio:8/9;object-fit:cover;object-position:50% 0}
+.pl-grid{display:grid;gap:var(--s4);align-items:center}
+.pl .pm-contact{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.2;padding-top:10px;padding-bottom:10px}
+.pl .pm-contact span{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.pl a[href^="mailto:"]{text-transform:none}
+.pl .pm-links{margin-top:var(--s2)}
+.pl-bio p{font:400 17px/1.75 var(--font-body);margin:0 0 var(--s2)}
+.pl-bio p:last-child{margin-bottom:0}
+.pl-dark{background:var(--ink);color:#fff}
+.pl-dark h1,.pl-dark h2{color:#fff}
+.pl-dark .pl-title{color:#cfcfcf}
+.pl-dark .pl-dre{color:#bdbdbd}
+.pl-dark .pl-bio p{color:#e4e4e4}
+.pl-white{background:#fff;color:var(--ink)}
+.pl-white .pl-title{color:var(--ink-2)}
+.pl-white .pl-dre{color:var(--muted)}
+.pl-about .pl-bio{columns:2;column-gap:var(--s4)}
+.pl-about .pl-bio p{break-inside:avoid;color:var(--ink)}
+.pl-about h2{margin:0 0 var(--s2);font:800 clamp(24px,1.9vw,30px)/1.2 var(--font-head)}
+
+/* Chase: photo on the right */
+.pl-right .pl-grid{grid-template-columns:minmax(0,1fr) minmax(240px,400px)}
+
+/* Zvon: white header with a small photo and a rule */
+.pl-white:not(.pl-side):not(.pl-bar) .pl-grid{grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:var(--s3)}
+.pl-contact{display:flex;flex-wrap:wrap;gap:0 var(--s3);align-items:center;margin:0;padding-bottom:12px;border-bottom:1px solid var(--ink);font-weight:700}
+.pl-contact a,.pl-contact span{display:inline-flex;align-items:center;min-height:44px}
+.pl-contact span{font-weight:400}
+.pl-about-tight{padding-top:0}
+
+/* Andrew: everything centered */
+.pl-center{text-align:center}
+.pl-center .back{display:block;text-align:left}
+.pl-center .pl-photo{width:min(300px,70vw);margin:0 auto var(--s3)}
+.pl-center .pm-actions,.pl-center .pm-links{justify-content:center}
+.pl-about-center h2{text-align:center}
+.pl-about-center .pl-bio{columns:1;max-width:760px;margin:0 auto}
+
+/* John: the whole intro is dark, bio beside the photo */
+.pl-full .pl-title{margin-bottom:var(--s4)}
+.pl-full .pl-grid{grid-template-columns:minmax(0,380px) minmax(0,1fr);align-items:start;gap:var(--s5)}
+.pl-full .pl-photo{margin-bottom:var(--s2)}
+.pl-full .pm-contact{flex:1 1 100%}
+
+/* Brett: photo and buttons stay in a left column */
+.pl-side .pl-title{padding-bottom:var(--s2);border-bottom:2px solid var(--ink)}
+.pl-side .pl-grid{grid-template-columns:minmax(0,340px) minmax(0,1fr);align-items:start;gap:var(--s5)}
+.pl-stick{position:sticky;top:100px}
+.pl-side .pl-photo{margin-bottom:var(--s2)}
+.pl-side .pm-contact{flex:1 1 100%}
+
+/* Josh: photo runs to the left edge of the screen */
+.pl-edge{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);padding:0}
+.pl-edge .pl-photo img{height:100%;min-height:560px;aspect-ratio:auto}
+.pl-edge-text{align-self:center;padding:var(--s4) clamp(24px,5vw,88px)}
+
+/* Koby: name header, black contact bar, photo beside bio */
+.pl-bar{padding-bottom:var(--s5)}
+.pl-bar .pl-title{margin-bottom:var(--s3)}
+.pl-bar-strip{background:var(--ink);color:#fff;margin-bottom:var(--s4)}
+.pl-bar-strip .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);align-items:center}
+.pl-bar-strip a,.pl-bar-strip p{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:76px;margin:0;color:#fff;text-decoration:none;overflow-wrap:anywhere}
+.pl-bar-strip a:hover,.pl-bar-strip a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+.pl-bar-strip span{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#bdbdbd}
+.pl-bar .pl-grid{grid-template-columns:minmax(0,320px) minmax(0,1fr);align-items:start;gap:var(--s5)}
+
+/* Rochelle: light gray band */
+.pl-gray{background:#efefef;color:var(--ink)}
+.pl-gray .pl-grid{grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:var(--s5)}
+.pl-gray .pl-title{color:var(--ink-2)}
+.pl-gray .pl-bio{margin-top:var(--s3)}
+
+@media (max-width:900px){
+  .pl .pl-grid,.pl-edge,.pl-white:not(.pl-side):not(.pl-bar) .pl-grid{grid-template-columns:minmax(0,1fr)}
+  .pl .pl-grid{gap:var(--s3)}
+  .pl-right .pl-photo{order:-1}
+  .pl-stick{position:static}
+  .pl .pl-grid > .pl-photo{max-width:320px}
+  .pl-edge .pl-photo img{height:auto;min-height:0;aspect-ratio:1}
+  .pl-about .pl-bio{columns:1}
+  .pl-bar-strip .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .pl-bar-strip a,.pl-bar-strip p{min-height:60px}
+}
+@media (max-width:520px){.pl .pm-actions .btn{flex:1 1 100%}}
+.pl-white .eyebrow,.pl-gray .eyebrow{color:var(--muted)}

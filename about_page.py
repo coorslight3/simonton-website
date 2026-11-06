@@ -110,8 +110,8 @@ MAP_AGENTS = {
     'Koby Sarna':     ('ks', False),
 }
 COUNTYWIDE = {'Chase Simonton'}
-MAP_LABEL            = "See {first}'s territory"
-MAP_LABEL_COUNTYWIDE = "See {first}'s countywide coverage"
+MAP_LABEL            = "See {first}'s Territory"
+MAP_LABEL_COUNTYWIDE = "See {first}'s Countywide Coverage"
 
 # ---- Condensed page (Nov 2026): the map comes first, then short, graphic sections. ----
 LEAD_SHORT = ('Most brokers say they cover Los Angeles, a county of eighty-eight cities where a building eight '
