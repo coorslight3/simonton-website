@@ -1,6 +1,7 @@
 window.CLOSINGS = [
  {
   "mls": "24-450613",
+  "built": 1990,
   "address": "10020 Zelzah Ave",
   "city": "Northridge",
   "units": 50,
@@ -23,6 +24,7 @@ window.CLOSINGS = [
  },
  {
   "mls": "17-223046",
+  "built": 1989,
   "address": "1610 Broadway",
   "city": "Santa Monica",
   "units": 7,
@@ -34,6 +36,7 @@ window.CLOSINGS = [
  },
  {
   "mls": "22-117531",
+  "built": 1970,
   "address": "1044 3RD ST",
   "city": "Santa Monica",
   "units": 10,

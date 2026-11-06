@@ -43,7 +43,7 @@ CONTENT = Path(__file__).parent / 'content'  # sections that no longer live on t
 PAGES = {'about': 'about.html', 'team': 'team.html', 'listings': 'listings.html',
          'closings': 'closings.html', 'testimonials': 'testimonials.html',
          '1031': None, 'exchanges': '1031-exchanges.html', 'blog': 'blog.html',
-         'faqs': 'faqs.html', 'contact': 'contact.html'}
+         'faqs': 'faqs.html', 'contact': 'contact.html', 'valuation': 'sell-my-apartment-building.html'}
 
 
 def fix_links(s):
@@ -74,14 +74,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=111">
+<link rel="stylesheet" href="styles.css?v=119">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=111"></script>
+{bottom}{scripts}<script src="script.js?v=119"></script>
 </body>
 </html>
 '''
@@ -208,7 +208,7 @@ ap = about_page
     </ul>
     <div class="x-cta">
       <p>{md(ap.CLOSE[0])}</p>
-      <span class="t-ctas"><a class="btn btn-dark" href="team.html">Meet the team</a> <a class="btn btn-ghost-dark" href="index.html#valuation">Request a free valuation</a></span>
+      <span class="t-ctas"><a class="btn btn-dark" href="team.html">Meet the team</a> <a class="btn btn-ghost-dark" href="sell-my-apartment-building.html">Request a free valuation</a></span>
     </div>
   </div>
 </section>""", 'subpage', MAP_DEEPLINK_JS))
@@ -432,6 +432,16 @@ for fname, sec, title, desc, extra in TAB_PAGES:
     else:
         body = section_html(sec)
     (SITE / fname).write_text(page(title, desc, body, 'subpage', extra))
+
+# Sell page: the same Sell steps and valuation form shown at the bottom of the home page.
+_sell = index[index.index('<section class="section sell"'):index.index('<footer class="footer">')]
+assert '<h2 id="sell-title">' in _sell
+(SITE / 'sell-my-apartment-building.html').write_text(page(
+    'Sell My Apartment Building | Simonton Commercial',
+    'Find out what your Los Angeles apartment building is worth. Request a free, confidential valuation from Simonton Commercial.',
+    fix_links(_sell.replace('<h2 id="sell-title">', '<h1 id="sell-title">').replace('worth.</h2>', 'worth.</h1>')),
+    'subpage'))
+
 
 def expertise_html(zips):
     """Areas of Expertise on a profile: each ZIP the broker covers, linked to its area page, with a

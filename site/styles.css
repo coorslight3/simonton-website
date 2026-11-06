@@ -1033,3 +1033,41 @@ blockquote footer strong{font-weight:700}
   .lc-split .head h2{font-size:clamp(26px,2.4vw,36px)}
   .lc-split #listings .cards,.lc-split #closings .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
 }
+
+/* Home: listings and closings as compact rows (photo, address, price) */
+@media (min-width:1101px){
+  .lc-split #listings .cards,.lc-split #closings .cards{grid-template-columns:minmax(0,1fr);gap:10px}
+  .lc-split .card.listing{display:grid;grid-template-columns:150px minmax(0,1fr);border-radius:12px;overflow:hidden}
+  .lc-split .card.listing .listing-img{height:100%;min-height:104px;aspect-ratio:auto}
+  .lc-split .card.listing .card-body{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tag price" "name price" "loc mls";align-items:center;column-gap:16px;row-gap:2px;padding:12px 18px}
+  .lc-split .card-body .tag{grid-area:tag;justify-self:start;margin:0 0 2px;padding:2px 8px;font-size:10.5px}
+  .lc-split .card-body h3{grid-area:name;margin:0;font-size:17px}
+  .lc-split .card-body .loc{grid-area:loc;margin:0;font-size:14px}
+  .lc-split .card-body .price{grid-area:price;margin:0;font-size:22px;text-align:right;justify-self:end}
+  .lc-split .card-body .mls{grid-area:mls;margin:0;font-size:12.5px;text-align:right;justify-self:end}
+}
+
+/* Home listings and closings: larger photos, building facts, no disclaimer lines */
+.facts{margin:6px 0 0;font:700 14px var(--font-body);color:var(--ink)}
+@media (min-width:1101px){
+  .lc-split .disclaimer{display:none}
+  .lc-split .card.listing{grid-template-columns:44% minmax(0,1fr)}
+  .lc-split .card.listing .listing-img{min-height:172px}
+  .lc-split .card.listing .card-body{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:14px 20px;gap:1px}
+  .lc-split .card-body .price{text-align:left;justify-self:auto;margin-top:4px}
+  .lc-split .card-body .mls{text-align:left;justify-self:auto;margin-top:2px}
+  .lc-split .card-body .facts{margin-top:4px}
+}
+.lc-split .disclaimer{display:none}
+.lc-split > .section{padding-bottom:var(--s4)}
+@media (min-width:1101px){
+  .lc-split .card.listing{height:190px}
+  .lc-split .card.listing .listing-img{height:190px;min-height:0}
+}
+
+/* Sell page heading matches the home page section heading */
+.sell-head h1{font-size:clamp(30px,4vw,52px);font-weight:900;margin-bottom:var(--s2)}
+
+/* More 5-Star Reviews: ten cards always fill their rows */
+.rv-more{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:1101px){.rv-more{grid-template-columns:repeat(5,minmax(0,1fr))}}

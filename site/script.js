@@ -115,7 +115,6 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
           <dl>
             <div><dt>Units</dt><dd>${d.units}</dd></div>
             <div><dt>Sold</dt><dd>${usd(d.price)}</dd></div>
-            ${d.cap ? `<div><dt>Cap rate</dt><dd>${d.cap.toFixed(2)}%</dd></div>` : ''}
             <div><dt>Days on market</dt><dd>${d.dom}</dd></div>
           </dl>
         </div>
@@ -144,7 +143,7 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
   track.innerHTML = list.map(d => `
     <article class="card listing">
       <img class="listing-img" src="assets/closings/${encodeURIComponent(d.mls)}.jpg" alt="${esc(d.address)}, ${esc(d.city)}" loading="lazy">
-      <div class="card-body"><span class="tag">Sold</span><h3>${esc(d.address)}</h3><p class="loc">${esc(d.city)}, CA</p><p class="price">$${d.price.toLocaleString('en-US')}</p><p class="mls">${d.units} units${d.cap ? ` &middot; ${d.cap.toFixed(2)}% cap` : ''}</p></div>
+      <div class="card-body"><span class="tag">Sold</span><h3>${esc(d.address)}</h3><p class="loc">${esc(d.city)}, CA</p><p class="price">$${d.price.toLocaleString('en-US')}</p><p class="facts">${d.units} Units${d.built ? ` &middot; Built ${d.built}` : ''}</p></div>
     </article>`).join('');
   track.querySelectorAll('img').forEach(i => i.addEventListener('error', () => { i.closest('.card').hidden = true; }));
 })();
@@ -178,9 +177,9 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
 
   const topics = {
     sell: { q: 'Sell my building', keys: ['sell', 'selling', 'list', 'listing my', 'apartment building', 'owner'],
-      a: 'We specialize in selling apartment buildings in Los Angeles. The best first step is a free, confidential valuation.', link: ['#valuation', 'Request a free valuation'] },
+      a: 'We specialize in selling apartment buildings in Los Angeles. The best first step is a free, confidential valuation.', link: ['sell-my-apartment-building.html', 'Request a free valuation'], abs: true },
     value: { q: 'Free valuation', keys: ['value', 'valuation', 'worth', 'price', 'pricing', 'cap rate'],
-      a: 'Tell us about your property and we will follow up with a confidential opinion of value.', link: ['#valuation', 'Request a free valuation'] },
+      a: 'Tell us about your property and we will follow up with a confidential opinion of value.', link: ['sell-my-apartment-building.html', 'Request a free valuation'], abs: true },
     x1031: { q: '1031 exchange', keys: ['1031', 'exchange', 'tax', 'defer'],
       a: 'We help multifamily owners plan the sale and find a replacement property for a 1031 exchange. This is not tax or legal advice, so please check with your tax professional.', link: ['1031-exchanges.html', 'About 1031 exchanges'], abs: true },
     listings: { q: 'Current listings', keys: ['listing', 'listings', 'for sale', 'buy', 'available', 'property', 'properties'],
