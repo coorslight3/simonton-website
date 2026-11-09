@@ -1194,3 +1194,30 @@ blockquote footer strong{font-weight:700}
 
 /* Home stats: three across at every width */
 .hero-stats .stats-grid.stats-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* Sell page: Free Valuation is the page heading, sized like the same heading on the home page */
+.val h1{margin:0 0 var(--s2);color:#fff;font:900 clamp(30px,3.2vw,40px)/1.1 var(--font-head)}
+
+/* Valuation and Sell steps: tighter, with icons */
+.val{padding:var(--s4) 0}
+.val .split{gap:var(--s4)}
+.val .val-call{margin-top:var(--s2);padding-top:var(--s2)}
+.val-call-btn{display:inline-flex;align-items:center;gap:8px}
+.val-form .field{margin-bottom:10px}
+.val-form .field label{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.val-form .field label svg{flex:none;opacity:.8}
+.val-form .val-drop{padding:12px 16px}
+.val-form .btn[type=submit]{margin-top:4px}
+
+.section.sell{padding:var(--s4) 0}
+.sell-head{margin-bottom:var(--s3)}
+.sell-head h1,.sell-head h2{font-size:clamp(26px,3vw,38px);margin-bottom:8px;text-wrap:balance}
+.sell-head .lead{font-size:16px;max-width:720px}
+.sell-steps{gap:10px;margin-bottom:12px}
+.sell-steps li{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+.sell-ico{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;margin-bottom:10px;border-radius:50%;background:var(--ink);color:#fff}
+.sell-n{position:absolute;top:14px;right:14px;margin:0;font:700 12px var(--font-body);letter-spacing:.08em;color:var(--muted);-webkit-text-stroke:0}
+.sell-steps h3{font-size:16px;margin-bottom:4px}
+.sell-steps p{font-size:14px;line-height:1.45}
+.sell-honest{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;padding:12px 16px;border-radius:14px;background:var(--ink);color:#fff;font-size:16px;text-align:left}
+.sell-honest-ico{flex:none;display:inline-flex}

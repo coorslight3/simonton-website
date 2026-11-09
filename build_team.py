@@ -75,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=137">
+<link rel="stylesheet" href="styles.css?v=144">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=137"></script>
+{bottom}{scripts}<script src="script.js?v=144"></script>
 </body>
 </html>
 '''
@@ -435,12 +435,12 @@ for fname, sec, title, desc, extra in TAB_PAGES:
     (SITE / fname).write_text(page(title, desc, body, 'subpage', extra))
 
 # Sell page: the same Sell steps and valuation form shown at the bottom of the home page.
-_sell = index[index.index('<section class="section sell"'):index.index('<footer class="footer">')]
-assert '<h2 id="sell-title">' in _sell
+_sell = index[index.index('<section class="section dark val"'):index.index('<footer class="footer">')]
+assert '<h2 id="val-title">' in _sell
 (SITE / 'sell-my-apartment-building.html').write_text(page(
     'Sell My Apartment Building | Simonton Commercial',
     'Find out what your Los Angeles apartment building is worth. Request a free, confidential valuation from Simonton Commercial.',
-    fix_links(_sell.replace('<h2 id="sell-title">', '<h1 id="sell-title">').replace('worth.</h2>', 'worth.</h1>')),
+    fix_links(_sell.replace('<h2 id="val-title">', '<h1 id="val-title">').replace('Apartment Building</h2>', 'Apartment Building</h1>')),
     'subpage'))
 
 
