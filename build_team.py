@@ -75,14 +75,14 @@ def page(title, desc, body, bodyclass='', scripts=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=160">
+<link rel="stylesheet" href="styles.css?v=164">
 </head>
 <body class="{bodyclass}">
 {top}<main id="main">
 {body}
 </main>
 
-{bottom}{scripts}<script src="script.js?v=160"></script>
+{bottom}{scripts}<script src="script.js?v=164"></script>
 </body>
 </html>
 '''
@@ -438,7 +438,7 @@ for fname, sec, title, desc, extra in TAB_PAGES:
 def _cut(start):
     a = index.index(start)
     return index[a:index.index('</section>', a) + len('</section>')]
-_sell = _cut('<section class="section dark val"') + '\n\n  ' + _cut('<section class="section sell"')
+_sell = _cut('<section class="section dark val"')
 assert '<h2 id="val-title">' in _sell
 (SITE / 'sell-my-apartment-building.html').write_text(page(
     'Sell My Apartment Building | Simonton Commercial',
