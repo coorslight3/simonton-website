@@ -633,7 +633,7 @@ blockquote footer strong{font-weight:700}
 /* ---- Nov 3: top menu as one clean line of text links (hamburger below 1740px); Sell button stays filled ---- */
 .brand{flex:none}
 .nav a.nav-sell{background:var(--ink);color:#fff;border-color:var(--ink)}
-@media (min-width:1740px){
+@media (min-width:1200px){
   .header-inner{max-width:none;padding:0 28px;gap:var(--s2)}
   .nav{flex-wrap:nowrap;gap:2px;white-space:nowrap}
   .nav a:not(.btn),.nav-dd-btn{padding:8px 7px;min-height:44px;display:inline-flex;align-items:center;font:500 14px var(--font-body)}
@@ -641,7 +641,7 @@ blockquote footer strong{font-weight:700}
   .nav a.nav-sell{margin-left:12px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink)}
   .nav a.nav-sell:hover{background:#fff;color:var(--ink);text-decoration:none}
 }
-@media (min-width:981px) and (max-width:1739px){
+@media (min-width:981px) and (max-width:1199px){
   .nav-toggle{display:flex}
   .nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 20px 24px}
   .nav.open{display:flex}
@@ -651,7 +651,7 @@ blockquote footer strong{font-weight:700}
   .nav-dd-btn{width:100%;justify-content:space-between;padding:12px 0}
   .nav-dd-menu{position:static;width:auto;box-shadow:none;border:0;padding:0 0 8px 12px;columns:1}
 }
-@media (max-width:1739px){.nav a.nav-sell{display:inline-flex;justify-content:center;margin-top:12px;padding:12px 20px;border-radius:999px;border:1.5px solid var(--ink)}}
+@media (max-width:1199px){.nav a.nav-sell{display:inline-flex;justify-content:center;margin-top:12px;padding:12px 20px;border-radius:999px;border:1.5px solid var(--ink)}}
 
 /* ---- Nov 3: team + services section: wider, same-size headings, linked cards ---- */
 .intro .wrap{max-width:1480px;padding:0 clamp(20px,3.5vw,56px)}
@@ -756,7 +756,7 @@ blockquote footer strong{font-weight:700}
 .head-social a{display:grid;place-items:center;width:36px;height:36px;color:var(--ink);border-radius:50%;transition:background .2s,color .2s}
 .head-social a:hover{background:var(--ink);color:#fff}
 .head-social svg{width:17px;height:17px}
-@media (min-width:1740px){
+@media (min-width:1200px){
   .header-inner{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;row-gap:0;padding-top:6px;padding-bottom:6px}
   .header-inner .brand{grid-row:1 / 3}
   .head-social{grid-column:2;grid-row:1;justify-self:end;margin:0 -6px 0 0}
@@ -1221,3 +1221,122 @@ blockquote footer strong{font-weight:700}
 .sell-steps p{font-size:14px;line-height:1.45}
 .sell-honest{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;padding:12px 16px;border-radius:14px;background:var(--ink);color:#fff;font-size:16px;text-align:left}
 .sell-honest-ico{flex:none;display:inline-flex}
+
+/* Listing cards: city, price and details sit at the bottom of every card, so a row lines up even when a title wraps */
+.card.listing{display:flex;flex-direction:column}
+.card.listing .card-body{flex:1;display:flex;flex-direction:column}
+.card.listing .loc{margin-top:auto}
+@media (min-width:1101px){.lc-split .card.listing .loc{margin-top:0}}
+
+/* Home: team intro above the listings (photo beside the text), services below them as a full-width grid */
+.who-split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,4.5vw,80px);align-items:center}
+.who-split .team-photo.who-photo{margin:0}
+.who-text{text-align:left}
+.intro .who-text h2{margin:0 0 var(--s2)}
+.intro .who-text p{text-align:left}
+.intro .who-text p.approach{text-align:center}
+.intro-svc .services h2{text-align:center;margin:0 0 var(--s3)}
+.intro-svc .services{display:flex;flex-direction:column}
+.intro-svc .svc{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.intro-svc .svc-card{grid-column:span 2;align-content:start}
+.intro-svc .svc-card:nth-child(4),.intro-svc .svc-card:nth-child(5){grid-column:span 3}
+@media (max-width:980px){
+  .who-split{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  .intro .who-text h2{text-align:center}
+  .intro-svc .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .intro-svc .svc-card,.intro-svc .svc-card:nth-child(4){grid-column:span 1}
+  .intro-svc .svc-card:nth-child(5){grid-column:1 / -1}
+}
+@media (max-width:640px){
+  .intro-svc .svc{grid-template-columns:minmax(0,1fr)}
+  .intro-svc .svc-card:nth-child(5){grid-column:auto}
+}
+@media (min-width:981px){.intro .who-text h2{text-align:left}}
+
+/* Team section: wider photo level with the text, approach band across the bottom */
+.who-split{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);row-gap:var(--s3);align-items:center}
+.who-split .who-photo img{display:block;width:100%;height:auto}
+.intro .who-text p:last-child{margin-bottom:0}
+.who-band{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);background:var(--ink);color:#fff;border-radius:24px;padding:clamp(20px,2.2vw,32px) clamp(24px,3vw,44px)}
+.intro .who-band p.approach{margin:0;padding:0;background:none;border-radius:0;text-align:left}
+.who-band .approach strong{font-size:clamp(20px,1.9vw,28px)}
+.who-more.btn{flex:none;background:#fff;color:var(--ink);border-color:#fff}
+.who-more.btn:hover{background:transparent;color:#fff}
+
+/* Our Services: heading and button on one line, five open columns with icons */
+.svc-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-bottom:var(--s3)}
+.intro-svc .svc-head h2{margin:0;text-align:left}
+.intro-svc .svc-head .svc-cta{margin:0;align-self:auto}
+.intro-svc .svc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);counter-reset:svc}
+.intro-svc .svc-card,.intro-svc .svc-card:nth-child(4),.intro-svc .svc-card:nth-child(5){grid-column:auto;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:var(--s3) clamp(14px,1.4vw,24px) var(--s2);border:0;border-left:1px solid var(--line);border-radius:0;background:none;box-shadow:none}
+.intro-svc .svc-card:first-child{border-left:0;padding-left:0}
+.intro-svc .svc-card::before{content:counter(svc,decimal-leading-zero);counter-increment:svc;display:block;width:auto;height:auto;border:0;border-radius:0;background:none;font:700 12px var(--font-body);letter-spacing:.12em;color:var(--muted);order:-2}
+.svc-ico{order:-1;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;transition:transform .25s}
+.intro-svc .svc-card h3{min-height:0;margin:0;font:800 clamp(17px,1.3vw,21px)/1.25 var(--font-head)}
+.intro-svc .svc-card p{margin:0;font-size:15px;line-height:1.55;color:var(--muted)}
+.intro-svc .svc-card:hover,.intro-svc.anim .svc-card.in:hover{background:none;color:inherit;box-shadow:none;transform:none}
+.intro-svc .svc-card:hover p{color:var(--muted)}
+.intro-svc .svc-card:hover h3{text-decoration:underline;text-underline-offset:5px}
+.intro-svc .svc-card:hover .svc-ico{transform:translateY(-3px)}
+
+@media (max-width:1100px){
+  .intro-svc .svc{grid-template-columns:minmax(0,1fr)}
+  .intro-svc .svc-card,.intro-svc .svc-card:nth-child(4),.intro-svc .svc-card:nth-child(5),.intro-svc .svc-card:first-child{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:var(--s2);row-gap:4px;align-items:start;padding:var(--s2) 0;border-left:0;border-bottom:1px solid var(--line)}
+  .intro-svc .svc-card::before{display:none}
+  .svc-ico{grid-row:1 / span 2}
+}
+@media (max-width:980px){
+  .who-split{grid-template-columns:minmax(0,1fr)}
+  .who-band{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:600px){
+  .svc-head{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.svc-ico{transition:none}.intro-svc .svc-card:hover .svc-ico{transform:none}}
+.intro-team .who-band{margin-top:var(--s3)}
+.intro-svc .svc-card::before{counter-increment:none}
+.intro-svc .svc-card h3{align-self:flex-start;justify-content:flex-start;text-align:left}
+@media (min-width:1200px){.who-split{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}.intro .who-text p{font-size:clamp(17px,1.3vw,20px);line-height:1.6}.intro .who-text h2{font-size:clamp(30px,2.6vw,40px)}}
+@media (min-width:981px){
+  .who-split{align-items:stretch}
+  .who-split .team-photo.who-photo{position:relative;min-height:300px;height:100%}
+  .who-split .who-photo .photo-link,.who-split .who-photo img{position:absolute;inset:0;width:100%;height:100%}
+  .who-split .who-photo img{object-fit:cover;object-position:50% 78%}
+  .who-text{align-self:center}
+}
+
+/* Valuation and Meet the Team are both black on the home page: a thin line between them */
+#valuation + #team{border-top:1px solid #333}
+.val-form .field label{display:block}
+.val-form .field label svg{display:inline-block;vertical-align:-3px;margin-right:6px}
+.val-form .val-row{align-items:end}
+
+/* Services drop-down in the top menu: one short column */
+.nav-dd-svc .nav-dd-menu{width:min(320px,94vw);columns:1}
+
+/* Menu button opens a side menu with every page, at every width. The bar across the top (1100px and up) shows the main links. */
+.nav-toggle{display:flex}
+.header-inner{position:relative}
+@media (max-width:1199px){#nav{display:none}}
+@media (min-width:1200px){
+  .header-inner{grid-template-columns:auto 1fr auto;column-gap:var(--s2)}
+  .header-inner .nav-toggle{grid-column:3;grid-row:1 / 3}
+}
+.side-nav{position:absolute;top:100%;right:0;z-index:80;width:min(380px,100vw);max-height:calc(100vh - 100px);overflow-y:auto;display:flex;flex-direction:column;padding:8px 24px 24px;background:#fff;border:1px solid var(--line);border-top:0;box-shadow:0 18px 40px rgba(0,0,0,.14)}
+.side-nav[hidden]{display:none}
+.side-nav > a:not(.btn){display:flex;align-items:center;min-height:44px;padding:8px 0;border-bottom:1px solid var(--line);font:500 16px var(--font-body);text-decoration:none;color:var(--ink)}
+.side-nav > a:not(.btn):hover,.side-nav > a:not(.btn):focus-visible{text-decoration:underline;text-underline-offset:6px}
+.side-nav .nav-dd{border-bottom:1px solid var(--line)}
+.side-nav .nav-dd-btn{width:100%;justify-content:space-between;min-height:44px;padding:8px 0;font:500 16px var(--font-body)}
+.side-nav .nav-dd-menu{position:static;transform:none;width:auto;columns:2;border:0;box-shadow:none;padding:0 0 8px 8px}
+.side-nav .nav-dd-menu a{padding:8px 8px;font-size:14px}
+.side-sell{margin-top:var(--s2);justify-content:center}
+@media (max-width:560px){.side-nav{width:100%;border-left:0;border-right:0}.side-nav .nav-dd-menu{columns:1}}
+
+/* Valuation, left column: what you get, then the team's numbers */
+.val-get{margin-top:var(--s3);padding-top:var(--s2);border-top:1px solid #3a3a3a}
+.val-get h3{margin:0 0 12px;font:800 20px var(--font-head);color:#fff}
+.val-points{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--s2)}
+.val-points li{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35;color:#e6e6e6}
+.val-pt-ico{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid #fff;color:#fff}
+@media (max-width:560px){.val-points{grid-template-columns:minmax(0,1fr)}

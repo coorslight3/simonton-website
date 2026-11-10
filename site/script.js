@@ -4,16 +4,18 @@ $('#year').textContent = new Date().getFullYear();
 
 $('.topbar-close').addEventListener('click', () => $('#topbar').classList.add('hide'));
 
+// Menu button: opens the side menu with every page (the bar across the top shows the main ones).
 const toggle = $('.nav-toggle');
-const nav = $('#nav');
+const side = $('#side-nav');
 const setNav = open => {
-  nav.classList.toggle('open', open);
+  side.hidden = !open;
   toggle.setAttribute('aria-expanded', String(open));
   toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 };
-toggle.addEventListener('click', () => setNav(!nav.classList.contains('open')));
-nav.addEventListener('click', e => { if (e.target.closest('a')) setNav(false); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') setNav(false); });
+toggle.addEventListener('click', () => setNav(side.hidden));
+side.addEventListener('click', e => { if (e.target.closest('a')) setNav(false); });
+document.addEventListener('click', e => { if (!side.hidden && !side.contains(e.target) && !toggle.contains(e.target)) setNav(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !side.hidden) { setNav(false); toggle.focus(); } });
 
 // Forms email chase@remaxonecommercial.com through Web3Forms.
 // Paste the access key (emailed to that address by web3forms.com) below to turn them on.
@@ -287,27 +289,27 @@ document.querySelectorAll('[data-drop]').forEach(zone => {
 })();
 
 // "Areas We Serve" drop-down: click or hover to open; Escape or an outside click closes it.
-(() => {
-  const dd = $('.nav-dd');
-  if (!dd) return;
+document.querySelectorAll('.nav-dd').forEach(dd => {
   const btn = $('.nav-dd-btn', dd), menu = $('.nav-dd-menu', dd);
   const set = open => { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); };
   btn.addEventListener('click', () => set(menu.hidden));
   const hoverable = matchMedia('(hover: hover) and (min-width: 981px)');
-  dd.addEventListener('mouseenter', () => { if (hoverable.matches) set(true); });
-  dd.addEventListener('mouseleave', () => { if (hoverable.matches) set(false); });
+  const inSide = !!dd.closest('.side-nav');
+  dd.addEventListener('mouseenter', () => { if (hoverable.matches && !inSide) set(true); });
+  dd.addEventListener('mouseleave', () => { if (hoverable.matches && !inSide) set(false); });
   document.addEventListener('click', e => { if (!dd.contains(e.target)) set(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
   dd.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) set(false); });
-})();
+  menu.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+});
 
 // Home team + services section: the team column and service cards rise in, one after another, on scroll.
 (() => {
-  const sec = $('.intro');
-  if (!sec || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const items = [...sec.querySelectorAll('.who, .svc-card, .svc-cta')];
-  items.forEach((el, i) => el.style.setProperty('--i', el.matches('.who') ? 0 : i));
-  sec.classList.add('anim');
+  const secs = [...document.querySelectorAll('.intro')];
+  if (!secs.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const items = secs.flatMap(sec => [...sec.querySelectorAll('.who, .svc-card, .svc-cta')]);
+  items.forEach((el, i) => el.style.setProperty('--i', el.matches('.who') ? 0 : el.closest('.svc') ? [...el.parentNode.children].indexOf(el) : 5));
+  secs.forEach(sec => sec.classList.add('anim'));
   // also reveal anything already scrolled past (e.g. after jumping to a link further down the page)
   const io = new IntersectionObserver(es => es.forEach(en => {
     if (en.isIntersecting || en.boundingClientRect.top < 0) { en.target.classList.add('in'); io.unobserve(en.target); }

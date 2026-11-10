@@ -11,7 +11,8 @@ the build, `EDITING.md` the browser workflow and `SETUP.md` local setup with Cla
   Robert's page and John's page under `site/apartment-broker/`, and one `blog-<slug>.html` per entry in
   `blog_posts.py` (which also fills the post list on `blog.html`). **Never hand-edit generated files; edit the source and rerun the build.**
 - `site/index.html` is hand-edited. Its header and footer (including the Chase "Meet The Team" band) are copied to every page by the build.
-- The "Areas We Serve" list appears in two places in `site/index.html` (header drop-down `nav-dd-menu` and footer `f-areas`).
+- The "Areas We Serve" list appears in three places in `site/index.html` (top bar drop-down `areas-menu`, side menu drop-down
+  `side-areas-menu`, and footer `f-areas`).
   When adding an area in `areas_content.py` (`HOODS`/`FULL` and `ORDER`), regenerate both lists from `ORDER`.
 - Asset links use a cache-busting `?v=NN` on `styles.css`/`script.js`. Bump the number everywhere when CSS or JS changes.
 
